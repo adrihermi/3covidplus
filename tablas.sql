@@ -17,7 +17,7 @@ create TABLE IF NOT EXISTS alumnos(
     dni_alumno VARCHAR (9) NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
---Si no existe creamos la tabla aulas
+--Si no existe creamos la tabla aulas.
 create TABLE IF NOT EXISTS aulas(
     nombre VARCHAR (50) NOT NULL,
     capacidad int (2) NOT NULL,   
