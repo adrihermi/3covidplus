@@ -6,31 +6,37 @@ use 3_covid_plus;
 --Si no existe creamos la tabla alumnos
 create TABLE IF NOT EXISTS alumnos(
     nombre VARCHAR (25) NOT NULL,
-    apellido1 VARCHAR (25) NOT NULL,
-    apellido2 VARCHAR (25) NOT NULL,
+    apellido1 VARCHAR (100) NOT NULL,
+    apellido2 VARCHAR (100) NOT NULL,
     fecha_nacimiento DATE NOT NULL,
     genero ENUM('Masculino','Femenino','Otros') NOT NULL, 
     telefono VARCHAR(11) NOT NULL,
     email VARCHAR(50) NOT NULL,
+    email_tutor_legal VARCHAR(50) NOT NULL,
     id_aula INT NOT NULL,
     CONSTRAINT FOREIGN KEY fk_alumnos_aulas (id_aula) REFERENCES aulas (id_aula),
+    ON UPDATE CASCADE,
     dni_alumno VARCHAR (9) NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
---Si no existe creamos la tabla aulas.
+--Si no existe creamos la tabla aulas 
 create TABLE IF NOT EXISTS aulas(
     nombre VARCHAR (50) NOT NULL,
-    capacidad int (2) NOT NULL,   
-    id_aula INT NOT NULL PRIMARY KEY
+    capacidad int (2) NOT NULL,
+    dni_profesor VARCHAR(9) NOT NULL UNIQUE,   
+    id_aula INT NOT NULL PRIMARY KEY,
+    CONSTRAINT FOREIGN KEY fk_aulas_profesor (dni_profesor) REFERENCES profesores (dni_profesor),
+    ON UPDATE CASCADE,
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
 --Si no existe creamos la tabla fechas
-create TABLE IF NOT EXISTS fechas(
+create TABLE IF NOT EXISTS estados_alumnos(
     fecha DATE NOT NULL,
     dni_alumno VARCHAR(9) NOT NULL,
     id_estado INT NOT NULL,
     CONSTRAINT FOREIGN KEY fk_fechas_alumnos (dni_alumno) REFERENCES alumnos (dni_alumno),
     CONSTRAINT FOREIGN KEY fk_fechas_estados (id_estado) REFERENCES estados (id_estados),
+    ON UPDATE CASCADE,
     PRIMARY KEY(fecha,dni_alumno,id_estado)
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
@@ -49,18 +55,19 @@ create TABLE IF NOT EXISTS estados(
     dni_profesor VARCHAR(9) NOT NULL,
     CONSTRAINT FOREIGN KEY fk_horarios_aulas (id_aula) REFERENCES aulas (id_aula),
     CONSTRAINT FOREIGN KEY fk_horario_profesores (dni_profesor) REFERENCES profesores (dni_profesor),
-    PRIMARY KEY(id_aula,dni_profesor)
+    ON UPDATE CASCADE,
+    PRIMARY KEY(dia,hora_inicio,id_aula,dni_profesor)
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
 --Si no existe creamos la tabla profesores
 create TABLE IF NOT EXISTS profesores(
     nombre VARCHAR (25) NOT NULL,
-    apellido1 VARCHAR (25) NOT NULL,
-    apellido2 VARCHAR (25) NOT NULL,
+    apellido1 VARCHAR (100) NOT NULL,
+    apellido2 VARCHAR (100) NOT NULL,
     fecha_nacimiento DATE NOT NULL,
     genero ENUM('Masculino','Femenino','Otros') NOT NULL,
     telefono VARCHAR(11) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    email_profesor VARCHAR(50) NOT NULL,
     dni_profesor VARCHAR(9) NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
@@ -69,7 +76,8 @@ create TABLE IF NOT EXISTS notificaciones_profesores(
     fecha DATE NOT NULL,
     dni_profesor VARCHAR(9) NOT NULL,
     CONSTRAINT FOREIGN KEY fk_notificaciones_profesores_profesores (dni_profesor) REFERENCES profesores (dni_profesor),
-    id_n_p INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    ON UPDATE CASCADE,
+    id_n_p INT AUTO_INCREMENT NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
 --Si no existe creamos la tabla notificaciones_alumnos
@@ -77,18 +85,20 @@ create TABLE IF NOT EXISTS notificaciones_alumnos(
     fecha DATE NOT NULL,
     dni_alumno VARCHAR(9) NOT NULL,
     CONSTRAINT FOREIGN KEY fk_notificaciones_alumnos_alumnos (dni_alumno) REFERENCES alumnos (dni_alumno),
-    id_n_a AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    ON UPDATE CASCADE,
+    id_n_a AUTO_INCREMENT NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
 --Si no existe creamos la tabla usuarios
 create TABLE IF NOT EXISTS usuarios(
+    contraseña VARCHAR (50) NOT NULL,
     nombre VARCHAR (25) NOT NULL,
-    apellido1 VARCHAR (25) NOT NULL,
-    apellido2 VARCHAR (25) NOT NULL,
+    apellido1 VARCHAR (100) NOT NULL,
+    apellido2 VARCHAR (100) NOT NULL,
     fecha_nacimiento DATE NOT NULL,
     genero ENUM('Masculino','Femenino','Otros') NOT NULL,
     telefono VARCHAR(11) NOT NULL,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     permisos ENUM('Administrador','Usuario') NOT NULL,
     estado bit TINYINT (1) not null,
     dni_usuario VARCHAR(9) NOT NULL PRIMARY KEY
