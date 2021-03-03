@@ -5,7 +5,10 @@
     grid-template-columns: 20% 1em auto 1em 20%;
     grid-template-areas: "header header header header header" ". . . . ." "nav .  main . aside" ". . . . ." "footer footer footer footer footer ";
 }
-
+img{
+position: relative;
+width: 250px;
+}
 .container>header {
     grid-area: header;
     background: linear-gradient(to right, #07D6E6,  #5857DF);
