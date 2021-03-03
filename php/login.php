@@ -6,7 +6,9 @@
 				 WHERE dni_usuario = '".$_POST["usuario"]."' AND contraseña = '".$_POST["contraseña"]."'";
 	if($conexion->query($consulta)){
         session_start();
-        /*Aquí irían las cookies pero no entiendo lo que se pide*/
+        $_SESSION["usuario"] =$_POST["usuario"];
+		$_SESSION["contraseña"] = $_POST["contraseña"];
+		$saida = 'ok';
     }else{
         $saida = 'error';
     }
