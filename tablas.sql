@@ -24,12 +24,8 @@ create TABLE IF NOT EXISTS alumnos(
 -- Si no existe creamos la tabla aulas 
 create TABLE IF NOT EXISTS aulas(
     nombre VARCHAR (50) NOT NULL,
-    capacidad int (2) NOT NULL,
-    dni_profesor VARCHAR(9) NOT NULL UNIQUE,
-    id_aula INT NOT NULL PRIMARY KEY,   
-    CONSTRAINT fk_aulas_profesor FOREIGN KEY (dni_profesor) REFERENCES profesores (dni_profesor)
-    ON UPDATE CASCADE 
-    ON DELETE RESTRICT
+    capacidad ENUM('16','20','24','28','32') NOT NULL,
+    id_aula INT NOT NULL PRIMARY KEY  
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
 -- Si no existe creamos la tabla fechas
@@ -59,7 +55,7 @@ create TABLE IF NOT EXISTS estados(
     hora_final VARCHAR(25) NOT NULL,
     id_aula INT NOT NULL,
     dni_profesor VARCHAR(9) NOT NULL,
-    CONSTRAINT pk_horarios PRIMARY KEY(dia,hora_inicio,id_aula,dni_profesor),
+    CONSTRAINT pk_horarios PRIMARY KEY(dia,hora_inicio,hora_final,id_aula,dni_profesor),
     CONSTRAINT fk_horarios_aulas FOREIGN KEY (id_aula) REFERENCES aulas (id_aula)
     ON UPDATE CASCADE 
     ON DELETE RESTRICT,
