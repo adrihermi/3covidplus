@@ -1,110 +1,92 @@
 .container {
-    display: grid;
-    height: calc(100vh - 2em);
+  display: grid;
+  height: calc(100vh - 2em);
+  grid-template-rows: 10% 1em auto 1em 10%;
+  grid-template-areas: "header" "." " main" ". " "footer ";
+}
+img {
+  position: relative;
+  width: 25vh;
+}
+
+.container > header {
+  grid-area: header;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+}
+
+.container > main {
+  grid-area: main;
+  background-color: white;
+  color: #5857df;
+}
+
+.container > footer {
+  grid-area: footer;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+}
+
+/*@media screen and (max-width: 590px) {
+  .container {
     grid-template-rows: 10% 1em auto 1em 10%;
-    grid-template-columns: 20% 1em auto 1em 20%;
-    grid-template-areas: "header header header header header" ". . . . ." "nav .  main . aside" ". . . . ." "footer footer footer footer footer ";
-}
-img{
-position: relative;
-width: 250px;
-}
-.container>header {
+    grid-template-areas: "header " ". " "  main" ". " "footer ";
+    }
+  .container > header {
     grid-area: header;
-    background: linear-gradient(to right, #07D6E6,  #5857DF);
-}
+    background: linear-gradient(to right, #07d6e6, #5857df);
+  }
 
-.container>nav {
+  .container > nav {
     grid-area: nav;
-    background: linear-gradient(to right, #07D6E6,  #5857DF);
+    background: linear-gradient(to right, #07d6e6, #5857df);
     color: white;
-}
+  }
 
-.container>section {
+  .container > section {
     grid-area: main;
     background-color: white;
-    color: #5857DF;
-}
+    color: #5857df;
+  }
 
-.container>aside {
+  .container > aside {
     grid-area: aside;
-    background: linear-gradient(to right, #07D6E6,  #5857DF);
-}
+    background: linear-gradient(to right, #07d6e6, #5857df);
+  }
 
-.container>footer {
+  .container > footer {
     grid-area: footer;
-    background: linear-gradient(to right, #07D6E6,  #5857DF);
-
-}
-
-@media screen and (max-width: 590px) {
-    .container {
-        grid-template-rows: 20% 1em 10% 1em auto 1em 10%;
-        grid-template-columns: 60% 1em auto;
-        grid-template-areas: "header header header" ". . ." "nav nav nav" ". . ." "main . aside" ". . ." "footer footer footer";
-    }
-    .container>header {
-        grid-area: header;
-        background: linear-gradient(to right, #07D6E6,  #5857DF);
-    }
-    
-    .container>nav {
-        grid-area: nav;
-        background: linear-gradient(to right, #07D6E6,  #5857DF);
-        color: white;
-    }
-    
-    .container>section {
-        grid-area: main;
-        background-color: white;
-        color: #5857DF;
-    }
-    
-    .container>aside {
-        grid-area: aside;
-        background: linear-gradient(to right, #07D6E6,  #5857DF);
-    }
-    
-    .container>footer {
-        grid-area: footer;
-        background: linear-gradient(to right, #07D6E6,  #5857DF);
-    
-    }
-    
+    background: linear-gradient(to right, #07d6e6, #5857df);
+  }
 }
 
 @media screen and (max-width: 450px) {
-    .container {
-        grid-template-rows: 10% 1em 20% 1em auto 1em 10% 1em 10%;
-        grid-template-columns: 100%;
-        grid-template-areas: "header" "." "nav" "." "main" "." "aside" "." "footer";
-    }
-.container>header {
+  .container {
+    grid-template-rows: 10% 1em 20% 1em auto 1em 10% 1em 10%;
+    grid-template-areas: "header" "." "nav" "." "main" "." "aside" "." "footer";
+  }
+  .container > header {
     grid-area: header;
-    background: linear-gradient(to right, #07D6E6,  #5857DF);
-}
+    background: linear-gradient(to right, #07d6e6, #5857df);
+  }
 
-.container>nav {
+  .container > nav {
     grid-area: nav;
-    background: linear-gradient(to right, #07D6E6,  #5857DF);
+    background: linear-gradient(to right, #07d6e6, #5857df);
     color: white;
-}
+  }
 
-.container>section {
+  .container > section {
     grid-area: main;
     background-color: white;
-    color: #5857DF;
-}
+    color: #5857df;
+  }
 
-.container>aside {
+  .container > aside {
     grid-area: aside;
-    background: linear-gradient(to right, #07D6E6,  #5857DF);
-}
+    background: linear-gradient(to right, #07d6e6, #5857df);
+  }
 
-.container>footer {
+  .container > footer {
     grid-area: footer;
-    background: linear-gradient(to right, #07D6E6,  #5857DF);
-
-}
-
-}
+    background: linear-gradient(to right, #07d6e6, #5857df);
+  }
+}*/
