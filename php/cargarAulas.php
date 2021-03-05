@@ -1,11 +1,11 @@
 <?php 
     require("conexion.php");
 	$consulta = "SELECT * 
-                 FROM aulas";
+                 FROM alumnos";
 	$saida = array();
 	if ($datos = $conexion->query($consulta)) {   		
-		while ($aula = $datos->fetch_object()) {
-			$saida[] = $aula;
+		while ($alumno = $datos->fetch_object()) {
+			$saida[] = $alumno;
 		}
 		$datos->close();
 	}
