@@ -13,6 +13,7 @@ create TABLE IF NOT EXISTS alumnos(
     telefono VARCHAR(11) NOT NULL,
     email VARCHAR(50) NOT NULL,
     email_tutor_legal VARCHAR(50) NOT NULL,
+    observaciones VARCHAR(150),
     id_aula INT NOT NULL,
     dni_alumno VARCHAR (9) NOT NULL PRIMARY KEY,
     CONSTRAINT fk_alumnos_aulas FOREIGN KEY  (id_aula) REFERENCES aulas (id_aula)
@@ -76,6 +77,7 @@ create TABLE IF NOT EXISTS profesores(
     genero ENUM('Masculino','Femenino','Otros') NOT NULL,
     telefono VARCHAR(11) NOT NULL,
     email_profesor VARCHAR(50) NOT NULL,
+    observaciones VARCHAR(150),
     dni_profesor VARCHAR(9) NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
