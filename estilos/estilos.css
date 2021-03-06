@@ -1,0 +1,129 @@
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+display: grid;
+height: calc(100vh - 2em);
+grid-template-rows: 10% 1em auto 1em 10%;
+grid-template-areas: "header" "." " main" ". " "footer ";
+}
+
+.container > header {
+grid-area: header;
+background: linear-gradient(to right, #07d6e6, #5857df);
+display: flex;
+align-items: center;
+text-align: center;
+justify-content: space-between;
+}
+
+.container > header img {
+  margin-left: 0;
+  width: 11vw;
+  justify-self: start;
+}
+
+.container nav {
+  display: flex;
+  column-gap: 1em;
+  align-items: center;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+a {
+  text-decoration: none;
+  font-size: 2vh;
+  color: white;
+}
+
+a:visited{
+  color: white;
+}
+
+/******************************************* MAIN *************************************************/
+.container > main {
+  text-align: center;
+grid-area: main;
+background-color: white;
+color: #5857df;
+}
+
+.banner-img {
+  width: 90vw;
+}
+
+/***************************************** FOOTER ************************************************/
+.container > footer {
+grid-area: footer;
+background: linear-gradient(to right, #07d6e6, #5857df);
+}
+
+/*@media screen and (max-width: 590px) {
+.container {
+  grid-template-rows: 10% 1em auto 1em 10%;
+  grid-template-areas: "header " ". " "  main" ". " "footer ";
+  }
+.container > header {
+  grid-area: header;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+}
+
+.container > nav {
+  grid-area: nav;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+  color: white;
+}
+
+.container > section {
+  grid-area: main;
+  background-color: white;
+  color: #5857df;
+}
+
+.container > aside {
+  grid-area: aside;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+}
+
+.container > footer {
+  grid-area: footer;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+}
+}
+
+@media screen and (max-width: 450px) {
+.container {
+  grid-template-rows: 10% 1em 20% 1em auto 1em 10% 1em 10%;
+  grid-template-areas: "header" "." "nav" "." "main" "." "aside" "." "footer";
+}
+.container > header {
+  grid-area: header;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+}
+
+.container > nav {
+  grid-area: nav;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+  color: white;
+}
+
+.container > section {
+  grid-area: main;
+  background-color: white;
+  color: #5857df;
+}
+
+.container > aside {
+  grid-area: aside;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+}
+
+.container > footer {
+  grid-area: footer;
+  background: linear-gradient(to right, #07d6e6, #5857df);
+}
+}*/
