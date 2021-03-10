@@ -1,139 +1,173 @@
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 0;
-    margin: 0;
-}
-
-.container {
-    display: grid;
-    height: calc(100vh - 2em);
-    grid-template-rows: 10% 1em auto 1em 10%;
-    grid-template-areas: "header" "." " main" ". " "footer ";
-}
-
-.container>header {
-    grid-area: header;
-    background: linear-gradient(to right, #07d6e6, #5857df);
-    display: flex;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
-}
-
-.container>header img {
-    margin-left: 0;
-    width: 11vw;
-    justify-self: start;
-}
-
-.container nav {
-    display: flex;
-    column-gap: 1em;
-    align-items: center;
-    text-align: center;
-    margin-right: 1rem;
-}
-
-a {
-    text-decoration: none;
-    font-size: 2vh;
-    color: white;
-}
-
-a:visited {
-    color: white;
-}
-
-
-/******************************************* MAIN *************************************************/
-
-.container>main {
-    text-align: center;
-    grid-area: main;
-    background-color: white;
-    color: #5857df;
-}
-
-.banner-img {
-    width: 90vw;
-}
-
-
-/***************************************** FOOTER ************************************************/
-
-.container>footer {
-    grid-area: footer;
-    background: linear-gradient(to right, #07d6e6, #5857df);
-    color: white;
-    font-weight: bold;
-    font-size: 1.125rem;
-    align-items: center;
-    display: flex;
-}
-
-.container>footer>p {
-    margin: 0 1rem;
-}
-
-
-/***************************************** INICIO DE SESION ************************************************/
-
-.login {
-    grid-template-rows: 10% 1em auto 1em 10%;
-    grid-template-areas: "header" "." " main" ". " "footer ";
-}
-
-.login .formulario {
-    display: flex;
-    flex-direction: column;
-    width: 450px;
-    margin: 0 auto;
-    border: 1px solid #5857df;
-    border-radius: 5px;
-    padding-bottom: 1rem;
-}
-
-.login .formulario>span {
-    background: linear-gradient(to right, #07d6e6, #5857df);
-}
-
-.login .formulario>span>a>img {
-    width: 11vw;
-}
-
-.login .formulario>section {
-    display: flex;
-    margin: 0.5rem;
-    align-items: center;
-}
-
-.login .formulario>section>label {
-    width: 35%;
-}
-
-.login .formulario>section>input {
-    flex-grow: 2;
-}
-
-.login .btn {
-    border: 1px solid #5857df;
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    width: auto;
-    margin: 0 auto;
-    background-color: #5857df;
-    color: white;
-    font-size: 1rem;
-    line-height: 1rem;
-    cursor: pointer;
-}
-
-.login .btn:hover {
-    opacity: 0.7;
-}
-
-
-/*@media screen and (max-width: 590px) {
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .container {
+        display: grid;
+        height: calc(100vh - 2em);
+        grid-template-rows: 10% 1em auto 1em 10%;
+        grid-template-areas: "header" "." " main" ". " "footer ";
+    }
+    
+    .container>header {
+        grid-area: header;
+        background: linear-gradient(to right, #07d6e6, #5857df);
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: space-between;
+    }
+    
+    .container>header img {
+        margin-left: 0;
+        width: 11vw;
+        justify-self: start;
+    }
+    
+    .container nav {
+        display: flex;
+        column-gap: 1em;
+        align-items: center;
+        text-align: center;
+        margin-right: 1rem;
+    }
+    
+    a {
+        text-decoration: none;
+        font-size: 2vh;
+        color: white;
+    }
+    
+    a:visited {
+        color: white;
+    }
+    /******************************************* MAIN *************************************************/
+    
+    .container>main {
+        text-align: center;
+        grid-area: main;
+        background-color: white;
+        color: #5857df;
+    }
+    
+    .banner-img {
+        width: 90vw;
+    }
+    /***************************************** FOOTER ************************************************/
+    
+    .container>footer {
+        grid-area: footer;
+        background: linear-gradient(to right, #07d6e6, #5857df);
+        color: white;
+        font-weight: bold;
+        font-size: 1.125rem;
+        align-items: center;
+        display: flex;
+    }
+    
+    .container>footer>p {
+        margin: 0 1rem;
+    }
+    /***************************************** INICIO DE SESION ************************************************/
+    
+    .login {
+        grid-template-rows: 10% 1em auto 1em 10%;
+        grid-template-areas: "header" "." " main" ". " "footer ";
+    }
+    
+    .login .formulario {
+        display: flex;
+        flex-direction: column;
+        width: 450px;
+        margin: 0 auto;
+        border: 1px solid #5857df;
+        border-radius: 5px;
+        padding-bottom: 1rem;
+    }
+    
+    .login .formulario>span {
+        background: linear-gradient(to right, #07d6e6, #5857df);
+    }
+    
+    .login .formulario>span>a>img {
+        width: 11vw;
+    }
+    
+    .login .formulario>section {
+        display: flex;
+        margin: 0.5rem;
+        align-items: center;
+    }
+    
+    .login .formulario>section>label {
+        width: 35%;
+    }
+    
+    .login .formulario>section>input {
+        flex-grow: 2;
+    }
+    
+    .login .btn {
+        border: 1px solid #5857df;
+        border-radius: 5px;
+        padding: 0.5rem 1rem;
+        width: auto;
+        margin: 0 auto;
+        background-color: #5857df;
+        color: white;
+        font-size: 1rem;
+        line-height: 1rem;
+        cursor: pointer;
+    }
+    
+    .login .btn:hover {
+        opacity: 0.7;
+    }
+    /***************************************** USUARIO ************************************************/
+    
+    .acciones nav {
+        margin-top: 5vh;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+        gap: 0px 54px;
+        grid-template-areas: "menu_usuario bienvenido bienvenido bienvenido" "menu_usuario bienvenido bienvenido bienvenido" "menu_usuario bienvenido bienvenido bienvenido";
+    }
+    
+    .menu_usuario {
+        grid-area: menu_usuario;
+    }
+    
+    .bienvenido {
+        grid-area: bienvenido;
+        font-size: xx-large;
+    }
+    
+    .acciones a {
+        color: #5857df;
+        font-size: large;
+        text-decoration: none;
+        line-height: 5vh;
+    }
+    
+    .menu_usuario ul li {
+        list-style: none;
+        text-align: left;
+    }
+    
+    .menu_usuario ul li:hover a,
+    .menu_usuario ul li:hover img {
+        color: #07d6e6;
+        font-size: x-large;
+        text-decoration: none;
+        transition-duration: .4s;
+    }
+    
+    .menu_usuario ul li:hover img {
+        height: 4vh;
+    }
+    /*@media screen and (max-width: 590px) {
 .container {
 grid-template-rows: 10% 1em auto 1em 10%;
 grid-template-areas: "header " ". " "  main" ". " "footer ";
