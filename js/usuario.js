@@ -1,7 +1,7 @@
 $(function() {
-    $(".alta_alumno").hide();
+    $("#form-alta-alumno").hide();
     $("#alta_alumno").click(function() {
-        $(".alta_alumno").show();
+        $("#form-alta-alumno").show();
     });
 
 })
