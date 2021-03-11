@@ -1,5 +1,5 @@
 $(function () {
-    $("#formulario-inicio").submit(function () {
+    $("#iniciar").on('click',function () {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
@@ -9,7 +9,7 @@ $(function () {
             return;
         }
         var clave = $("#clave").val();
-        if (!clave || clave.trim().length < 6) {
+        if (!clave || clave.trim().length < 4) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar una clave, teniendo en cuenta que debe tener 6 caracteres.");
             return;
         }

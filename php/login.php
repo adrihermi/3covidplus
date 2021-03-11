@@ -3,7 +3,7 @@
 	require("conexion.php");
 	$saida = '';
 	$consulta = "SELECT *
-			     FROM alumnos
+			     FROM usuarios
 				 WHERE dni_usuario = '".$_POST["usuario"]."' AND contraseña = '".$_POST["contraseña"]."'";
 	if($conexion->query($consulta)){
         session_start();
