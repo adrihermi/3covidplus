@@ -1,5 +1,5 @@
 $(function () {
-    $("#iniciar").on('click',function () {
+    $("#iniciar").on('click', function () {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
@@ -13,10 +13,17 @@ $(function () {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar una clave, teniendo en cuenta que debe tener 6 caracteres.");
             return;
         }
-        $.ajax({
-            type: "POST",
-            url: "php/login.php",
-            data: { usuario: usuario, contraseña: clave },
-        })
-    });
+        $.post("php/login.php", { usuario: usuario, contraseña: clave })
+            .done(function (datos) {
+                switch (datos) {
+                    case "ok":
+                        
+                        break;
+                    case "error":
+                        $("#mensaje-error").removeClass("ocultar").html("El usuario o contraseña no existen.");
+                        break;
+                }
+            })
+            .fail()
+    })
 });
