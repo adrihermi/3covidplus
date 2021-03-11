@@ -1,6 +1,6 @@
 <?php 
     require("conexion.php");
-	$consulta = "DELETE FROM alumnos WHERE dni_alumno = '".$_GET['dni_alumno']."'";
+	$consulta = "DELETE FROM alumnos WHERE dni_alumno = '".$_GET['id_alumno']."'";
 	$saida = '';
 	if ($conexion->query($consulta)) {   		
 		$saida = 'ok';

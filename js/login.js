@@ -1,5 +1,5 @@
-$(function() {
-    $("#formulario-inicio").submit(function() {
+$(function () {
+    $("#formulario-inicio").submit(function () {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
@@ -17,7 +17,6 @@ $(function() {
             type: "POST",
             url: "php/login.php",
             data: { usuario: usuario, contraseña: clave },
-
         })
     });
 });
