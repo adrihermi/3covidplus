@@ -180,7 +180,11 @@
    
     /***************************************** ALTA ALUMNO ************************************************/
    
-    
+#form-alumno span{
+    background: linear-gradient(to right, #07d6e6, #5857df);
+    border:solid 2px black;
+    color: white;
+    }
     /*@media screen and (max-width: 590px) {
 .container {
 grid-template-rows: 10% 1em auto 1em 10%;
