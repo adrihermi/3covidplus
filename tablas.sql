@@ -1,7 +1,7 @@
 -- Creamos y establecemos la base de datos
-DROP DATABASE IF EXISTS 3_covid_plus;
-CREATE DATABASE 3_covid_plus;
-USE 3_covid_plus;
+DROP DATABASE IF EXISTS covid_plus;
+CREATE DATABASE covid_plus;
+USE covid_plus;
 
 -- Si no existe creamos la tabla alumnos
 create TABLE IF NOT EXISTS alumnos(
@@ -110,11 +110,6 @@ create TABLE IF NOT EXISTS usuarios(
     telefono VARCHAR(11) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     permisos ENUM('Administrador','Usuario') NOT NULL,
-<<<<<<< HEAD
     dni_usuario VARCHAR(9) NOT NULL,
     id_usuario INT AUTO_INCREMENT NOT NULL PRIMARY KEY
-=======
-    estado bit TINYINT (1) not null,
-    dni_usuario VARCHAR(9) NOT NULL PRIMARY KEY
->>>>>>> 1a4e5140761d5a7cb237d8cdd2e894127e7fb1a3
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;

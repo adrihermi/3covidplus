@@ -176,13 +176,8 @@
     .menu_usuario ul li:hover a,
     .menu_usuario ul li:hover img {
         color: #07d6e6;
-        font-size: x-large;
         text-decoration: none;
         transition-duration: .4s;
-    }
-    
-    .menu_usuario ul li:hover img {
-        height: 4vh;
     }
     /***************************************** ALTA ALUMNO ************************************************/
     
