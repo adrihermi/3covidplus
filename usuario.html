@@ -1,74 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 
-    <head>
-        <title>3Covid+</title>
-        <meta charset="utf-8"/>
-        <meta name="description" content="pagina inicial">
-        <link rel="stylesheet" href="estilos/estilos.css"/>
-        <link rel="shortcut icon" href="estilos/img/logo.png"/>
-        <script src="js/jquery.min.js"></script>
-        <script src="/js/usuario.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<head>
+    <title>3Covid+</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="pagina inicial">
+    <link rel="stylesheet" href="estilos/estilos.css" />
+    <link rel="shortcut icon" href="estilos/img/logo.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/usuario.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
-    <body>
-        <div class="container">
-            <header id="logo_nombre">
-                <div class="uno">
-                    <img src="estilos/img/logo_fondo_transparente.png" alt="3Covid+">
+<body>
+    <div class="container">
+        <header id="logo_nombre">
+            <div class="uno">
+                <img src="estilos/img/logo_fondo_transparente.png" alt="3Covid+">
+            </div>
+            <nav>
+                <div class="dos">
+                    <a href="index.html" class="navLink">Cerrar Sesión</a>
                 </div>
-                <nav>
-                    <div class="dos">
-                        <a href="index.html" class="navLink">Cerrar Sesión</a>
-                    </div>
+            </nav>
+        </header>
+        <main class="main_usuario">
+            <section class="acciones">
+                <nav class="menu_usuario">
+                    <ul>
+                        <li><img src="estilos/img/usuario2.png" alt="imagen de usuario" height="30px">
+                            <a href="#" id="alta-alumno">Dar de Alta un alumno</a><br></li>
+                        <li><img src="estilos/img/resume.png" alt="imagen de usuario" height="30px">
+                            <a href="">Modificar alumno</a><br></li>
+                        <li><img src="estilos/img/userCovid.png" alt="imagen de usuario" height="30px">
+                            <a href="">Cambiar estado de un alumno</a><br></li>
+                        <li><img src="estilos/img/classroom.png" alt="imagen de usuario" height="30px">
+                            <a href="#" id="alta-aula">Dar de alta un aula</a><br></li>
+                        <li><img src="estilos/img/teacher.png" alt="imagen de usuario" height="30px">
+                            <a href="#" id="alta-profesor">Dar de alta un profesor</a><br></li>
+                    </ul>
                 </nav>
-            </header>
-            <main class="main_usuario">
-                <h1 class="bienvenido">¡Bienvenido!</h1>
-                <section class="acciones">
-                    <nav class="menu_usuario">
-                        <ul>
-                            <li><img src="estilos/img/usuario2.png" alt="imagen de usuario" height="30px">
-                                <a href="#" id="alta_alumno">Dar de Alta un alumno</a><br></li>
-                            <li><img src="estilos/img/resume.png" alt="imagen de usuario" height="30px">
-                                <a href="">Modificar alumno</a><br></li>
-                            <li><img src="estilos/img/userCovid.png" alt="imagen de usuario" height="30px">
-                                <a href="">Cambiar estado de un alumno</a><br></li>
-                            <li><img src="estilos/img/classroom.png" alt="imagen de usuario" height="30px">
-                                <a href="">Dar de alta un aula</a><br></li>
-                            <li><img src="estilos/img/teacher.png" alt="imagen de usuario" height="30px">
-                                <a href="">Dar de alta un profesor</a><br></li>
-                        </ul>
-                    </nav>
-                </section>
-                <section class="info">
-                    <form action="" class="formulario_alumno" method="POST">
-                        <div class="form-group">
-                            <label for="nombre">Nombre:</label>
-                            <input type="text" id="nombre" name="nombre" value="Introduzca su nombre" required><br>
+            </section>
+            <div class="cuerpo">
+                <h1 class="bienvenido mb-5">¡Bienvenido!</h1>
+                <form id="form-alumno" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="nombre-alumno" class="form-label">Nombre del alumno</label>
+                            <input type="text" class="form-control" id="nombre-alumno" aria-describedby="nombrealumno" required>
                         </div>
-                        <div class="form-group">
-                            <label for="apellido1">Primer Apellido:</label>
-                            <input type="apellido1" id="apellido1" name="apellido1" value="Introduzca su primer apellido"><br>
+                        <div class="mb-3 col">
+                            <label for="apellido1-alumno" class="form-label">Primer apellido del alumno</label>
+                            <input type="text" class="form-control" id="apellido1-alumno" aria-describedby="apellido1alumno" required>
                         </div>
-                        <label for="apellido2">Segundo Apellido:</label>
-                        <input type="apellido2" id="apellido2" name="apellido2" value="Introduzca su segundo apellido"><br>
+                        <div class="mb-3 col">
+                            <label for="apellido2-alumno" class="form-label">Segundo apellido del alumno</label>
+                            <input type="text" class="form-control" id="apellido2-alumno" aria-describedby="apellido2alumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="dni-alumno" class="form-label">DNI del alumno</label>
+                            <input type="text" class="form-control" id="dni-alumno" aria-describedby="dnialumno" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="fecha-nac-alumno" class="form-label">Fecha de nacimiento del alumno</label>
+                            <input type="date" class="form-control" id="fecha-nac-alumno" aria-describedby="fechaNacalumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="genero-alumno" class="form-label ">Género del alumno</label>
+                            <select class="form-select" id="genero-alumno" required>
+                                <option selected></option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="telefono-alumno" class="form-label">Telefono</label>
+                            <input type="number" class="form-control" id="telefono-alumno" aria-describedby="tlfalumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="mail-contacto-alumno" class="form-label">Correo del alumno</label>
+                            <input type="email" class="form-control" id="mail-contacto-alumno" aria-describedby="correoalumno">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="mail-tutor-alumno" class="form-label">Correo de tutor legal</label>
+                            <input type="email" class="form-control" id="mail-tutor-alumno" placeholder="ejemplo@gmail.com" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="observaciones-alumno" class="form-label">Observaciones</label>
+                            <textarea class="form-control" id="observaciones-alumno"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn" type="submit">Dar de alta al alumno</button>
+                    </div>
+                </form>
+                <form action="" id="form-aula" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="mb-3 offset-4 col-4">
+                            <label for="nombre" class="form-label">Nombre del aula</label>
+                            <input type="text" class="form-control" id="nombre-aula" aria-describedby="nombreAula" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 offset-4 col-4">
+                            <label for="capacidad" class="form-label">Capacidad del aula</label>
+                            <input type="number" class="form-control" id="capacidad-aula" aria-describedby="capacidadAula" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="d-grid gap-2 col-3 mx-auto">
+                            <button class="btn" type="submit">Dar de alta el aula</button>
+                        </div>
+                    </div>
+                </form>
+                <form id="form-profesor" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="nombre-profesor" class="form-label">Nombre del profesor</label>
+                            <input type="text" class="form-control" id="nombre-profesor" aria-describedby="nombreprofesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="apellido1-profesor" class="form-label">Primer apellido del profesor</label>
+                            <input type="text" class="form-control" id="apellido1-profesor" aria-describedby="apellido1profesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="apellido2-profesor" class="form-label">Segundo apellido del profesor</label>
+                            <input type="text" class="form-control" id="apellido2-profesor" aria-describedby="apellido2profesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="dni-profesor" class="form-label">DNI del profesor</label>
+                            <input type="text" class="form-control" id="dni-profesor" aria-describedby="dniprofesor" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="fecha-nac-profesor" class="form-label">Fecha de nacimiento del profesor</label>
+                            <input type="date" class="form-control" id="fecha-nac-profesor" aria-describedby="fechaNacprofesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="genero-profesor" class="form-label ">Género del profesor</label>
+                            <select class="form-select" id="genero-profesor" required>
+                                <option selected></option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="telefono-profesor" class="form-label">Telefono</label>
+                            <input type="number" class="form-control" id="telefono-profesor" aria-describedby="tlfprofesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="mail-profesor" class="form-label">Correo del profesor</label>
+                            <input type="email" class="form-control" id="mail-profesor" aria-describedby="correoprofesor">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="observaciones-profesor" class="form-label">Observaciones</label>
+                            <textarea class="form-control" id="observaciones-profesor"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn" type="submit">Dar de alta al profesor</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <footer>
+            <p>
+                Creado por Adrian Hermida y Ann Jolie Lourido
+            </p>
+        </footer>
+    </div>
 
-                    </form>
-                    <!--nombre', 'apellido1', 'apellido2', 'fecha_nacimiento', 
-                                        'genero', 'telefono', 'email', 'email_tutor_legal',
-                                        'observaciones' ,'id_aula', 'dni_alumno'-->
-                </section>
-            </main>
-            <footer>
-                <p>
-                    Creado por Adrian Hermida y Ann Jolie Lourido
-                </p>
-            </footer>
-        </div>
-    </body>
+</body>
 
-</html>
+</html>s

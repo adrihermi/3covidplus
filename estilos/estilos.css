@@ -126,17 +126,25 @@
         opacity: 0.7;
     }
     /***************************************** USUARIO ************************************************/
-    .main_usuario{
-      height: 70%%;
+    
+    .main_usuario {
+        height: 70%;
+        display: flex;
+        justify-content: center;
     }
+    
+    .acciones {
+        width: 25%;
+    }
+    
+    .cuerpo {
+        width: 75%;
+    }
+    
+    #form-alumno {}
+    
     .acciones nav {
         margin-top: 5vh;
-        display: grid;
-        grid-template-columns: 1.5fr 1fr 1fr 0fr;
-        gap: 0px 54px;
-        grid-template-areas: "bienvenido bienvenido bienvenido bienvenido" 
-        "menu_usuario info info ." 
-        "menu_usuario info info .";
     }
     
     .menu_usuario {
@@ -148,10 +156,11 @@
         grid-area: bienvenido;
         font-size: xx-large;
     }
+    
     .info {
-      grid-area: info;
-
+        grid-area: info;
     }
+    
     .acciones a {
         color: #5857df;
         font-size: large;
@@ -167,22 +176,42 @@
     .menu_usuario ul li:hover a,
     .menu_usuario ul li:hover img {
         color: #07d6e6;
-        font-size: x-large;
         text-decoration: none;
         transition-duration: .4s;
     }
-    
-    .menu_usuario ul li:hover img {
-        height: 4vh;
-    }
-
-    .formulario_alumno{
-      
-    }
-
-   
     /***************************************** ALTA ALUMNO ************************************************/
-   
+    
+    .cuerpo .btn {
+        border: 1px solid #5857df;
+        border-radius: 5px;
+        background-color: #5857df;
+        color: white;
+        cursor: pointer;
+    }
+    
+    .cuerpo .btn:hover {
+        background-color: #07d6e6;
+        border-color: #07d6e6;
+        transition-duration: 0.5s;
+        color: black;
+    }
+    
+    .form-control.is-invalid,
+    .was-validated .form-control:invalid {
+        border-color: #DD2026 !important;
+    }
+    
+    .form-control.is-invalid,
+    .was-validated .form-control:valid {
+        border-color: #07d6e6 !important;
+        background-image: url(img/valido.png) !important;
+    }
+    
+    .form-control.is-invalid,
+    .was-validated .form-select:valid {
+        border-color: #07d6e6 !important;
+        background-image: url(img/valido.png) !important;
+    }
     /*@media screen and (max-width: 590px) {
 .container {
 grid-template-rows: 10% 1em auto 1em 10%;
