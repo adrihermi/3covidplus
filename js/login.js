@@ -3,7 +3,7 @@ $(function () {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
-        var usuario = ($("#usuario").val()).toLowerCase(); 
+        var usuario = ($("#usuario").val()).toUpperCase(); 
         if (!usuario || usuario.trim().length === 0) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el nombre de usuario");
             return;
@@ -17,6 +17,7 @@ $(function () {
             .done(function (datos) {
                 switch (datos) {
                     case "ok":
+                        console.log(usuario)
                         $(location).attr('href','./usuario.html')
                         break;
                     case "error":

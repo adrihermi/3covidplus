@@ -1,7 +1,7 @@
 <?php 
     require("conexion.php");
 	$consulta = "SELECT * 
-                 FROM alumnos";
+                 FROM aulas";
 	$saida = array();
 	if ($datos = $conexion->query($consulta)) {   		
 		while ($alumno = $datos->fetch_object()) {
