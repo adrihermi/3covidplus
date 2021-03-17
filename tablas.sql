@@ -26,7 +26,7 @@ create TABLE IF NOT EXISTS alumnos(
 create TABLE IF NOT EXISTS aulas(
     nombre VARCHAR (50) NOT NULL,
     capacidad ENUM('16','20','24','28','32') NOT NULL,
-    id_aula INT NOT NULL PRIMARY KEY  
+    id_aula INT AUTO_INCREMENT NOT NULL PRIMARY KEY  
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
 -- Si no existe creamos la tabla fechas
