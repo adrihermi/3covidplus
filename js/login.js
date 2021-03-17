@@ -3,7 +3,7 @@ $(function () {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
-        var usuario = $("#usuario").val();
+        var usuario = ($("#usuario").val()).toLowerCase(); 
         if (!usuario || usuario.trim().length === 0) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el nombre de usuario");
             return;
@@ -17,13 +17,15 @@ $(function () {
             .done(function (datos) {
                 switch (datos) {
                     case "ok":
-                        
+                        $(location).attr('href','./usuario.html')
                         break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("El usuario o contraseña no existen.");
                         break;
                 }
             })
-            .fail()
+            .fail(function(){
+                alert("Error en el fichero: login.php")
+            })
     })
 });
