@@ -1,4 +1,14 @@
 $(function() {
+    $("#form-listar").hide();
+    $("#listar-aulas").click(function() {
+        ocultarFormularios();
+        $("#form-listar").show();
+        $(".bienvenido").text("Listar alumnos")
+    });
+    $("#aula-listar").change(function() {
+
+
+    });
     $("#form-alumno").hide();
     $("#alta-alumno").click(function() {
         ocultarFormularios();
