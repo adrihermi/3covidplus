@@ -6,9 +6,15 @@ $(function() {
         $(".bienvenido").text("Listar alumnos")
     });
     $("#aula-listar").change(function() {
+        $.post("php/cargarAlumnosPorAula.php", { aula: this.value })
+            .done(function(alumnos) {
 
-
+            })
+            .fail(function() {
+                alert("Error en el fichero: cargarAlumnosPorAula.php")
+            })
     });
+
     $("#form-alumno").hide();
     $("#alta-alumno").click(function() {
         ocultarFormularios();
@@ -31,7 +37,7 @@ $(function() {
     });
 
     function ocultarFormularios() {
-        $("form").hide();
+        $(".form").hide();
     }
 
 

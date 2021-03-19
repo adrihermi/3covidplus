@@ -49,23 +49,43 @@
             </section>
             <div class="cuerpo">
                 <h1 class="bienvenido mb-5">¡Bienvenido!</h1>
-                <form id="form-listar" class="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="mb-3 offset-4 col-4">
-                            <label for="aula-listar" class="form-label ">Por favor, seleccione el aula a listar</label>
-                            <select class="form-select" id="aula-listar" required>
-                                <option selected></option>
-                                <option value="1eso">1º E.S.O</option>
-                                <option value="2eso">2º E.S.o</option>
-                                <option value="3eso">3º E.S.O</option>
-                                <option value="4eso">4º E.S.O</option>
-                                <option value="1bach">1º de Bachillerato </option>
-                                <option value="2bach">2º de Bachillerato </option>
-                              </select>
+                <div id="form-listar" class="form">
+                    <form class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="mb-3 offset-4 col-4">
+                                <label for="aula-listar" class="form-label ">Por favor, seleccione el aula a listar</label>
+                                <select class="form-select" id="aula-listar" required>
+                                    <option selected></option>
+                                    <option value="1eso">1º E.S.O</option>
+                                    <option value="2eso">2º E.S.o</option>
+                                    <option value="3eso">3º E.S.O</option>
+                                    <option value="4eso">4º E.S.O</option>
+                                    <option value="1bach">1º de Bachillerato </option>
+                                    <option value="2bach">2º de Bachillerato </option>
+                                  </select>
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <form id="form-alumno" class="needs-validation" novalidate>
+                    </form>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Fecha de nacimiento</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <form id="form-alumno" class="needs-validation form" novalidate>
                     <div class="row">
                         <div class="mb-3 col">
                             <label for="nombre-alumno" class="form-label">Nombre del alumno</label>
@@ -123,7 +143,7 @@
                         <button class="btn" type="submit">Dar de alta al alumno</button>
                     </div>
                 </form>
-                <form action="" id="form-aula" class="needs-validation" novalidate>
+                <form action="" id="form-aula" class="needs-validation form" novalidate>
                     <div class="row">
                         <div class="mb-3 offset-4 col-4">
                             <label for="nombre" class="form-label">Nombre del aula</label>
@@ -149,7 +169,7 @@
                         </div>
                     </div>
                 </form>
-                <form id="form-profesor" class="needs-validation" novalidate>
+                <form id="form-profesor" class="needs-validation form" novalidate>
                     <div class="row">
                         <div class="mb-3 col">
                             <label for="nombre-profesor" class="form-label">Nombre del profesor</label>
