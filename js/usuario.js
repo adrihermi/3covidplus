@@ -1,13 +1,39 @@
 $(function() {
     $("#form-listar").hide();
     $("#listar-aulas").click(function() {
+        $.getJSON('php/cargarAulas.php', function(datos) {
+            $("#aula-listar").html("<option selected></option>");
+            $(datos).each(function() {
+                $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+            });
+        });
         ocultarFormularios();
         $("#form-listar").show();
         $(".bienvenido").text("Listar alumnos")
     });
     $("#aula-listar").change(function() {
-        $.post("php/cargarAlumnosPorAula.php", { aula: this.value })
+        $.ajax({
+                type: "POST",
+                url: "php/cargarAlumnosPorAula.php",
+                data: { aula: this.value },
+                dataType: "JSON"
+            })
             .done(function(alumnos) {
+                var htmlString = "";
+
+                $(alumnos).each(function() {
+                    htmlString += "<tr>" +
+                        "<td>" + this.nombre + " " + (this.apellido1 || "") + " " + (this.apellido2 || "") + "</td>" +
+                        "<td>" + this.fecha_nacimiento + "</td>" +
+                        "<td>" + this.telefono + "</td>" +
+                        "<td>" + this.email + "</td>" +
+                        "<td>" +
+                        "<button class='asignar_posicion' data-value='" + this.id_alumno + "'>Asignar posicion</button>" +
+                        "<button class='modificar_alumno' data-value='" + this.id_alumno + "'>Modificar</button>" +
+                        "</td>";
+                });
+
+                $("#form-listar table tbody").html(htmlString);
 
             })
             .fail(function() {
