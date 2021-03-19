@@ -1,27 +1,34 @@
-$(function () {
+$(function() {
     //Cargamos las aulas en el select
-    $.getJSON('servidor/cargarAulas.php', function (datos) {
-        $.each(datos, function () {
-            $("#clase-alumno").append("<option value = '" + this.id_aula + "'>" + this.nombre  + "</option>");
+    function cargarAulas() {
+        $.getJSON('php/cargarAulas.php', function(datos) {
+            $("#clase-alumno").html("");
+            $(datos).each(function() {
+                $("#clase-alumno").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+            });
         });
+    }
+
+    $("#alta-alumno").click(function() {
+        cargarAulas();
     });
 
-    $("#form-alumno button").on('click', function () {
+    $("#form-alumno button").on('click', function() {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
         var nombre = $("#nombre-alumno").val();
-        var apellido1 =  $("#apellido1-alumno").val();
-        var apellido2 =  $("#apellido2-alumno").val();
-        var dni_alumno =  $("#dn1-alumno").val();
-        var fecha_nacimiento =  $("#fecha-nac-alumno").val();
-        var genero =  $("#genero-alumno option:selected").val();
+        var apellido1 = $("#apellido1-alumno").val();
+        var apellido2 = $("#apellido2-alumno").val();
+        var dni_alumno = $("#dni-alumno").val();
+        var fecha_nacimiento = $("#fecha-nac-alumno").val();
+        var genero = $("#genero-alumno option:selected").val();
         var telefono = $("#telefono-alumno").val();
         var email_alumno = $("#mail-contacto-alumno").val();
         var email_tutor = $("#mail-tutor-alumno").val();
         var clase_alumno = $("#clase-alumno").val();
         var observaciones = $("#observaciones-alumno").val();
-        
+
         if (!nombre || nombre.trim().length === 0) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el nombre del alumno");
             return;
@@ -59,23 +66,22 @@ $(function () {
             return;
         }
         if (!clase_alumno || clase_alumno.trim().length === 0) {
-            $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el correo del tutor del alumno.");
+            $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el aula al cual pertenece el alumno.");
             return;
         }
-        $.post("php/inserirAlumnos.php", { nombre: nombre, apellido1: apellido1, apellido2:apellido2, fecha_nacimiento:fecha_nacimiento,gener:genero, telefono:telefono, email:email_alumno, email_tutor_legal:email_tutor, observaciones:observaciones, clase:clase_alumno, dni_alumno:dni_alumno })
-            .done(function (datos) {
+        $.post("php/inserirAlumnos.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_alumno, email_tutor_legal: email_tutor, observaciones: observaciones, clase: clase_alumno, dni_alumno: dni_alumno })
+            .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        console.log(usuario)
-                        $(location).attr('href','./usuario.html')
+                        location.href = "./usuario.html";
                         break;
                     case "error":
-                        $("#mensaje-error").removeClass("ocultar").html("El usuario o contraseña no existen.");
+                        $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
                         break;
                 }
             })
-            .fail(function(){
-                alert("Error en el fichero: login.php")
+            .fail(function() {
+                $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
             })
     })
 });

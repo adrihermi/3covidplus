@@ -2,7 +2,7 @@
 	$servidor="localhost";
 	$usuario="root";
 	$contrasinal="";
-	$baseDatos="3_covid_plus";
+	$baseDatos="covid_plus";
 
 	// Creamos a conexión
 	$conexion = new mysqli($servidor, $usuario, $contrasinal, $baseDatos);
