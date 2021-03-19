@@ -1,6 +1,6 @@
 <?php 
     require("conexion.php");
-	$consulta = "INSERT INTO aulas (nombre, capacidad, id_aula) VALUES ('".$_POST['nombre']."','".$_POST['capacidad']."','')";
+	$consulta = "INSERT INTO aulas (nombre, capacidad) VALUES ('".$_POST['nombre']."','".$_POST['capacidad']."')";
 	$saida = '';
 	if ($conexion->query($consulta)) {   		
 		$saida = 'ok';

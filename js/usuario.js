@@ -13,7 +13,7 @@ $(function() {
     $("#alta-alumno").click(function() {
         ocultarFormularios();
         $("#form-alumno").show();
-        $(".bienvenido").text("Dar de alta un alumno")
+        $(".bienvenido").text("Dar de alta un alumno");
     });
 
     $("#form-aula").hide();
@@ -50,4 +50,35 @@ $(function() {
                 form.classList.add('was-validated');
             }, false)
         });
+
+    $("#form-aula button").on('click', function() {
+        if (!$("#mensaje-error").hasClass("ocultar")) {
+            $("#mensaje-error").addClass("ocultar");
+        }
+        var nombre_aula = $("#nombre-aula").val();
+        var capacidad = $("#capacidad").val();
+
+        if (!nombre_aula || nombre_aula.trim().length === 0) {
+            $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el nombre del aula");
+            return;
+        }
+        if (!capacidad || isNaN(capacidad)) {
+            $("#mensaje-error").removeClass("ocultar").html("Debe seleccionar la capacidad del aula");
+            return;
+        }
+        $.post("php/inserirAulas.php", { nombre: nombre_aula, capacidad: capacidad })
+            .done(function(datos) {
+                switch (datos) {
+                    case "ok":
+                        location.href = "./usuario.html";
+                        break;
+                    case "error":
+                        $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
+                        break;
+                }
+            })
+            .fail(function() {
+                $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
+            });
+    });
 })
