@@ -221,6 +221,10 @@
         border-color: #07d6e6 !important;
         background-image: url(img/valido.png) !important;
     }
+    
+    .mensaje-error {
+        color: #dc3545;
+    }
     /*@media screen and (max-width: 590px) {
 .container {
 grid-template-rows: 10% 1em auto 1em 10%;
