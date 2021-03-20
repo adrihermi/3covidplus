@@ -85,24 +85,21 @@ $(function() {
             })
             .fail(function() {
                 alert("Error en el fichero: cargarAlumnosPorAula.php")
-            })
+            });
     });
 
-    $("#form-alumno").hide();
     $("#alta-alumno").click(function() {
         ocultarFormularios();
         $("#form-alumno").show();
         $(".bienvenido").text("Dar de alta un alumno");
     });
 
-    $("#form-aula").hide();
     $("#alta-aula").click(function() {
         ocultarFormularios();
         $("#form-aula").show();
         $(".bienvenido").text("Dar de alta un aula")
     });
 
-    $("#form-profesor").hide();
     $("#alta-profesor").click(function() {
         ocultarFormularios();
         $("#form-profesor").show();
@@ -113,6 +110,7 @@ $(function() {
         $(".form").hide();
     }
 
+    ocultarFormularios();
 
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation');
