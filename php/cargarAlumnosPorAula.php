@@ -2,7 +2,7 @@
     require("conexion.php");
 	$aula = $_POST['aula'];
 	$consulta = "SELECT * 
-                 FROM alumnos WHERE id_aula='$aula'";
+                 FROM alumnos WHERE id_aula='$aula' ORDER BY nombre";
 	$saida = array();
 	if ($datos = $conexion->query($consulta)) {   		
 		while ($alumno = $datos->fetch_object()) {

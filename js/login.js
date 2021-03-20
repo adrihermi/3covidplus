@@ -1,9 +1,9 @@
-$(function () {
-    $("#iniciar").on('click', function () {
+$(function() {
+    $("#iniciar").on('click', function() {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
-        var usuario = ($("#usuario").val()).toUpperCase(); 
+        var usuario = ($("#usuario").val()).toUpperCase();
         if (!usuario || usuario.trim().length === 0) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el nombre de usuario");
             return;
@@ -14,18 +14,17 @@ $(function () {
             return;
         }
         $.post("php/login.php", { usuario: usuario, contraseña: clave })
-            .done(function (datos) {
+            .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        console.log(usuario)
-                        $(location).attr('href','./usuario.html')
+                        location.href = "./usuario.html";
                         break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("El usuario o contraseña no existen.");
                         break;
                 }
             })
-            .fail(function(){
+            .fail(function() {
                 alert("Error en el fichero: login.php")
             })
     })

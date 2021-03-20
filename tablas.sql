@@ -118,8 +118,8 @@ create TABLE IF NOT EXISTS usuarios(
 create TABLE IF NOT EXISTS posicion_alumnos(
     id_aula INT NOT NULL, 
     id_alumno VARCHAR(9) NOT NULL,
-    posicion_x VARCHAR(2) NOT NULL,
-    posicion_y VARCHAR(2) NOT NULL,
+    posicion_x INT NOT NULL,
+    posicion_y INT NOT NULL,
     id_posicion INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     CONSTRAINT fk_posicion_alumnos_alumnos FOREIGN KEY (id_alumno) REFERENCES alumnos (id_alumno)
     ON UPDATE CASCADE 

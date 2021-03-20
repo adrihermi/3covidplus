@@ -35,6 +35,53 @@ $(function() {
 
                 $("#form-listar table tbody").html(htmlString);
 
+                $(".asignar_posicion").click(function() {
+                    $("#posicion-id-alumno").val($(this).data("value"));
+                    ocultarFormularios();
+                    $("#form-asignar-posicion").show();
+                    $(".bienvenido").text("Asignar posicion");
+                    $.getJSON("php/cargarAlumnoPorId.php?id=" + id_alumno, function(alumno_y_aula) {
+                        if (alumno_y_aula) {
+                            // Logica para cargar la grilla
+                            $.getJSON("php/cargarGrillaPorAula.php?id=" + alumno_y_aula.id_aula, function(grilla) {
+                                if (grilla.length > 0) {
+                                    // Logica para indicar las posiciones ocupadas
+                                }
+                            });
+                        }
+                    });
+                });
+
+                $(".modificar_alumno").click(function() {
+                    var id_alumno = $(this).data("value");
+                    $("#id-alumno-editar").val(id_alumno);
+                    ocultarFormularios();
+                    $("#form-editar-alumno").show();
+                    $(".bienvenido").text("Modificar alumno");
+
+                    $.getJSON('php/cargarAulas.php', function(datos) {
+                        $("#clase-alumno-editar").html("");
+                        $(datos).each(function() {
+                            $("#clase-alumno-editar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                        });
+                        $.getJSON("php/cargarAlumnoPorId.php?id=" + id_alumno, function(alumno) {
+                            if (alumno) {
+                                $("#nombre-alumno-editar").val(alumno.nombre);
+                                $("#apellido1-alumno-editar").val(alumno.apellido1);
+                                $("#apellido2-alumno-editar").val(alumno.apellido2);
+                                $("#dni-alumno-editar").val(alumno.dni_alumno);
+                                $("#fecha-nac-alumno-editar").val(alumno.fecha_nacimiento);
+                                $("#genero-alumno-editar").val(alumno.genero);
+                                $("#clase-alumno-editar").val(alumno.id_aula);
+                                $("#telefono-alumno-editar").val(alumno.telefono);
+                                $("#mail-contacto-alumno-editar").val(alumno.email);
+                                $("#mail-tutor-alumno-editar").val(alumno.email_tutor_legal);
+                                $("#observaciones-alumno-editar").val(alumno.observaciones);
+                            }
+                        });
+                    });
+                })
+
             })
             .fail(function() {
                 alert("Error en el fichero: cargarAlumnosPorAula.php")
