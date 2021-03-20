@@ -169,6 +169,7 @@
     }
     
     .menu_usuario ul li {
+        margin-top: 2vh;
         list-style: none;
         text-align: left;
     }
