@@ -43,7 +43,7 @@
                         <li><img src="estilos/img/userCovid.png" alt="imagen de usuario" height="30px">
                             <a href="">Cambiar estado de un alumno</a><br></li>
                         <li><img src="estilos/img/teacher.png" alt="imagen de usuario" height="30px">
-                            <a href="#" id="gestion-profesor">Gestionar profesores</a><br></li>
+                            <a href="#" id="gestion-profesores">Gestionar profesores</a><br></li>
                     </ul>
                 </nav>
             </section>
@@ -257,6 +257,29 @@
                     </div>
                 </form>
                 <form id="form-profesor" class="needs-validation form" novalidate>
+                    <button class="btn" id="alta-profesor">Dar de alta profesor</button>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Fecha de nacimiento</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">email</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <form id="form-alta-profesor" class="needs-validation form" novalidate>
                     <div class="row">
                         <div class="mb-3 col">
                             <label for="nombre-profesor" class="form-label">Nombre del profesor</label>
@@ -445,6 +468,60 @@
                     <div class="x2_y7"></div>
                     <div class="x3_y7"></div>
                 </div>
+                <form id="form-editar-profesor" class="needs-validation form" novalidate>
+                    <input type="hidden" id="id-profesor-editar" />
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="nombre-profesor-editar" class="form-label">Nombre del profesor</label>
+                            <input type="text" class="form-control" id="nombre-profesor-editar" aria-describedby="nombreprofesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="apellido1-profesor-editar" class="form-label">Primer apellido del profesor</label>
+                            <input type="text" class="form-control" id="apellido1-profesor-editar" aria-describedby="apellido1profesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="apellido2-profesor-editar" class="form-label">Segundo apellido del profesor</label>
+                            <input type="text" class="form-control" id="apellido2-profesor-editar" aria-describedby="apellido2profesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="dni-profesor-editar" class="form-label">DNI del profesor</label>
+                            <input type="text" class="form-control" id="dni-profesor-editar" aria-describedby="dniprofesor" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="fecha-nac-profesor-editar" class="form-label">Fecha de nacimiento del profesor</label>
+                            <input type="date" class="form-control" id="fecha-nac-profesor-editar" aria-describedby="fechaNacprofesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="genero-profesor-editar" class="form-label ">Género del profesor</label>
+                            <select class="form-select" id="genero-profesor-editar" required>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="telefono-profesor-editar" class="form-label">Telefono</label>
+                            <input type="number" class="form-control" id="telefono-profesor-editar" aria-describedby="tlfprofesor" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="mail-profesor-editar" class="form-label">Correo del profesor</label>
+                            <input type="email" class="form-control" id="mail-profesor-editar" aria-describedby="correoprofesor">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="observaciones-profesor-editar" class="form-label">Observaciones</label>
+                            <textarea class="form-control" id="observaciones-profesor-editar"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn" type="submit">Confirmar</button>
+                    </div>
+                </form>
             </div>
         </main>
         <footer>
