@@ -238,7 +238,8 @@ $(function() {
             })
             .fail(function() {
                 $("#mensaje-error").removeClass("ocultar").html("Error al insertar el profesor.");
-            })
+            });
+        return false;
     });
 
     $("#form-editar-profesor button").on('click', function() {
@@ -301,7 +302,8 @@ $(function() {
             })
             .fail(function() {
                 $("#mensaje-error").removeClass("ocultar").html("Error al insertar el profesor.");
-            })
+            });
+        return false;
     });
 
     function ocultarFormularios() {
@@ -355,5 +357,6 @@ $(function() {
             .fail(function() {
                 $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
             });
+        return false;
     });
 })

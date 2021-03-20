@@ -83,6 +83,7 @@ $(function() {
             })
             .fail(function() {
                 $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
-            })
+            });
+        return false;
     });
 });
