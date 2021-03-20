@@ -9,7 +9,9 @@ $(function() {
         });
         ocultarFormularios();
         $("#form-listar").show();
-        $(".bienvenido").text("Listar alumnos")
+        $(".bienvenido").text("Listar alumnos");
+        $("#form-listar table tbody").html("");
+
     });
     $("#aula-listar").change(function() {
         $.ajax({
@@ -20,6 +22,7 @@ $(function() {
             })
             .done(function(alumnos) {
                 var htmlString = "";
+                $("#form-listar table").show();
 
                 $(alumnos).each(function() {
                     htmlString += "<tr>" +
