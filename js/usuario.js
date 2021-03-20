@@ -28,8 +28,8 @@ $(function() {
                         "<td>" + this.telefono + "</td>" +
                         "<td>" + this.email + "</td>" +
                         "<td>" +
-                        "<button class='asignar_posicion' data-value='" + this.id_alumno + "'>Asignar posicion</button>" +
-                        "<button class='modificar_alumno' data-value='" + this.id_alumno + "'>Modificar</button>" +
+                        "<button class='asignar_posicion btn' data-value='" + this.id_alumno + "'>Asignar posicion</button>" +
+                        "<button class='modificar_alumno btn' data-value='" + this.id_alumno + "'>Modificar</button>" +
                         "</td>";
                 });
 
