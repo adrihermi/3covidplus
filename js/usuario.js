@@ -38,20 +38,45 @@ $(function() {
                 $(".asignar_posicion").click(function() {
                     $("#posicion-id-alumno").val($(this).data("value"));
                     ocultarFormularios();
-                    $("#form-asignar-posicion").show();
+                    // $("#form-asignar-posicion").show();
                     $(".bienvenido").text("Asignar posicion");
-                    $.getJSON("php/cargarAlumnoPorId.php?id=" + id_alumno, function(alumno_y_aula) {
+                    $.getJSON("php/cargarAlumnoPorId.php?id=" + $(this).data("value"), function(alumno_y_aula) {
                         if (alumno_y_aula) {
+                            $(".grid-container" + alumno_y_aula.capacidad_aula).show();
                             // Logica para cargar la grilla
-                            $.getJSON("php/cargarGrillaPorAula.php?id=" + alumno_y_aula.id_aula, function(grilla) {
-                                if (grilla.length > 0) {
-                                    // Logica para indicar las posiciones ocupadas
+                            $.getJSON("php/cargarGrillaDelAula.php?id=" + alumno_y_aula.id_aula, function(grilla) {
+                                // Logica para indicar las posiciones ocupadas
+                                var cantidad_total_y;
+                                if (alumno_y_aula.capacidad_aula == 32) {
+                                    cantidad_total_y = 8;
+                                } else if (alumno_y_aula.capacidad_aula == 28) {
+                                    cantidad_total_y = 7;
+                                } else if (alumno_y_aula.capacidad_aula == 24) {
+                                    cantidad_total_y = 6;
+                                } else if (alumno_y_aula.capacidad_aula == 20) {
+                                    cantidad_total_y = 5;
+                                } else {
+                                    cantidad_total_y = 4;
+                                }
+                                for (var y = 0; y < cantidad_total_y; y++) {
+                                    for (var x = 0; x < 4; x++) {
+                                        var posicion_alumno = grilla.filter(f => f.posicion_x == x && f.posicion_y == y)[0];
+                                        var etiqueta = "<label>Posicion libre</label>";
+                                        var libre = "posicion_libre";
+                                        if (posicion_alumno) {
+                                            libre = "";
+                                            etiqueta = "<label>" + posicion_alumno.nombre + " " + (posicion_alumno.apellido1 || "") + " " + (posicion_alumno.apellido2 || "") + "</label>";
+                                        }
+                                        $(".grid-container" + alumno_y_aula.capacidad_aula + " .x" + x + "_y" + y).html(
+                                            "<div class='usuarios_grilla'></div>" +
+                                            etiqueta).addClass(libre);
+
+                                    }
                                 }
                             });
                         }
                     });
                 });
-
                 $(".modificar_alumno").click(function() {
                     var id_alumno = $(this).data("value");
                     $("#id-alumno-editar").val(id_alumno);

@@ -225,6 +225,28 @@
     .mensaje-error {
         color: #dc3545;
     }
+    /*******************************ASIGNAR POSICION*************************************************************/
+    
+    .usuarios_grilla {
+        height: 5vh;
+        padding: 5px;
+        background-image: url(img/freePosition.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        margin-top: ;
+    }
+    
+    .posicion_libre:hover .usuarios_grilla {
+        background-image: url(img/usuario2.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        transition-duration: 0.5s;
+    }
+    
+    .posicion_libre:hover {
+        cursor: pointer;
+    }
     /*******************************16 ALUMNOS*************************************************************/
     
     .grid-container16 {
@@ -237,98 +259,114 @@
     
     .x0_y0 {
         grid-area: x0_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y0 {
         grid-area: x1_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y0 {
         grid-area: x2_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y0 {
         grid-area: x3_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y1 {
         grid-area: x0_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y1 {
         grid-area: x1_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y1 {
         grid-area: x2_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y1 {
         grid-area: x3_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y2 {
         grid-area: x0_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y2 {
         grid-area: x1_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y2 {
         grid-area: x2_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y2 {
         grid-area: x3_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y3 {
         grid-area: x0_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y3 {
         grid-area: x1_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y3 {
         grid-area: x2_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y3 {
         grid-area: x3_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     /*******************************20 ALUMNOS*************************************************************/
     
@@ -342,281 +380,319 @@
     
     .x0_y1 {
         grid-area: x0_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y1 {
         grid-area: x1_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y1 {
         grid-area: x2_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y1 {
         grid-area: x3_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y2 {
         grid-area: x0_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y2 {
         grid-area: x1_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y2 {
         grid-area: x2_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y2 {
         grid-area: x3_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y3 {
         grid-area: x0_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y3 {
         grid-area: x1_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y3 {
         grid-area: x2_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y3 {
         grid-area: x3_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y4 {
         grid-area: x0_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y4 {
         grid-area: x1_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y4 {
         grid-area: x2_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y4 {
         grid-area: x3_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y0 {
         grid-area: x0_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y0 {
         grid-area: x1_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y0 {
         grid-area: x2_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y0 {
         grid-area: x3_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     /*******************************24 ALUMNOS*************************************************************/
     
     .grid-container24 {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
         gap: 7px 7px;
-        grid-template-areas: "x0_y4 x1_y4 x2_y4 x3_y4 x4_y4" "x0_y3 x1_y3 x2_y3 x3_y3 x4_y3" "x0_y2 x1_y2 x2_y2 x3_y2 x4_y2" "x0_y1 x1_y1 x2_y1 x3_y1 x4_y1" "x0_y0 x1_y0 x2_y0 x3_y0 x4_y0";
-    }
-    
-    .x0_y1 {
-        grid-area: x0_y1;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x1_y1 {
-        grid-area: x1_y1;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x2_y1 {
-        grid-area: x2_y1;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x3_y1 {
-        grid-area: x3_y1;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x0_y2 {
-        grid-area: x0_y2;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x1_y2 {
-        grid-area: x1_y2;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x2_y2 {
-        grid-area: x2_y2;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x3_y2 {
-        grid-area: x3_y2;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x0_y3 {
-        grid-area: x0_y3;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x1_y3 {
-        grid-area: x1_y3;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x2_y3 {
-        grid-area: x2_y3;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x3_y3 {
-        grid-area: x3_y3;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x0_y4 {
-        grid-area: x0_y4;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x1_y4 {
-        grid-area: x1_y4;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x2_y4 {
-        grid-area: x2_y4;
-        border: solid 1px black;
-        height: 60px;
-    }
-    
-    .x3_y4 {
-        grid-area: x3_y4;
-        border: solid 1px black;
-        height: 60px;
+        grid-template-areas: "x0_y5 x1_y5 x2_y5 x3_y5" "x0_y4 x1_y4 x2_y4 x3_y4" "x0_y3 x1_y3 x2_y3 x3_y3" "x0_y2 x1_y2 x2_y2 x3_y2" "x0_y1 x1_y1 x2_y1 x3_y1" "x0_y0 x1_y0 x2_y0 x3_y0";
     }
     
     .x0_y0 {
         grid-area: x0_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y0 {
         grid-area: x1_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y0 {
         grid-area: x2_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y0 {
         grid-area: x3_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
-    .x4_y4 {
-        grid-area: x4_y4;
-        border: solid 1px black;
-        height: 60px;
+    .x0_y1 {
+        grid-area: x0_y1;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
-    .x4_y3 {
-        grid-area: x4_y3;
-        border: solid 1px black;
-        height: 60px;
+    .x1_y1 {
+        grid-area: x1_y1;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
-    .x4_y2 {
-        grid-area: x4_y2;
-        border: solid 1px black;
-        height: 60px;
+    .x2_y1 {
+        grid-area: x2_y1;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
-    .x4_y1 {
-        grid-area: x4_y1;
-        border: solid 1px black;
-        height: 60px;
+    .x3_y1 {
+        grid-area: x3_y1;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
-    .x4_y0 {
-        grid-area: x4_y0;
-        border: solid 1px black;
-        height: 60px;
+    .x0_y2 {
+        grid-area: x0_y2;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x1_y2 {
+        grid-area: x1_y2;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x2_y2 {
+        grid-area: x2_y2;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x3_y2 {
+        grid-area: x3_y2;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x0_y3 {
+        grid-area: x0_y3;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x1_y3 {
+        grid-area: x1_y3;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x2_y3 {
+        grid-area: x2_y3;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x3_y3 {
+        grid-area: x3_y3;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x0_y4 {
+        grid-area: x0_y4;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x1_y4 {
+        grid-area: x1_y4;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x2_y4 {
+        grid-area: x2_y4;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x3_y4 {
+        grid-area: x3_y4;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x0_y5 {
+        grid-area: x0_y5;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x1_y5 {
+        grid-area: x1_y5;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x2_y5 {
+        grid-area: x2_y5;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
+    }
+    
+    .x3_y5 {
+        grid-area: x3_y5;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     /*******************************28 ALUMNOS*************************************************************/
     
@@ -630,170 +706,198 @@
     
     .x0_y0 {
         grid-area: x0_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y0 {
         grid-area: x1_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y0 {
         grid-area: x2_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y0 {
         grid-area: x3_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y1 {
         grid-area: x0_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y1 {
         grid-area: x1_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y1 {
         grid-area: x2_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y1 {
         grid-area: x3_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y2 {
         grid-area: x0_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y2 {
         grid-area: x1_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y2 {
         grid-area: x2_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y2 {
         grid-area: x3_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y3 {
         grid-area: x0_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y3 {
         grid-area: x1_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y3 {
         grid-area: x2_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y3 {
         grid-area: x3_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y4 {
         grid-area: x0_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y4 {
         grid-area: x1_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y4 {
         grid-area: x2_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y4 {
         grid-area: x3_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y5 {
         grid-area: x0_y5;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y5 {
         grid-area: x1_y5;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y5 {
         grid-area: x2_y5;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y5 {
         grid-area: x3_y5;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y6 {
         grid-area: x0_y6;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y6 {
         grid-area: x1_y6;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y6 {
         grid-area: x2_y6;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y6 {
         grid-area: x3_y6;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     /*******************************32 ALUMNOS*************************************************************/
     
@@ -807,194 +911,226 @@
     
     .x0_y0 {
         grid-area: x0_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y0 {
         grid-area: x1_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y0 {
         grid-area: x2_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y0 {
         grid-area: x3_y0;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y1 {
         grid-area: x0_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y1 {
         grid-area: x1_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y1 {
         grid-area: x2_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y1 {
         grid-area: x3_y1;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y2 {
         grid-area: x0_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y2 {
         grid-area: x1_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y2 {
         grid-area: x2_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y2 {
         grid-area: x3_y2;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y3 {
         grid-area: x0_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y3 {
         grid-area: x1_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y3 {
         grid-area: x2_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y3 {
         grid-area: x3_y3;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y4 {
         grid-area: x0_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y4 {
         grid-area: x1_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y4 {
         grid-area: x2_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y4 {
         grid-area: x3_y4;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y5 {
         grid-area: x0_y5;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y5 {
         grid-area: x1_y5;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y5 {
         grid-area: x2_y5;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y5 {
         grid-area: x3_y5;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y6 {
         grid-area: x0_y6;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y6 {
         grid-area: x1_y6;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y6 {
         grid-area: x2_y6;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y6 {
         grid-area: x3_y6;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x0_y7 {
         grid-area: x0_y7;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x1_y7 {
         grid-area: x1_y7;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x2_y7 {
         grid-area: x2_y7;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     
     .x3_y7 {
         grid-area: x3_y7;
-        border: solid 1px black;
-        height: 60px;
+        border: solid 1px #5857df;
+        border-radius: 6px;
+        padding: 10px;
     }
     /*@media screen and (max-width: 590px) {
 .container {
