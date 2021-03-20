@@ -113,3 +113,18 @@ create TABLE IF NOT EXISTS usuarios(
     dni_usuario VARCHAR(9) NOT NULL,
     id_usuario INT AUTO_INCREMENT NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
+
+-- Si no existe creamos la tabla posicion_alumnos
+create TABLE IF NOT EXISTS posicion_alumnos(
+    id_aula INT NOT NULL, 
+    id_alumno VARCHAR(9) NOT NULL,
+    posicion_x VARCHAR(2) NOT NULL,
+    posicion_y VARCHAR(2) NOT NULL,
+    id_posicion INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    CONSTRAINT fk_posicion_alumnos_alumnos FOREIGN KEY (id_alumno) REFERENCES alumnos (id_alumno)
+    ON UPDATE CASCADE 
+    ON DELETE RESTRICT,
+    CONSTRAINT fk_posicion_alumnos_aulas FOREIGN KEY  (id_aula) REFERENCES aulas (id_aula)
+    ON UPDATE CASCADE 
+    ON DELETE RESTRICT
+)ENGINE = MyISAM DEFAULT CHARSET = latin1;
