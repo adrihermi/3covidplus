@@ -100,10 +100,10 @@ $(function() {
         $(".bienvenido").text("Dar de alta un aula")
     });
 
-    $("#alta-profesor").click(function() {
+    $("#gestion-profesor").click(function() {
         ocultarFormularios();
         $("#form-profesor").show();
-        $(".bienvenido").text("Dar de alta un profesor")
+        $(".bienvenido").text("Gestion de profesores")
     });
 
     function ocultarFormularios() {
