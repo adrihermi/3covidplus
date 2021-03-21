@@ -49,13 +49,6 @@ create TABLE IF NOT EXISTS estados(
     id_estado INT AUTO_INCREMENT NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
--- Insert de los 4 posibles estados
-INSERT INTO `estados`(`descripcion`) VALUES ("Positivo");
-INSERT INTO `estados`(`descripcion`) VALUES ("Espera resultados PCR");
-INSERT INTO `estados`(`descripcion`) VALUES ("En contacto con un positivo");
-INSERT INTO `estados`(`descripcion`) VALUES ("Normal");
-
-
 -- Si no existe creamos la tabla horarios 
     create TABLE IF NOT EXISTS horarios(
     dia VARCHAR(15) NOT NULL,
