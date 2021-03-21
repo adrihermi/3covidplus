@@ -306,9 +306,6 @@ $(function() {
         return false;
     });
 
-    $().on('click',function(){
-        
-    })
     function ocultarFormularios() {
         $(".form").hide();
     }
