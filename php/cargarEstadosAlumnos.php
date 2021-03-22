@@ -6,7 +6,7 @@ $consulta = "SELECT *
 $saida = array();
 if ($datos = $conexion->query($consulta)) {
 	while ($alumno = $datos->fetch_object()) {
-		$saida[] = $alumno;
+		$saida[] = $alumno;	
 	}
 	$datos->close();
 }
