@@ -45,7 +45,7 @@ create TABLE IF NOT EXISTS estados_alumnos(
 
 -- Si no existe creamos la tabla estados
 create TABLE IF NOT EXISTS estados(
-    descripcion VARCHAR(15) NOT NULL,
+    descripcion VARCHAR(30) NOT NULL,
     id_estado INT AUTO_INCREMENT NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
