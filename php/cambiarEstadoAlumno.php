@@ -4,17 +4,75 @@
 	$saida = array();
 	if ($conexion->query($consulta)) {   		
 		if($_POST['id_estado'] == 3){
-			$consulta = "SELECT posicion_x, posicion_y 
-						 FROM posicion_alumnos 
-						 WHERE id_alumno = ".$_POST['id_alumno']."";
+			// El alumno dio positivo, se deben buscar los colindantes
+			$consulta = "SELECT pos.posicion_x, pos.posicion_y, au.capacidad, au.id_aula
+						 FROM posicion_alumnos as pos
+						 JOIN aula as au on pos.id_aula=au.id_aula
+						 WHERE pos.id_alumno = ".$_POST['id_alumno']."";
 			if ($datos = $conexion->query($consulta)) {   		
-				while ($alumno = $datos->fetch_object()) {
-					$saida[] = $alumno;
+				while ($posicion = $datos->fetch_object()) {
+					$posicion_alumno_contagiado = $posicion;
 				}
 				$datos->close();
+			}
+
+			if ($posicion_alumno_contagiado != null) {
+				// Buscando los posibles colindantes
+				$colindantes = posibles_colindantes($posicion_alumno_contagiado->posicion_x, $posicion_alumno_contagiado->posicion_y, $posicion_alumno_contagiado->capacidad);
+				foreach ($colindantes as $colindante) {
+					echo "x".$colindante["x"] . "_y" .$colindante["y"] ."\n";
+					$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado)
+								 SELECT '".$_POST["fecha"]."', al.id_alumno, '4' FROM alumnos as al
+								 JOIN posicion_alumnos as pos on al.id_aula=pos.id_aula
+								 WHERE pos.id_aula='".$posicion_alumno_contagiado->id_aula."' AND pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."'";
+					
+					if ($datos = $conexion->query($consulta)) {
+						$datos->close();
+					}
+				}
 			}
 		}
 	}
 	$conexion->close();
-	echo json_encode($saida);
+	echo json_encode("ok");
+
+	function posibles_colindantes($x, $y, $capacidad_aula) {
+        $posibilidades = [];
+		if ($capacidad_aula == 32) {
+			$total_y = 8;
+		} else if ($capacidad_aula == 28) { 
+			$total_y = 7;
+		} else if ($capacidad_aula == 24) { 
+			$total_y = 6;
+		} else if ($capacidad_aula == 20) { 
+			$total_y = 5;
+		} else if ($capacidad_aula == 16) { 
+			$total_y = 4;
+		}
+        if ($y - 1 >= 0) {
+            if ($x - 1 >= 0) {
+                $posibilidades[] = ["x" => strval($x - 1), "y" => strval($y - 1)];
+            }
+            $posibilidades[] = ["x" => strval($x), "y" => strval($y - 1)];
+            if ($x + 1 <= 3) {
+                $posibilidades[] = ["x" => strval($x + 1), "y" => strval($y - 1)];
+            }
+        }
+        if ($x - 1 >= 0) {
+            $posibilidades[] = ["x" => strval($x - 1), "y" => strval($y)];
+        }
+        if ($x + 1 <= 3) {
+            $posibilidades[] = ["x" => strval($x + 1), "y" => strval($y)];
+        }
+        if ($y + 1 < $total_y) {
+            if ($x - 1 >= 0) {
+                $posibilidades[] = ["x" => strval($x - 1), "y" => strval($y + 1)];
+            }
+            $posibilidades[] = ["x" => strval($x), "y" => strval($y + 1)];
+            if ($x + 1 <= 3) {
+                $posibilidades[] = ["x" => strval($x + 1), "y" => strval($y + 1)];
+            }
+        }
+        return $posibilidades;
+	}
 ?>
