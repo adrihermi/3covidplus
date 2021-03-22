@@ -206,6 +206,22 @@
                         <button class="btn" type="submit">Confirmar</button>
                     </div>
                 </form>
+                <form id="form-cambiar-estado-alumno" class="needs-validation form" novalidate>
+                    <input type="hidden" id="id-alumno-cambiar-estado" />
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="estado-alumno" class="form-label">Estado</label>
+                            <select class="form-control" id="estado-alumno" required></select>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="fecha-cambio-estado" class="form-label">Fecha</label>
+                            <input class="form-control" id="fecha-cambio-estado" type="date" />
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn" type="submit">Confirmar</button>
+                    </div>
+                </form>
                 <form action="" id="form-aula" class="needs-validation form" novalidate>
                     <div class="row">
                         <div class="mb-3 offset-4 col-4">
@@ -309,6 +325,7 @@
                         <button class="btn" type="submit">Confirmar</button>
                     </div>
                 </form>
+                <input type="hidden" id="posicion-id-alumno" />
                 <div class="grid-container16 form">
                     <div class="x0_y0"></div>
                     <div class="x1_y0"></div>

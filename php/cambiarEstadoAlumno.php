@@ -1,17 +1,19 @@
 <?php 
     require("conexion.php");
-	$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES (".$_POST['fecha'].", ".$_POST['id_alumno'].", ".$_POST['id_estado'].")";
+	$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES ('".$_POST['fecha']."', ".$_POST['id_alumno'].", ".$_POST['id_estado'].")";
 	$saida = array();
 	if ($conexion->query($consulta)) {   		
 		if($_POST['id_estado'] == 3){
 			// El alumno dio positivo, se deben buscar los colindantes
 			$consulta = "SELECT pos.posicion_x, pos.posicion_y, au.capacidad, au.id_aula
 						 FROM posicion_alumnos as pos
-						 JOIN aula as au on pos.id_aula=au.id_aula
-						 WHERE pos.id_alumno = ".$_POST['id_alumno']."";
+						 JOIN aulas as au on pos.id_aula=au.id_aula
+						 WHERE pos.id_alumno = ".$_POST['id_alumno'];
+			$posicion_alumno_contagiado = null;
 			if ($datos = $conexion->query($consulta)) {   		
 				while ($posicion = $datos->fetch_object()) {
 					$posicion_alumno_contagiado = $posicion;
+					break;
 				}
 				$datos->close();
 			}
@@ -20,15 +22,12 @@
 				// Buscando los posibles colindantes
 				$colindantes = posibles_colindantes($posicion_alumno_contagiado->posicion_x, $posicion_alumno_contagiado->posicion_y, $posicion_alumno_contagiado->capacidad);
 				foreach ($colindantes as $colindante) {
-					echo "x".$colindante["x"] . "_y" .$colindante["y"] ."\n";
 					$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado)
 								 SELECT '".$_POST["fecha"]."', al.id_alumno, '4' FROM alumnos as al
-								 JOIN posicion_alumnos as pos on al.id_aula=pos.id_aula
+								 INNER JOIN posicion_alumnos as pos on al.id_alumno=pos.id_alumno
 								 WHERE pos.id_aula='".$posicion_alumno_contagiado->id_aula."' AND pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."'";
 					
-					if ($datos = $conexion->query($consulta)) {
-						$datos->close();
-					}
+					$conexion->query($consulta);
 				}
 			}
 		}
