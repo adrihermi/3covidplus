@@ -19,7 +19,7 @@
 			if ($posicion_alumno_contagiado != null) {
 				// Buscando los posibles colindantes
 				$colindantes = posibles_colindantes($posicion_alumno_contagiado->posicion_x, $posicion_alumno_contagiado->posicion_y, $posicion_alumno_contagiado->capacidad);
-				foreach (posibles_colindantes(0, 3, 16) as $colindante) {
+				foreach ($colindantes as $colindante) {
 					echo "x".$colindante["x"] . "_y" .$colindante["y"] ."\n";
 					$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado)
 								 SELECT '".$_POST["fecha"]."', al.id_alumno, '4' FROM alumnos as al
