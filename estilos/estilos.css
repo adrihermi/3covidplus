@@ -203,6 +203,11 @@
     table thead {
         color: #5857df;
     }
+    
+    .gestionAlumno {
+        height: 5vh;
+        margin: 6px;
+    }
     /***************************************** ALTA ALUMNO ************************************************/
     
     .form-control.is-invalid,

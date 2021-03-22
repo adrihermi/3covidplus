@@ -31,8 +31,9 @@ $(function() {
                         "<td>" + this.telefono + "</td>" +
                         "<td>" + this.email + "</td>" +
                         "<td>" +
-                        "<button class='asignar_posicion btn' data-value='" + this.id_alumno + "'>Asignar posicion</button>" +
-                        "<button class='modificar_alumno btn' data-value='" + this.id_alumno + "'>Modificar</button>" +
+                        "<a href='#' class='asignar_posicion' data-value='" + this.id_alumno + "'><img src='estilos/img/posicion.png' title='Asignar posicion del alumno' class='gestionAlumno' alt='Asignar posicion del alumno'/></a>" +
+                        "<a href='#' class='modificar_alumno' data-value='" + this.id_alumno + "'><img src='estilos/img/edit.png' title='Editar alumno' class='gestionAlumno' alt='Editar alumno'/></a>" +
+                        "<a href='#' class='cambiar_estado' data-value='" + this.id_alumno + "'><img src='estilos/img/userCovid.png' title='Cambiar estado del alumno' class='gestionAlumno' alt='Cambiar estado del alumno'/></a>" +
                         "</td>";
                 });
 
@@ -306,9 +307,10 @@ $(function() {
         return false;
     });
 
-    $().on('click',function(){
-        
+    $().on('click', function() {
+
     })
+
     function ocultarFormularios() {
         $(".form").hide();
     }
