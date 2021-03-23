@@ -9,7 +9,7 @@ $(function() {
         });
         ocultarFormularios();
         $("#form-listar").show();
-        $(".bienvenido").text("Listar alumnos");
+        $(".bienvenido").text("Gestionar alumnos");
         $("#form-listar table tbody").html("");
 
     });
@@ -26,6 +26,7 @@ $(function() {
 
                 $(alumnos).each(function() {
                     htmlString += "<tr>" +
+                        "<td><img class='estado' src='estilos/img/" + (this.id_estado === "1" ? "usuario2.png" : this.id_estado === "2" ? "usuarioespera.png" : this.id_estado === "3" ? "usercovid.png" : "usuarioespera.png") + "' alt='' title='" + (this.id_estado === "1" ? "Normal" : this.id_estado === "2" ? "En espera" : this.id_estado === "3" ? "Positivo" : "En contacto con un positivo") + "' /></td>" +
                         "<td>" + this.nombre + " " + (this.apellido1 || "") + " " + (this.apellido2 || "") + "</td>" +
                         "<td>" + this.fecha_nacimiento + "</td>" +
                         "<td>" + this.telefono + "</td>" +
@@ -67,13 +68,21 @@ $(function() {
                                         var posicion_alumno = grilla.filter(f => f.posicion_x == x && f.posicion_y == y)[0];
                                         var etiqueta = "<label>Posicion libre</label>";
                                         var libre = "posicion_libre";
+                                        var titulo = "";
                                         if (posicion_alumno) {
-                                            libre = "";
+                                            libre = posicion_alumno.id_estado === "1" ? "normal" :
+                                                posicion_alumno.id_estado === "2" ? "enespera" :
+                                                posicion_alumno.id_estado === "3" ? "positivo" :
+                                                "encontacto";
+                                            titulo = posicion_alumno.id_estado === "1" ? "" :
+                                                posicion_alumno.id_estado === "2" ? "En espera de PCR" :
+                                                posicion_alumno.id_estado === "3" ? "Positivo" :
+                                                "En contacto con un positivo";
                                             etiqueta = "<label>" + posicion_alumno.nombre + " " + (posicion_alumno.apellido1 || "") + " " + (posicion_alumno.apellido2 || "") + "</label>";
                                         }
                                         $(".grid-container" + alumno_y_aula.capacidad_aula + " .x" + x + "_y" + y).html(
                                             "<div class='usuarios_grilla'></div>" +
-                                            etiqueta).addClass(libre);
+                                            etiqueta).addClass(libre).attr("title", titulo);
 
                                     }
                                 }
@@ -435,14 +444,14 @@ $(function() {
     });
 
     //Eliminamos $_SESSION["usuario"] y $_SESSION["contraseña"]
-    $("#cerrarSesion").on("click",function(){
+    $("#cerrarSesion").on("click", function() {
         $.ajax({
-            url: 'php/logout.php',
-        })
-            .done(function () {
+                url: 'php/logout.php',
+            })
+            .done(function() {
                 location.href = "./index.html";
             })
-            .fail(function () {
+            .fail(function() {
                 alert("Error en el fichero: logout.php");
             })
     })
