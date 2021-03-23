@@ -339,6 +339,7 @@ $(function() {
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
+                        console.log("Hola");
                         location.href = "./usuario.html";
                         break;
                     case "error":
