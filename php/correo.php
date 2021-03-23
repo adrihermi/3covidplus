@@ -18,7 +18,7 @@ function crear_correo(){
 function enviar_correo_multiples($lista_correos,  $cuerpo,  $asunto = ""){
 		$mail = new PHPMailer();		
 		$mail->IsSMTP(); 					
-		$mail->SMTPDebug  = 0;  // cambiar a 1 o 2 para ver errores
+		$mail->SMTPDebug  = 0;
 		$mail->SMTPAuth   = true;                  
 		//$mail->SMTPSecure = "tls";                 
 		$mail->Host       = "smtp.gmail.com";      
@@ -28,8 +28,6 @@ function enviar_correo_multiples($lista_correos,  $cuerpo,  $asunto = ""){
 		$mail->SetFrom('ies.aller.ulloa@edu.xunta.es', 'Aviso de contacto con un positivo en covid-19.');
 		$mail->Subject    = $asunto;
 		$mail->MsgHTML($cuerpo);
-		/*partir la lista de correos por la coma*/
-		//$correos = explode(",", $lista_correos);
 		foreach($lista_correos as $correo){
 			$mail->AddAddress($correo, $correo);
 		}
