@@ -9,7 +9,7 @@ $(function() {
             return;
         }
         var clave = $("#clave").val();
-        if (!clave || clave.trim().length < 4) {
+        if (!clave || clave.trim().length < 6) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar una clave, teniendo en cuenta que debe tener 6 caracteres.");
             return;
         }

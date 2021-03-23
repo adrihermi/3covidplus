@@ -433,4 +433,17 @@ $(function() {
             });
         return false;
     });
+
+    //Eliminamos $_SESSION["usuario"] y $_SESSION["contraseña"]
+    $("#cerrarSesion").on("click",function(){
+        $.ajax({
+            url: 'php/logout.php',
+        })
+            .done(function () {
+                location.href = "./index.html";
+            })
+            .fail(function () {
+                alert("Error en el fichero: logout.php");
+            })
+    })
 })
