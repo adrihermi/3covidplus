@@ -31,8 +31,9 @@ $(function() {
                         "<td>" + this.telefono + "</td>" +
                         "<td>" + this.email + "</td>" +
                         "<td>" +
-                        "<button class='asignar_posicion btn' data-value='" + this.id_alumno + "'>Asignar posicion</button>" +
-                        "<button class='modificar_alumno btn' data-value='" + this.id_alumno + "'>Modificar</button>" +
+                        "<a href='#' class='asignar_posicion' data-value='" + this.id_alumno + "'><img src='estilos/img/posicion.png' title='Asignar posicion del alumno' class='gestionAlumno' alt='Asignar posicion del alumno'/></a>" +
+                        "<a href='#' class='modificar_alumno' data-value='" + this.id_alumno + "'><img src='estilos/img/edit.png' title='Editar alumno' class='gestionAlumno' alt='Editar alumno'/></a>" +
+                        "<a href='#' class='cambiar_estado' data-value='" + this.id_alumno + "'><img src='estilos/img/userCovid.png' title='Cambiar estado del alumno' class='gestionAlumno' alt='Cambiar estado del alumno'/></a>" +
                         "</td>";
                 });
 
@@ -107,6 +108,21 @@ $(function() {
                                 $("#observaciones-alumno-editar").val(alumno.observaciones);
                             }
                         });
+                    });
+                });
+                $(".cambiar_estado").click(function() {
+                    var id_alumno = $(this).data("value");
+                    $("#id-alumno-cambiar-estado").val(id_alumno);
+                    ocultarFormularios();
+                    $("#form-cambiar-estado-alumno").show();
+                    $(".bienvenido").text("Modificar alumno");
+                    $('#fecha-cambio-estado').val(new Date().toDateInputValue());
+                    $.getJSON('php/cargarEstados.php', function(datos) {
+                        var htmlString = "";
+                        $(datos).each(function() {
+                            htmlString += "<option value='" + this.id_estado + "'>" + this.descripcion + "</option>";
+                        });
+                        $("#estado-alumno").html(htmlString);
                     });
                 });
 
@@ -306,6 +322,57 @@ $(function() {
         return false;
     });
 
+    $("#form-cambiar-estado-alumno button").on('click', function() {
+        var id_alumno = $("#id-alumno-cambiar-estado").val();
+        var id_estado = $("#estado-alumno").val();
+        var fecha = $("#fecha-cambio-estado").val();
+        if (!id_alumno) {
+            $("#mensaje-error").removeClass("ocultar").html("Debe seleccionar al usuario.");
+            return false;
+        }
+        if (!fecha || fecha.trim().length == 0) {
+            $("#mensaje-error").removeClass("ocultar").html("Debe ingresar la fecha del cambio de estado.");
+            return false;
+        }
+
+        $.post("php/cambiarEstadoAlumno.php", { fecha: fecha, id_alumno: id_alumno, id_estado: id_estado })
+            .done(function(datos) {
+                switch (datos) {
+                    case "ok":
+                        location.href = "./usuario.html";
+                        break;
+                    case "error":
+                        $("#mensaje-error").removeClass("ocultar").html("Error al cambiar el estado del alumno.");
+                        break;
+                }
+            })
+            .fail(function() {
+                $("#mensaje-error").removeClass("ocultar").html("Error al cambiar el estado del alumno.");
+            });
+        return false;
+    });
+
+    $(".x0_y0,.x0_y1,.x0_y2,.x0_y3,.x1_y0,.x1_y1,.x1_y2,.x1_y3,.x2_y0,.x2_y1,.x2_y2,.x2_y3,.x3_y0,.x3_y1,.x3_y2,.x3_y3,.x4_y0,.x4_y1,.x4_y2,.x4_y3,.x5_y0,.x5_y1,.x5_y2,.x5_y3,.x6_y0,.x6_y1,.x6_y2,.x6_y3,.x7_y0,.x7_y1,.x7_y2,.x7_y3").click(function() {
+        var id_alumno = $("#posicion-id-alumno").val();
+        if (id_alumno && id_alumno > 0) {
+            var posicion = this.classList[0].split("_");
+            $.post("php/inserirPosicionAlumno.php", { id_alumno: id_alumno, posicion_x: posicion[0].replace("x", ""), posicion_y: posicion[1].replace("y", "") })
+                .done(function(datos) {
+                    switch (datos) {
+                        case "ok":
+                            location.href = "./usuario.html";
+                            break;
+                        case "error":
+                            $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
+                            break;
+                    }
+                })
+                .fail(function() {
+                    $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
+                });
+        }
+    });
+
     function ocultarFormularios() {
         $(".form").hide();
     }
@@ -327,6 +394,12 @@ $(function() {
                 form.classList.add('was-validated');
             }, false)
         });
+
+    Date.prototype.toDateInputValue = (function() {
+        var local = new Date(this);
+        local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+        return local.toJSON().slice(0, 10);
+    });
 
     $("#form-aula button").on('click', function() {
         if (!$("#mensaje-error").hasClass("ocultar")) {

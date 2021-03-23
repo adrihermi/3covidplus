@@ -203,6 +203,11 @@
     table thead {
         color: #5857df;
     }
+    
+    .gestionAlumno {
+        height: 5vh;
+        margin: 6px;
+    }
     /***************************************** ALTA ALUMNO ************************************************/
     
     .form-control.is-invalid,
@@ -234,7 +239,6 @@
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
-        margin-top: ;
     }
     
     .posicion_libre:hover .usuarios_grilla {
