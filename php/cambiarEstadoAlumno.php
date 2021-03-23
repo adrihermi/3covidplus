@@ -1,5 +1,6 @@
 <?php 
     require("conexion.php");
+	require ("correo.php");
 	$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES ('".$_POST['fecha']."', ".$_POST['id_alumno'].", ".$_POST['id_estado'].")";
 	$saida = array();
 	if ($conexion->query($consulta)) {   		
@@ -26,8 +27,15 @@
 								 SELECT '".$_POST["fecha"]."', al.id_alumno, '4' FROM alumnos as al
 								 INNER JOIN posicion_alumnos as pos on al.id_alumno=pos.id_alumno
 								 WHERE pos.id_aula='".$posicion_alumno_contagiado->id_aula."' AND pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."'";
-					
 					$conexion->query($consulta);
+					$consulta = "SELECT al.email_tutor_legal
+								 FROM alumnos as al 
+								 JOIN posicion_alumnos as pos on al.id_alumno = pos.id_alumno 
+								 WHERE pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."'";
+					if($correo_tutor_legal = $conexion->query($consulta)){
+						enviar_correos($correo_tutor_legal);
+					}
+					$correo_tutor_legal->close();
 				}
 			}
 		}
