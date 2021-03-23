@@ -23,12 +23,13 @@ function enviar_correo_multiples($lista_correos,  $cuerpo,  $asunto = ""){
 		//$mail->SMTPSecure = "tls";                 
 		$mail->Host       = "smtp.gmail.com";      
 		$mail->Port       = 587;                   
-		$mail->Username   = "ies_aller_ulloa@gmail.com";  //usuario de gmail
-		$mail->Password   = ""; //contraseña de gmail          
+		$mail->Username   = "3covidplus@gmail.com";  
+		$mail->Password   = "olacaracola";           
 		$mail->SetFrom('ies.aller.ulloa@edu.xunta.es', 'Aviso de contacto con un positivo en covid-19.');
 		$mail->Subject    = $asunto;
 		$mail->MsgHTML($cuerpo);
-		foreach($lista_correos as $correo){
+		$correos = explode(",", $lista_correos);
+		foreach($correos as $correo){
 			$mail->AddAddress($correo, $correo);
 		}
 		if(!$mail->Send()) {
