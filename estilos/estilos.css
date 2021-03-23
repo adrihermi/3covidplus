@@ -208,6 +208,10 @@
         height: 5vh;
         margin: 6px;
     }
+    
+    img.estado {
+        width: 45px;
+    }
     /***************************************** ALTA ALUMNO ************************************************/
     
     .form-control.is-invalid,
@@ -235,10 +239,26 @@
     .usuarios_grilla {
         height: 5vh;
         padding: 5px;
-        background-image: url(img/freePosition.png);
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
+    }
+    
+    .normal .usuarios_grilla {
+        background-image: url(img/usuario2.png);
+    }
+    
+    .enespera .usuarios_grilla,
+    .encontacto .usuarios_grilla {
+        background-image: url(img/usuarioespera.png);
+    }
+    
+    .positivo .usuarios_grilla {
+        background-image: url(img/userCovid.png);
+    }
+    
+    .posicion_libre .usuarios_grilla {
+        background-image: url(img/freePosition.png);
     }
     
     .posicion_libre:hover .usuarios_grilla {

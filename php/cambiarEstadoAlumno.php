@@ -31,17 +31,24 @@
 					$consulta = "SELECT al.email_tutor_legal
 								 FROM alumnos as al 
 								 JOIN posicion_alumnos as pos on al.id_alumno = pos.id_alumno 
-								 WHERE pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."'";
-					if($correo_tutor_legal = $conexion->query($consulta)){
-						enviar_correos($correo_tutor_legal);
+								 WHERE pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."' AND pos.id_aula='".$posicion_alumno_contagiado->id_aula."'";
+					$correo_tutor_legal = "";
+					$datos = $conexion->query($consulta);
+					while ($dato_alumno = $datos->fetch_object()) {
+						$correo_tutor_legal = $dato_alumno->email_tutor_legal;
+						break;
 					}
-					$correo_tutor_legal->close();
+					$datos->close();
+					echo "Correo: " .$correo_tutor_legal;
+					if ($correo_tutor_legal != "") {
+						echo json_encode(enviar_correos($correo_tutor_legal));
+					}
 				}
 			}
 		}
 	}
 	$conexion->close();
-	echo json_encode("ok");
+	echo "ok";
 
 	function posibles_colindantes($x, $y, $capacidad_aula) {
         $posibilidades = [];
