@@ -15,7 +15,7 @@ function crear_correo(){
 			  <p>Dirección del IES Ramón María Aller Ulloa</p>";	
 	return $texto;
 }
-function enviar_correo_multiples($lista_correos,  $cuerpo,  $asunto = ""){
+function enviar_correo_multiples($lista_correos,  $cuerpo,  $asunto){
 		$mail = new PHPMailer();		
 		$mail->IsSMTP(); 					
 		$mail->SMTPDebug  = 0;
