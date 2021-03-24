@@ -1,7 +1,17 @@
 $(function() {
     var eventoAula;
-    $.getJSON("php/validarAdministrador.php", function(datos) {
-        if (datos == "ok")
+    $("#panel-administrador").parent().hide();
+    $.ajax({ url: "php/validarAdministrador.php" }).done(function(datos) {
+        if (datos == "ok") {
+            $("#panel-administrador").parent().show();
+        }
+    });
+    $("#panel-administrador").click(function() {
+        $.ajax({ url: "php/validarAdministrador.php" }).done(function(datos) {
+            if (datos == "ok") {
+                window.location.href = "admin.html";
+            }
+        });
     });
     $("#form-listar").hide();
     $("#listar-aulas").click(function() {
