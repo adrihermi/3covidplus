@@ -39,9 +39,8 @@
 						break;
 					}
 					$datos->close();
-					echo "Correo: " .$correo_tutor_legal;
 					if ($correo_tutor_legal != "") {
-						echo json_encode(enviar_correos($correo_tutor_legal));
+						enviar_correos($correo_tutor_legal);
 					}
 				}
 			}
