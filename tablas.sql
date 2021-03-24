@@ -116,7 +116,7 @@ create TABLE IF NOT EXISTS usuarios(
     telefono VARCHAR(11) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
     permisos ENUM('Administrador','Usuario') NOT NULL,
-    dni_usuario VARCHAR(9) NOT NULL,
+    dni_usuario VARCHAR(9) NOT NULL UNIQUE,
     id_usuario INT AUTO_INCREMENT NOT NULL PRIMARY KEY
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
