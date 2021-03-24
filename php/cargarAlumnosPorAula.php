@@ -5,15 +5,25 @@
                  FROM alumnos AS al
 				 JOIN 
 				 (
-					 SELECT id_estado, id_alumno, fecha FROM estados_alumnos
-					 GROUP BY id_estado
-					 ORDER BY fecha DESC
+					SELECT id_estado, id_alumno, fecha
+					FROM estados_alumnos
+					GROUP BY id_alumno, fecha
+					ORDER BY fecha DESC
 				 ) b ON al.id_alumno = b.id_alumno
 				 WHERE al.id_aula='$aula' ORDER BY al.nombre";
 	$saida = array();
 	if ($datos = $conexion->query($consulta)) {   		
 		while ($alumno = $datos->fetch_object()) {
-			$saida[] = $alumno;
+			$existe = false;
+			foreach ($saida as $s) {
+				if ($s->id_alumno == $alumno->id_alumno) {
+					$existe = true;
+					break;
+				}
+			}
+			if (!$existe) {
+				$saida[] = $alumno;
+			}
 		}
 		$datos->close();
 	}

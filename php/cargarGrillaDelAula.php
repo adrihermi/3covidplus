@@ -6,7 +6,7 @@ $consulta = "SELECT *
 	JOIN 
 	(
 		SELECT id_estado, id_alumno, fecha FROM estados_alumnos
-		GROUP BY id_estado
+		GROUP BY id_alumno
 		ORDER BY fecha DESC
 	) b ON al.id_alumno = b.id_alumno
 	WHERE pos.id_aula='" . $_GET["id"] . "'";

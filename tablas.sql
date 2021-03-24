@@ -31,7 +31,7 @@ create TABLE IF NOT EXISTS aulas(
 
 -- Si no existe creamos la tabla fechas
 create TABLE IF NOT EXISTS estados_alumnos(
-    fecha DATE NOT NULL,
+    fecha DATETIME NOT NULL,
     id_alumno VARCHAR(9) NOT NULL,
     id_estado INT NOT NULL,
     CONSTRAINT pk_estado_alumnos PRIMARY KEY(fecha,id_alumno,id_estado),

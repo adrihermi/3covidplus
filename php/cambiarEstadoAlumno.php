@@ -1,7 +1,7 @@
 <?php 
     require("conexion.php");
 	require ("correo.php");
-	$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES ('".$_POST['fecha']."', ".$_POST['id_alumno'].", ".$_POST['id_estado'].")";
+	$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES (now(), ".$_POST['id_alumno'].", ".$_POST['id_estado'].")";
 	$saida = array();
 	if ($conexion->query($consulta)) {   		
 		if($_POST['id_estado'] == 3){
