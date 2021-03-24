@@ -233,7 +233,7 @@ $(function() {
                     var id_alumno = $(this).data("value");
                     $("#id-alumno-cambiar-estado").val(id_alumno);
                     ocultarFormularios();
-                    $("#form-cambiar-estado-alumno").show();
+                    $("#form-cambiar-estado-alumno").data("id_aula", idAula).show();
                     $(".bienvenido").text("Modificar alumno");
                     $('#fecha-cambio-estado').val(new Date().toDateInputValue());
                     $.getJSON('php/cargarEstados.php', function(datos) {
@@ -450,7 +450,7 @@ $(function() {
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        location.href = "./usuario.html";
+                        $("#gestion-profesores").click();
                         break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el profesor.");
@@ -519,7 +519,7 @@ $(function() {
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        location.href = "./usuario.html";
+                        $("#gestion-profesores").click();
                         break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el profesor.");
@@ -533,6 +533,7 @@ $(function() {
     });
 
     $("#form-cambiar-estado-alumno button").on('click', function() {
+        var id_aula = $(this).parent().parent().data("id_aula");
         var id_alumno = $("#id-alumno-cambiar-estado").val();
         var id_estado = $("#estado-alumno").val();
         var fecha = $("#fecha-cambio-estado").val();
@@ -549,7 +550,7 @@ $(function() {
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        location.href = "./usuario.html";
+                        $("#listar-aulas").data("id_aula", id_aula).trigger("grilla-lista");
                         break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al cambiar el estado del alumno.");
@@ -676,5 +677,6 @@ $(function() {
         $("#form-listar").show();
         $(".bienvenido").text("Mostrar Aula");
         $("#form-listar table tbody").html("");
+        $("#posicion-id-alumno").val("");
     });
 })
