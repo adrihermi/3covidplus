@@ -32,6 +32,24 @@ $(function() {
             $("#form-listar").show();
             $(".bienvenido").text("Gestionar alumnos");
             $("#form-listar table tbody").html("");
+        })
+        // Evento de mostrar la grilla
+        .on("grilla", function() {
+            eventoAula = "grilla-aula";
+            // Se obtiene el id del aula seleccionado
+            var aula_seleccionada = $(this).data("id_aula");
+            $.getJSON('php/cargarAulas.php', function(datos) {
+                $("#aula-listar").html("<option selected></option>");
+                $(datos).each(function() {
+                    $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                });
+                // Ya cargados los datos se selecciona el valor del select en #aula-listar y se activa el evento change
+                $("#aula-listar").val(aula_seleccionada).trigger("change");
+            });
+            ocultarFormularios();
+            $("#form-listar").show();
+            $(".bienvenido").text("Gestionar alumnos");
+            $("#form-listar table tbody").html("");
         });
 
     $("#aula-listar").change(function() {
@@ -275,17 +293,17 @@ $(function() {
                     });
                     $.getJSON("php/cargarProfesorPorId.php?id=" + id_profesor, function(profesor) {
                         if (profesor) {
-                        $("#id-profesor-editar").val(id_profesor);
-                        $("#nombre-profesor-editar").val(profesor.nombre);
-                        $("#apellido1-profesor-editar").val(profesor.apellido1);
-                        $("#apellido2-profesor-editar").val(profesor.apellido2);
-                        $("#dni-profesor-editar").val(profesor.dni_profesor);
-                        $("#fecha-nac-profesor-editar").val(profesor.fecha_nacimiento);
-                        $("#genero-profesor-editar").val(profesor.genero);
-                        $("#telefono-profesor-editar").val(profesor.telefono);
-                        $("#mail-profesor-editar").val(profesor.email_profesor);
-                        $("#observaciones-profesor-editar").val(profesor.observaciones);
-                        $("#clase-profesor-editar").val(profesor.id_aula);
+                            $("#id-profesor-editar").val(id_profesor);
+                            $("#nombre-profesor-editar").val(profesor.nombre);
+                            $("#apellido1-profesor-editar").val(profesor.apellido1);
+                            $("#apellido2-profesor-editar").val(profesor.apellido2);
+                            $("#dni-profesor-editar").val(profesor.dni_profesor);
+                            $("#fecha-nac-profesor-editar").val(profesor.fecha_nacimiento);
+                            $("#genero-profesor-editar").val(profesor.genero);
+                            $("#telefono-profesor-editar").val(profesor.telefono);
+                            $("#mail-profesor-editar").val(profesor.email_profesor);
+                            $("#observaciones-profesor-editar").val(profesor.observaciones);
+                            $("#clase-profesor-editar").val(profesor.id_aula);
                         }
                     });
                 });
@@ -362,7 +380,7 @@ $(function() {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el aula al cual pertenece el profesor como tutor.");
             return;
         }
-        $.post("php/inserirProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_aula:clase_profesor})
+        $.post("php/inserirProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_aula: clase_profesor })
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
@@ -431,7 +449,7 @@ $(function() {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el aula al cual pertenece el profesor como tutor.");
             return;
         }
-        $.post("php/modificarProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_profesor: id_profesor, id_aula:clase_profesor })
+        $.post("php/modificarProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_profesor: id_profesor, id_aula: clase_profesor })
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
@@ -488,7 +506,7 @@ $(function() {
                 .done(function(datos) {
                     switch (datos) {
                         case "ok":
-                            grillaAula(id_aula);
+                            $("#listar-aulas").data("id_aula", clase_alumno).trigger("grilla");
                             break;
                         case "error":
                             $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
@@ -546,13 +564,15 @@ $(function() {
         }
         $.post("php/inserirAulas.php", { nombre: nombre_aula, capacidad: capacidad })
             .done(function(datos) {
-                switch (datos) {
-                    case "ok":
-                        location.href = "./usuario.html";
-                        break;
-                    case "error":
-                        $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
-                        break;
+                if (datos === "erro") {
+                    $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
+                } else {
+                    // Se obtiene el id del aula insertada en la base de datos
+                    var aula = JSON.parse(datos);
+                    // Se muestra el mensaje de exito
+                    $("#mensaje-exito").show().fadeOut(5000).html("Aula ingresada con éxito.");
+                    //Se agrega el id del aula al select de listar aulas y se activa el evento grilla
+                    $("#listar-aulas").data("id_aula", aula.id).trigger("grilla");
                 }
             })
             .fail(function() {
