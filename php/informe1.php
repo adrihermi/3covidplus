@@ -1,7 +1,8 @@
 <?php
+    require("conexion.php");
     header("Content-type: application/vnd.ms-excel");
-    header("Content-Disposition: attachment; filename=nombre_archivo.xls");
-    $consulta = "";
+    header("Content-Disposition: attachment; filename=informe_casos.xls");
+    $consulta = "SELECT * FROM usuarios";
 ?>
 <table>
     <caption>Informe de casos.</caption>
@@ -13,12 +14,14 @@
         <th>En contacto con un positivo</th>
     </tr>
     <?php
-        $datos = $conexion->query($consulta); 
-        while($fila=mysqli_fetch_assoc($datos)){
+        if($datos = $conexion->query($consulta)){
+            while($fila=mysqli_fetch_assoc($datos)){
+        
+        
     ?>        
     <?php
+    }
     } 
-    $datos->close();
-    $conexion->close();
+    
     ?>   
 </table>
