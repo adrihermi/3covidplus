@@ -235,6 +235,13 @@ $(function() {
         $(".bienvenido").text("Dar de alta un alumno");
     });
 
+    $("#alta-usuario").click(function() {
+        ocultarFormularios();
+        $("#form-usuario").show();
+        $(".bienvenido").text("Dar de alta un usuario");
+    });
+
+
     $("#alta-aula").click(function() {
         ocultarFormularios();
         $("#form-aula").show();
@@ -275,17 +282,17 @@ $(function() {
                     });
                     $.getJSON("php/cargarProfesorPorId.php?id=" + id_profesor, function(profesor) {
                         if (profesor) {
-                        $("#id-profesor-editar").val(id_profesor);
-                        $("#nombre-profesor-editar").val(profesor.nombre);
-                        $("#apellido1-profesor-editar").val(profesor.apellido1);
-                        $("#apellido2-profesor-editar").val(profesor.apellido2);
-                        $("#dni-profesor-editar").val(profesor.dni_profesor);
-                        $("#fecha-nac-profesor-editar").val(profesor.fecha_nacimiento);
-                        $("#genero-profesor-editar").val(profesor.genero);
-                        $("#telefono-profesor-editar").val(profesor.telefono);
-                        $("#mail-profesor-editar").val(profesor.email_profesor);
-                        $("#observaciones-profesor-editar").val(profesor.observaciones);
-                        $("#clase-profesor-editar").val(profesor.id_aula);
+                            $("#id-profesor-editar").val(id_profesor);
+                            $("#nombre-profesor-editar").val(profesor.nombre);
+                            $("#apellido1-profesor-editar").val(profesor.apellido1);
+                            $("#apellido2-profesor-editar").val(profesor.apellido2);
+                            $("#dni-profesor-editar").val(profesor.dni_profesor);
+                            $("#fecha-nac-profesor-editar").val(profesor.fecha_nacimiento);
+                            $("#genero-profesor-editar").val(profesor.genero);
+                            $("#telefono-profesor-editar").val(profesor.telefono);
+                            $("#mail-profesor-editar").val(profesor.email_profesor);
+                            $("#observaciones-profesor-editar").val(profesor.observaciones);
+                            $("#clase-profesor-editar").val(profesor.id_aula);
                         }
                     });
                 });
@@ -362,7 +369,7 @@ $(function() {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el aula al cual pertenece el profesor como tutor.");
             return;
         }
-        $.post("php/inserirProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_aula:clase_profesor})
+        $.post("php/inserirProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_aula: clase_profesor })
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
@@ -431,7 +438,7 @@ $(function() {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el aula al cual pertenece el profesor como tutor.");
             return;
         }
-        $.post("php/modificarProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_profesor: id_profesor, id_aula:clase_profesor })
+        $.post("php/modificarProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_profesor: id_profesor, id_aula: clase_profesor })
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
