@@ -82,6 +82,25 @@ $(function() {
             $("#form-listar").show();
             $(".bienvenido").text("Gestionar alumnos");
             $("#form-listar table tbody").html("");
+        })
+        // Evento de mostrar la grilla desde la lista para asignar la posicion del alumno
+        .on("grilla-lista-asignar", function() {
+            eventoAula = "grilla-lista-aula";
+            // Se obtiene el id del aula seleccionado
+            var aula_seleccionada = $(this).data("id_aula");
+            $("#posicion-id-alumno").val($(this).data("id_alumno"));
+            $.getJSON('php/cargarAulas.php', function(datos) {
+                $("#aula-listar").html("<option selected></option>");
+                $(datos).each(function() {
+                    $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                });
+                // Ya cargados los datos se selecciona el valor del select en #aula-listar y se activa el evento change
+                $("#aula-listar").val(aula_seleccionada).trigger("change");
+            });
+            ocultarFormularios();
+            $("#form-listar").show();
+            $(".bienvenido").text("Gestionar alumnos");
+            $("#form-listar table tbody").html("");
         });
 
     $("#aula-listar").change(function() {

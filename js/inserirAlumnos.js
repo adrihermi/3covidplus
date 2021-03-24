@@ -112,20 +112,17 @@ $(function() {
         }
         $.post(url, consulta)
             .done(function(datos) {
-                switch (datos) {
-                    case "ok":
-                        $("#mensaje-exito").show().html("Alta de alumno exitosa.").fadeOut(5000);
-                        if (posicion_x >= 0 && posicion_y >= 0) {
-                            // Se envia el aula del alumno a la lista de aulas y se activa el evento grilla
-                            $("#listar-aulas").data("id_aula", clase_alumno).trigger("grilla");
-                        } else {
-                            // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
-                            $("#listar-aulas").data("id_aula", clase_alumno).trigger("grilla-lista");
-                        }
-                        break;
-                    case "error":
-                        $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
-                        break;
+                if (datos === "error") {
+                    $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
+                } else {
+                    $("#mensaje-exito").show().html("Alta de alumno exitosa.").fadeOut(5000);
+                    if (posicion_x >= 0 && posicion_y >= 0) {
+                        // Se envia el aula del alumno a la lista de aulas y se activa el evento grilla
+                        $("#listar-aulas").data("id_aula", clase_alumno).trigger("grilla");
+                    } else {
+                        // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
+                        $("#listar-aulas").data("id_aula", clase_alumno).data("id_alumno", datos.id).trigger("grilla-lista-asignar");
+                    }
                 }
             })
             .fail(function() {
