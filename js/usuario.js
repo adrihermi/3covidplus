@@ -32,12 +32,52 @@ $(function() {
             $("#form-listar").show();
             $(".bienvenido").text("Gestionar alumnos");
             $("#form-listar table tbody").html("");
+        })
+        // Evento de mostrar la grilla
+        .on("grilla", function() {
+            eventoAula = "grilla-aula";
+            // Se obtiene el id del aula seleccionado
+            var aula_seleccionada = $(this).data("id_aula");
+            $.getJSON('php/cargarAulas.php', function(datos) {
+                $("#aula-listar").html("<option selected></option>");
+                $(datos).each(function() {
+                    $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                });
+                // Ya cargados los datos se selecciona el valor del select en #aula-listar y se activa el evento change
+                $("#aula-listar").val(aula_seleccionada).trigger("change");
+            });
+            ocultarFormularios();
+            $("#form-listar").show();
+            $(".bienvenido").text("Gestionar alumnos");
+            $("#form-listar table tbody").html("");
+            $("#posicion-id-alumno").val("");
+        })
+        // Evento de mostrar la grilla desde la lista
+        .on("grilla-lista", function() {
+            eventoAula = "grilla-lista-aula";
+            // Se obtiene el id del aula seleccionado
+            var aula_seleccionada = $(this).data("id_aula");
+            $.getJSON('php/cargarAulas.php', function(datos) {
+                $("#aula-listar").html("<option selected></option>");
+                $(datos).each(function() {
+                    $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                });
+                // Ya cargados los datos se selecciona el valor del select en #aula-listar y se activa el evento change
+                $("#aula-listar").val(aula_seleccionada).trigger("change");
+            });
+            ocultarFormularios();
+            $("#form-listar").show();
+            $(".bienvenido").text("Gestionar alumnos");
+            $("#form-listar table tbody").html("");
         });
 
     $("#aula-listar").change(function() {
         if (eventoAula == "listarAulas") {
             listarAulas(this.value);
         } else if (eventoAula == "grilla-aula") {
+            grillaAula(this.value);
+        } else if (eventoAula == "grilla-lista-aula") {
+            eventoAula = "listarAulas";
             grillaAula(this.value);
         }
 
@@ -56,7 +96,7 @@ $(function() {
 
                 $(alumnos).each(function() {
                     htmlString += "<tr>" +
-                        "<td><img class='estado' src='estilos/img/" + (this.id_estado === "1" ? "usuario2.png" : this.id_estado === "2" ? "usuarioespera.png" : this.id_estado === "3" ? "usercovid.png" : "usuarioespera.png") + "' alt='' title='" + (this.id_estado === "1" ? "Normal" : this.id_estado === "2" ? "En espera" : this.id_estado === "3" ? "Positivo" : "En contacto con un positivo") + "' /></td>" +
+                        "<td><img class='estado' src='estilos/img/" + (this.id_estado === "1" ? "usuario.png" : this.id_estado === "2" ? "usuarioespera.png" : this.id_estado === "3" ? "usercovid.png" : "usuarioespera.png") + "' alt='' title='" + (this.id_estado === "1" ? "Normal" : this.id_estado === "2" ? "En espera" : this.id_estado === "3" ? "Positivo" : "En contacto con un positivo") + "' /></td>" +
                         "<td>" + this.nombre + " " + (this.apellido1 || "") + " " + (this.apellido2 || "") + "</td>" +
                         "<td>" + this.fecha_nacimiento + "</td>" +
                         "<td>" + this.telefono + "</td>" +
@@ -83,6 +123,7 @@ $(function() {
                     $.getJSON("php/cargarAlumnoPorId.php?id=" + $(this).data("value"), function(alumno_y_aula) {
                         if (alumno_y_aula) {
                             $(".grid-container" + alumno_y_aula.capacidad_aula).show();
+                            $(".leyenda-grilla").show();
                             $(".grid-container" + alumno_y_aula.capacidad_aula + " button[data-role='volver-aula']").data("id_aula", alumno_y_aula.id_aula);
                             // Logica para cargar la grilla
                             $.getJSON("php/cargarGrillaDelAula.php?id=" + alumno_y_aula.id_aula, function(grilla) {
@@ -106,7 +147,8 @@ $(function() {
                                         var libre = "posicion_libre";
                                         var titulo = "";
                                         if (posicion_alumno) {
-                                            libre = posicion_alumno.id_estado === "1" ? "normal" :
+                                            libre = posicion_alumno.id_alumno == $("#posicion-id-alumno").val() ? "seleccionado" :
+                                                posicion_alumno.id_estado === "1" ? "normal" :
                                                 posicion_alumno.id_estado === "2" ? "enespera" :
                                                 posicion_alumno.id_estado === "3" ? "positivo" :
                                                 "encontacto";
@@ -118,7 +160,7 @@ $(function() {
                                         }
                                         $(".grid-container" + alumno_y_aula.capacidad_aula + " .x" + x + "_y" + y).html(
                                             "<div class='usuarios_grilla'></div>" +
-                                            etiqueta).addClass(libre).attr("title", titulo);
+                                            etiqueta).removeClass(["posicion_libre", "normal", "enespera", "positivo", "encontacto", "seleccionado"]).addClass(libre).attr("title", titulo);
 
                                     }
                                 }
@@ -182,6 +224,7 @@ $(function() {
         $.getJSON("php/cargarAulaPorId.php?id=" + idAula, function(aula) {
             if (aula) {
                 $(".grid-container" + aula.capacidad).show();
+                $(".leyenda-grilla").show();
                 // Logica para cargar la grilla
                 $.getJSON("php/cargarGrillaDelAula.php?id=" + aula.id_aula, function(grilla) {
                     // Logica para indicar las posiciones ocupadas
@@ -204,7 +247,8 @@ $(function() {
                             var libre = "posicion_libre";
                             var titulo = "";
                             if (posicion_alumno) {
-                                libre = posicion_alumno.id_estado === "1" ? "normal" :
+                                libre = posicion_alumno.id_alumno == $("#posicion-id-alumno").val() ? "seleccionado" :
+                                    posicion_alumno.id_estado === "1" ? "normal" :
                                     posicion_alumno.id_estado === "2" ? "enespera" :
                                     posicion_alumno.id_estado === "3" ? "positivo" :
                                     "encontacto";
@@ -216,9 +260,10 @@ $(function() {
                             }
                             $(".grid-container" + aula.capacidad + " .x" + x + "_y" + y).html(
                                 "<div class='usuarios_grilla'></div>" +
-                                etiqueta).addClass(libre).attr("title", titulo);
+                                etiqueta).removeClass("posicion_libre normal enespera positivo encontacto seleccionado").addClass(libre).attr("title", titulo);
                         }
                     }
+                    $("#posicion-id-aula").val(idAula);
                 });
             }
         });
@@ -486,7 +531,7 @@ $(function() {
         return false;
     });
 
-    $(".x0_y0,.x0_y1,.x0_y2,.x0_y3,.x1_y0,.x1_y1,.x1_y2,.x1_y3,.x2_y0,.x2_y1,.x2_y2,.x2_y3,.x3_y0,.x3_y1,.x3_y2,.x3_y3,.x4_y0,.x4_y1,.x4_y2,.x4_y3,.x5_y0,.x5_y1,.x5_y2,.x5_y3,.x6_y0,.x6_y1,.x6_y2,.x6_y3,.x7_y0,.x7_y1,.x7_y2,.x7_y3").click(function() {
+    $(".grid-container16 > div,.grid-container20 > div,.grid-container24 > div,.grid-container28 > div,.grid-container32 > div").click(function() {
         var id_alumno = $("#posicion-id-alumno").val();
         var id_aula = $("#posicion-id-aula").val();
         if (id_alumno && id_alumno > 0) {
@@ -495,7 +540,7 @@ $(function() {
                 .done(function(datos) {
                     switch (datos) {
                         case "ok":
-                            grillaAula(id_aula);
+                            $("#listar-aulas").data("id_aula", id_aula).trigger("grilla-lista");
                             break;
                         case "error":
                             $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
@@ -505,6 +550,11 @@ $(function() {
                 .fail(function() {
                     $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
                 });
+        }
+        if (eventoAula == "grilla-aula" && $(this).hasClass("posicion_libre")) {
+            $("#clase-alumno").val(id_aula);
+            var posicion = this.classList[0].split("_");
+            $("#alta-alumno").data("id_aula", id_aula).data("posicion_x", posicion[0].replace("x", "")).data("posicion_y", posicion[1].replace("y", "")).trigger("alta");
         }
     });
 
@@ -553,13 +603,15 @@ $(function() {
         }
         $.post("php/inserirAulas.php", { nombre: nombre_aula, capacidad: capacidad })
             .done(function(datos) {
-                switch (datos) {
-                    case "ok":
-                        location.href = "./usuario.html";
-                        break;
-                    case "error":
-                        $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
-                        break;
+                if (datos === "erro") {
+                    $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
+                } else {
+                    // Se obtiene el id del aula insertada en la base de datos
+                    var aula = JSON.parse(datos);
+                    // Se muestra el mensaje de exito
+                    $("#mensaje-exito").show().fadeOut(5000).html("Aula ingresada con éxito.");
+                    //Se agrega el id del aula al select de listar aulas y se activa el evento grilla
+                    $("#listar-aulas").data("id_aula", aula.id).trigger("grilla");
                 }
             })
             .fail(function() {
@@ -593,6 +645,5 @@ $(function() {
         $("#form-listar").show();
         $(".bienvenido").text("Mostrar Aula");
         $("#form-listar table tbody").html("");
-
     });
 })

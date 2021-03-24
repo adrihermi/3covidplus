@@ -250,7 +250,7 @@
     }
     
     .normal .usuarios_grilla {
-        background-image: url(img/usuario2.png);
+        background-image: url(img/usuario.png);
     }
     
     .enespera .usuarios_grilla,
@@ -266,6 +266,10 @@
         background-image: url(img/freePosition.png);
     }
     
+    .seleccionado .usuarios_grilla {
+        background-image: url(img/usuario2.png);
+    }
+    
     .posicion_libre:hover .usuarios_grilla {
         background-image: url(img/usuario2.png);
         background-repeat: no-repeat;
@@ -275,6 +279,39 @@
     
     .posicion_libre:hover {
         cursor: pointer;
+    }
+    
+    .leyenda-grilla .seccion {
+        text-align: center;
+        display: grid;
+        grid-template-columns: 40px auto;
+    }
+    
+    .leyenda-grilla .bloque {
+        height: 40px;
+        border: 1px solid;
+        border-radius: 5px;
+        margin-right: 0.5rem;
+    }
+    
+    .leyenda-grilla .bloque.seleccionado {
+        background-color: #5857df;
+        border-color: #5857df;
+    }
+    
+    .leyenda-grilla .bloque.normal {
+        background-color: #07d6e6;
+        border-color: #07d6e6;
+    }
+    
+    .leyenda-grilla .bloque.enespera {
+        background-color: #fe8b55;
+        border-color: #fe8b55;
+    }
+    
+    .leyenda-grilla .bloque.positivo {
+        background-color: #ff1616;
+        border-color: #ff1616;
     }
     /*******************************16 ALUMNOS*************************************************************/
     

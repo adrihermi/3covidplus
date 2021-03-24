@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="estilos/estilos.css" />
     <link rel="shortcut icon" href="estilos/img/logo.png" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="estilos/jquery-ui.min.css" rel="stylesheet" />
     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
     <script src="js/usuario.js"></script>
     <script src="js/inserirAlumnos.js"></script>
     <script src="js/modificarAlumnos.js"></script>
@@ -44,6 +46,8 @@
                             <a href="#" id="grilla-aula">Mostrar un aula</a><br></li>
                         <li><img src="estilos/img/teacher.png" alt="imagen de usuario" height="40px">
                             <a href="#" id="gestion-profesores">Gestionar profesores</a><br></li>
+                        <li><img src="estilos/img/informe.png" alt="imagen de informes" height="40px">
+                            <a href="php/informe1.php" id="descargar-informe">Descargar informe</a><br></li>
                     </ul>
                 </nav>
             </section>
@@ -334,6 +338,27 @@
                 </form>
                 <input type="hidden" id="posicion-id-alumno" />
                 <input type="hidden" id="posicion-id-aula" />
+                <div class="leyenda-grilla form">
+                    <h4>Leyenda</h4>
+                    <div class="row">
+                        <div class="col seccion">
+                            <div class="bloque seleccionado"></div>
+                            <label>Seleccionado</label>
+                        </div>
+                        <div class="col seccion">
+                            <div class="bloque normal"></div>
+                            <label>Normal</label>
+                        </div>
+                        <div class="col seccion">
+                            <div class="bloque enespera"></div>
+                            <label>En espera de resultados PCR / En contacto con positivo</label>
+                        </div>
+                        <div class="col seccion">
+                            <div class="bloque positivo"></div>
+                            <label>Positivo</label>
+                        </div>
+                    </div>
+                </div>
                 <div class="grid-container16 form">
                     <div class="x0_y0"></div>
                     <div class="x1_y0"></div>
