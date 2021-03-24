@@ -34,7 +34,7 @@ create TABLE IF NOT EXISTS estados_alumnos(
     fecha DATETIME NOT NULL,
     id_alumno VARCHAR(9) NOT NULL,
     id_estado INT NOT NULL,
-    CONSTRAINT pk_estado_alumnos PRIMARY KEY(fecha,id_alumno,id_estado),
+    id_estado_alumno INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     CONSTRAINT fk_fechas_alumnos FOREIGN KEY (id_alumno) REFERENCES alumnos (id_alumno)
     ON UPDATE CASCADE 
     ON DELETE RESTRICT,
