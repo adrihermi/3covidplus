@@ -69,8 +69,6 @@ $(function() {
             $("#form-listar").show();
             $(".bienvenido").text("Gestionar alumnos");
             $("#form-listar table tbody").html("");
-            $("#posicion-id-alumno").val("");
-
         });
 
     $("#aula-listar").change(function() {
@@ -125,6 +123,7 @@ $(function() {
                     $.getJSON("php/cargarAlumnoPorId.php?id=" + $(this).data("value"), function(alumno_y_aula) {
                         if (alumno_y_aula) {
                             $(".grid-container" + alumno_y_aula.capacidad_aula).show();
+                            $(".leyenda-grilla").show();
                             $(".grid-container" + alumno_y_aula.capacidad_aula + " button[data-role='volver-aula']").data("id_aula", alumno_y_aula.id_aula);
                             // Logica para cargar la grilla
                             $.getJSON("php/cargarGrillaDelAula.php?id=" + alumno_y_aula.id_aula, function(grilla) {
@@ -225,6 +224,7 @@ $(function() {
         $.getJSON("php/cargarAulaPorId.php?id=" + idAula, function(aula) {
             if (aula) {
                 $(".grid-container" + aula.capacidad).show();
+                $(".leyenda-grilla").show();
                 // Logica para cargar la grilla
                 $.getJSON("php/cargarGrillaDelAula.php?id=" + aula.id_aula, function(grilla) {
                     // Logica para indicar las posiciones ocupadas
@@ -527,7 +527,7 @@ $(function() {
                 .done(function(datos) {
                     switch (datos) {
                         case "ok":
-                            $("#listar-aulas").data("id_aula", id_aula).trigger("grilla");
+                            $("#listar-aulas").data("id_aula", id_aula).trigger("grilla-lista");
                             break;
                         case "error":
                             $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
@@ -538,7 +538,7 @@ $(function() {
                     $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
                 });
         }
-        if (eventoAula == "grilla-aula") {
+        if (eventoAula == "grilla-aula" && $(this).hasClass("posicion_libre")) {
             $("#clase-alumno").val(id_aula);
             var posicion = this.classList[0].split("_");
             $("#alta-alumno").data("id_aula", id_aula).data("posicion_x", posicion[0].replace("x", "")).data("posicion_y", posicion[1].replace("y", "")).trigger("alta");
