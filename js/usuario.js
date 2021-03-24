@@ -70,9 +70,11 @@ $(function() {
                 });
 
                 $("#form-listar table tbody").html(htmlString);
+                $("#form-listar button[data-role='volver']").data("id_aula", idAula);
 
                 $(".asignar_posicion").click(function() {
                     $("#posicion-id-alumno").val($(this).data("value"));
+                    $("#posicion-id-aula").val(idAula);
                     ocultarFormularios();
                     // $("#form-asignar-posicion").show();
                     $(".bienvenido").text("Asignar posicion");
@@ -81,6 +83,7 @@ $(function() {
                     $.getJSON("php/cargarAlumnoPorId.php?id=" + $(this).data("value"), function(alumno_y_aula) {
                         if (alumno_y_aula) {
                             $(".grid-container" + alumno_y_aula.capacidad_aula).show();
+                            $(".grid-container" + alumno_y_aula.capacidad_aula + " button[data-role='volver-aula']").data("id_aula", alumno_y_aula.id_aula);
                             // Logica para cargar la grilla
                             $.getJSON("php/cargarGrillaDelAula.php?id=" + alumno_y_aula.id_aula, function(grilla) {
                                 // Logica para indicar las posiciones ocupadas
@@ -220,6 +223,11 @@ $(function() {
             }
         });
     }
+
+    $("button[data-role='volver-aula']").click(function() {
+        // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
+        $("#listar-aulas").data("id_aula", $(this).data("id_aula")).trigger("listar");
+    });
 
     $("#alta-alumno").click(function() {
         ocultarFormularios();
@@ -444,13 +452,14 @@ $(function() {
 
     $(".x0_y0,.x0_y1,.x0_y2,.x0_y3,.x1_y0,.x1_y1,.x1_y2,.x1_y3,.x2_y0,.x2_y1,.x2_y2,.x2_y3,.x3_y0,.x3_y1,.x3_y2,.x3_y3,.x4_y0,.x4_y1,.x4_y2,.x4_y3,.x5_y0,.x5_y1,.x5_y2,.x5_y3,.x6_y0,.x6_y1,.x6_y2,.x6_y3,.x7_y0,.x7_y1,.x7_y2,.x7_y3").click(function() {
         var id_alumno = $("#posicion-id-alumno").val();
+        var id_aula = $("#posicion-id-aula").val();
         if (id_alumno && id_alumno > 0) {
             var posicion = this.classList[0].split("_");
             $.post("php/inserirPosicionAlumno.php", { id_alumno: id_alumno, posicion_x: posicion[0].replace("x", ""), posicion_y: posicion[1].replace("y", "") })
                 .done(function(datos) {
                     switch (datos) {
                         case "ok":
-                            location.href = "./usuario.html";
+                            grillaAula(id_aula);
                             break;
                         case "error":
                             $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
