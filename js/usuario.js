@@ -182,9 +182,13 @@ $(function() {
                 ocultarFormularios();
                 $("#form-editar-profesor").show();
                 $(".bienvenido").text("Modificar profesor");
-
-                $.getJSON("php/cargarProfesorPorId.php?id=" + id_profesor, function(profesor) {
-                    if (profesor) {
+                $.getJSON('php/cargarAulas.php', function(datos) {
+                    $("#clase-profesor-editar").html("");
+                    $(datos).each(function() {
+                        $("#clase-profesor-editar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                    });
+                    $.getJSON("php/cargarProfesorPorId.php?id=" + id_profesor, function(profesor) {
+                        if (profesor) {
                         $("#id-profesor-editar").val(id_profesor);
                         $("#nombre-profesor-editar").val(profesor.nombre);
                         $("#apellido1-profesor-editar").val(profesor.apellido1);
@@ -195,7 +199,9 @@ $(function() {
                         $("#telefono-profesor-editar").val(profesor.telefono);
                         $("#mail-profesor-editar").val(profesor.email_profesor);
                         $("#observaciones-profesor-editar").val(profesor.observaciones);
-                    }
+                        $("#clase-profesor-editar").val(profesor.id_aula);
+                        }
+                    });
                 });
             });
         });
@@ -203,9 +209,22 @@ $(function() {
 
     $("#alta-profesor").on('click', function() {
         ocultarFormularios();
+        cargarAulasProfesor();
         $("#form-alta-profesor").show();
     });
 
+    function cargarAulasProfesor() {
+        $.getJSON('php/cargarAulas.php', function(datos) {
+            $("#clase-profesor").html("");
+            $(datos).each(function() {
+                $("#clase-profesor").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+            });
+        });
+    }
+
+    $("#alta-profesor").click(function() {
+        cargarAulasProfesor();
+    });
     $("#form-alta-profesor button").on('click', function() {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
@@ -218,6 +237,7 @@ $(function() {
         var genero = $("#genero-profesor").val();
         var telefono = $("#telefono-profesor").val();
         var email_profesor = $("#mail-profesor").val();
+        var clase_profesor = $("#clase-profesor").val();
         var observaciones = $("#observaciones-profesor").val();
 
         if (!nombre || nombre.trim().length === 0) {
@@ -252,7 +272,11 @@ $(function() {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el correo del profesor.");
             return;
         }
-        $.post("php/inserirProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor })
+        if (!clase_profesor || clase_profesor.trim().length === 0) {
+            $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el aula al cual pertenece el profesor como tutor.");
+            return;
+        }
+        $.post("php/inserirProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_aula:clase_profesor})
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
@@ -283,6 +307,7 @@ $(function() {
         var telefono = $("#telefono-profesor-editar").val();
         var email_profesor = $("#mail-profesor-editar").val();
         var observaciones = $("#observaciones-profesor-editar").val();
+        var clase_profesor = $("#clase-profesor-editar").val();
 
         if (!nombre || nombre.trim().length === 0) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el nombre del profesor");
@@ -316,7 +341,11 @@ $(function() {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el correo del profesor.");
             return;
         }
-        $.post("php/modificarProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_profesor: id_profesor })
+        if (!clase_profesor || clase_profesor.trim().length === 0) {
+            $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el aula al cual pertenece el profesor como tutor.");
+            return;
+        }
+        $.post("php/modificarProfesor.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_profesor, observaciones: observaciones, dni_profesor: dni_profesor, id_profesor: id_profesor, id_aula:clase_profesor })
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
