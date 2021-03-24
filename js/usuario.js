@@ -50,12 +50,36 @@ $(function() {
             $("#form-listar").show();
             $(".bienvenido").text("Gestionar alumnos");
             $("#form-listar table tbody").html("");
+            $("#posicion-id-alumno").val("");
+        })
+        // Evento de mostrar la grilla desde la lista
+        .on("grilla-lista", function() {
+            eventoAula = "grilla-lista-aula";
+            // Se obtiene el id del aula seleccionado
+            var aula_seleccionada = $(this).data("id_aula");
+            $.getJSON('php/cargarAulas.php', function(datos) {
+                $("#aula-listar").html("<option selected></option>");
+                $(datos).each(function() {
+                    $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                });
+                // Ya cargados los datos se selecciona el valor del select en #aula-listar y se activa el evento change
+                $("#aula-listar").val(aula_seleccionada).trigger("change");
+            });
+            ocultarFormularios();
+            $("#form-listar").show();
+            $(".bienvenido").text("Gestionar alumnos");
+            $("#form-listar table tbody").html("");
+            $("#posicion-id-alumno").val("");
+
         });
 
     $("#aula-listar").change(function() {
         if (eventoAula == "listarAulas") {
             listarAulas(this.value);
         } else if (eventoAula == "grilla-aula") {
+            grillaAula(this.value);
+        } else if (eventoAula == "grilla-lista-aula") {
+            eventoAula = "listarAulas";
             grillaAula(this.value);
         }
 
@@ -74,7 +98,7 @@ $(function() {
 
                 $(alumnos).each(function() {
                     htmlString += "<tr>" +
-                        "<td><img class='estado' src='estilos/img/" + (this.id_estado === "1" ? "usuario2.png" : this.id_estado === "2" ? "usuarioespera.png" : this.id_estado === "3" ? "usercovid.png" : "usuarioespera.png") + "' alt='' title='" + (this.id_estado === "1" ? "Normal" : this.id_estado === "2" ? "En espera" : this.id_estado === "3" ? "Positivo" : "En contacto con un positivo") + "' /></td>" +
+                        "<td><img class='estado' src='estilos/img/" + (this.id_estado === "1" ? "usuario.png" : this.id_estado === "2" ? "usuarioespera.png" : this.id_estado === "3" ? "usercovid.png" : "usuarioespera.png") + "' alt='' title='" + (this.id_estado === "1" ? "Normal" : this.id_estado === "2" ? "En espera" : this.id_estado === "3" ? "Positivo" : "En contacto con un positivo") + "' /></td>" +
                         "<td>" + this.nombre + " " + (this.apellido1 || "") + " " + (this.apellido2 || "") + "</td>" +
                         "<td>" + this.fecha_nacimiento + "</td>" +
                         "<td>" + this.telefono + "</td>" +
@@ -124,7 +148,8 @@ $(function() {
                                         var libre = "posicion_libre";
                                         var titulo = "";
                                         if (posicion_alumno) {
-                                            libre = posicion_alumno.id_estado === "1" ? "normal" :
+                                            libre = posicion_alumno.id_alumno == $("#posicion-id-alumno").val() ? "seleccionado" :
+                                                posicion_alumno.id_estado === "1" ? "normal" :
                                                 posicion_alumno.id_estado === "2" ? "enespera" :
                                                 posicion_alumno.id_estado === "3" ? "positivo" :
                                                 "encontacto";
@@ -136,7 +161,7 @@ $(function() {
                                         }
                                         $(".grid-container" + alumno_y_aula.capacidad_aula + " .x" + x + "_y" + y).html(
                                             "<div class='usuarios_grilla'></div>" +
-                                            etiqueta).removeClass("posicion_libre normal enespera positivo encontacto").addClass(libre).attr("title", titulo);
+                                            etiqueta).removeClass(["posicion_libre", "normal", "enespera", "positivo", "encontacto", "seleccionado"]).addClass(libre).attr("title", titulo);
 
                                     }
                                 }
@@ -222,7 +247,8 @@ $(function() {
                             var libre = "posicion_libre";
                             var titulo = "";
                             if (posicion_alumno) {
-                                libre = posicion_alumno.id_estado === "1" ? "normal" :
+                                libre = posicion_alumno.id_alumno == $("#posicion-id-alumno").val() ? "seleccionado" :
+                                    posicion_alumno.id_estado === "1" ? "normal" :
                                     posicion_alumno.id_estado === "2" ? "enespera" :
                                     posicion_alumno.id_estado === "3" ? "positivo" :
                                     "encontacto";
@@ -234,7 +260,7 @@ $(function() {
                             }
                             $(".grid-container" + aula.capacidad + " .x" + x + "_y" + y).html(
                                 "<div class='usuarios_grilla'></div>" +
-                                etiqueta).removeClass("posicion_libre normal enespera positivo encontacto").addClass(libre).attr("title", titulo);
+                                etiqueta).removeClass("posicion_libre normal enespera positivo encontacto seleccionado").addClass(libre).attr("title", titulo);
                         }
                     }
                     $("#posicion-id-aula").val(idAula);
