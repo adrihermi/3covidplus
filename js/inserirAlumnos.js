@@ -1,17 +1,37 @@
 $(function() {
+    var posicion_x;
+    var posicion_y;
     //Cargamos las aulas en el select
-    function cargarAulas() {
+    function cargarAulas(id_aula_seleccionado) {
         $.getJSON('php/cargarAulas.php', function(datos) {
             $("#clase-alumno").html("");
             $(datos).each(function() {
                 $("#clase-alumno").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
             });
+            if (id_aula_seleccionado) {
+                $("#clase-alumno").val(id_aula_seleccionado).attr("disabled", true);
+            } else {
+                $("#clase-alumno").attr("disabled", false);
+            }
         });
     }
 
     $("#alta-alumno").click(function() {
-        cargarAulas();
-    });
+            $(".form").hide();
+            $("#form-alumno").show();
+            $(".bienvenido").text("Dar de alta un alumno");
+            cargarAulas();
+            posicion_x = -1;
+            posicion_y = -1;
+        })
+        .on("alta", function() {
+            $(".form").hide();
+            $("#form-alumno").show();
+            $(".bienvenido").text("Dar de alta un alumno");
+            cargarAulas($(this).data("id_aula"));
+            posicion_x = $(this).data("posicion_x");
+            posicion_y = $(this).data("posicion_y");
+        });
 
     $("#form-alumno button").on('click', function() {
         if (!$("#mensaje-error").hasClass("ocultar")) {
@@ -69,13 +89,39 @@ $(function() {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el aula al cual pertenece el alumno.");
             return;
         }
-        $.post("php/inserirAlumnos.php", { nombre: nombre, apellido1: apellido1, apellido2: apellido2, fecha_nacimiento: fecha_nacimiento, genero: genero, telefono: telefono, email: email_alumno, email_tutor_legal: email_tutor, observaciones: observaciones, clase: clase_alumno, dni_alumno: dni_alumno })
+        var url = "";
+        var consulta = {
+            nombre: nombre,
+            apellido1: apellido1,
+            apellido2: apellido2,
+            fecha_nacimiento: fecha_nacimiento,
+            genero: genero,
+            telefono: telefono,
+            email: email_alumno,
+            email_tutor_legal: email_tutor,
+            observaciones: observaciones,
+            clase: clase_alumno,
+            dni_alumno: dni_alumno
+        };
+        if (posicion_x >= 0 && posicion_y >= 0) {
+            url = "php/inserirAlumnoYPosicion.php";
+            consulta.posicion_x = posicion_x;
+            consulta.posicion_y = posicion_y;
+        } else {
+            url = "php/inserirAlumnos.php";
+        }
+        $.post(url, consulta)
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
                         $("#mensaje-exito").show().html("Alta de alumno exitosa.").fadeOut(5000);
-                        // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
-                        $("#listar-aulas").data("id_aula", clase_alumno).trigger("listar");
+                        if (posicion_x >= 0 && posicion_y >= 0) {
+                            // Se envia el aula del alumno a la lista de aulas y se activa el evento grilla
+                            $("#listar-aulas").data("id_aula", clase_alumno).trigger("grilla");
+                        } else {
+                            // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
+                            $("#listar-aulas").data("id_aula", clase_alumno).trigger("listar");
+                        }
                         break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
