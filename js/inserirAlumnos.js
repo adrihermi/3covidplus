@@ -73,7 +73,9 @@ $(function() {
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        location.href = "./usuario.html";
+                        $("#mensaje-exito").show().html("Alta de alumno exitosa.").fadeOut(5000);
+                        // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
+                        $("#listar-aulas").data("id_aula", clase_alumno).trigger("listar");
                         break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
@@ -84,5 +86,5 @@ $(function() {
                 $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
             });
         return false;
-    })
+    });
 });
