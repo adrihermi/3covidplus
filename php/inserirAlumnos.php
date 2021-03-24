@@ -10,7 +10,7 @@
 		$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado)
 					 VALUES ('$hoy', '$id_alumno', '1')";
 		if ($conexion->query($consulta)) {
-			$saida = ["id" => $id_alumno];
+			$saida = json_encode(["id" => $id_alumno]);
 		}
 	}else{
         $saida = 'erro';

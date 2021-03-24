@@ -110,7 +110,7 @@ $(function() {
         } else {
             url = "php/inserirAlumnos.php";
         }
-        $.post(url, consulta)
+        $.ajax({ type: "POST", url: url, dataType: "JSON", data: consulta })
             .done(function(datos) {
                 if (datos === "error") {
                     $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");
