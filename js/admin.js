@@ -24,7 +24,7 @@ $(function() {
             $("#form-listar table tbody").html(htmlString);
             $("[data-role='modificar-usuario']").click(function() {
                 var idUsuario = $(this).data("value");
-                $.ajax({ url: "php/cargarUsuarioPorId.php?id=" + idUsuario }).done(function(usuario) {
+                $.getJSON({ url: "php/cargarUsuarioPorId.php?id=" + idUsuario }).done(function(usuario) {
                     ocultarFormularios();
                     $("#form-editar-usuario").show();
                     $("#id-usuario-editar").val(idUsuario);
@@ -37,8 +37,8 @@ $(function() {
                     $("#telefono-usuario-editar").val(usuario.telefono);
                     $("#mail-usuario-editar").val(usuario.email);
                     $("#permisos-usuario-editar").val(usuario.permisos);
-                    $("#contraseña-usuario-editar").val();
-                    $("#confirmar-contraseña-usuario-editar").val();
+                    $("#contraseña-usuario-editar").val(usuario.contrase\u00f1a);
+                    $("#confirmar-contraseña-usuario-editar").val(usuario.contrase\u00f1a);
                 });
             });
         });
@@ -118,13 +118,13 @@ $(function() {
             email: email_usuario,
             dni_usuario: dni_usuario,
             permisos: permisos_usuario,
-            contraseña: contraseña
+            contraseña: contraseña_usuario
         };
-        $.post("php/inserirUsuarios", consulta)
+        $.post("php/inserirUsuario.php", consulta)
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        cargarUsuarios();
+                       cargarUsuarios();
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el usuario.");
                         break;
@@ -152,7 +152,7 @@ $(function() {
         var permisos_usuario = $("#permisos-usuario-editar").val();
         var contraseña_usuario = $("#contraseña-usuario-editar").val();
         var confirmar_contraseña_usuario = $("#confirmar-contraseña-usuario-editar").val();
-
+        console.log($('#id-usuario-editar'))
         if (!nombre || nombre.trim().length === 0) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el nombre del usuario");
             return false;
@@ -205,13 +205,13 @@ $(function() {
             email: email_usuario,
             dni_usuario: dni_usuario,
             permisos: permisos_usuario,
-            contraseña: contraseña
+            contraseña: contraseña_usuario
         };
-        $.post("php/modificarUsuarios", consulta)
+        $.post("php/modificarUsuario.php", consulta)
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        cargarUsuarios();
+                        //cargarUsuarios();
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el usuario.");
                         break;
