@@ -74,7 +74,7 @@ $(function() {
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
-                        location.href = "./usuario.html";
+                        $("#listar-aulas").data("id_aula", clase_alumno).trigger("listar");
                         break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el alumno.");

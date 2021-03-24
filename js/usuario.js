@@ -676,5 +676,6 @@ $(function() {
         $("#form-listar").show();
         $(".bienvenido").text("Mostrar Aula");
         $("#form-listar table tbody").html("");
+        $("#posicion-id-alumno").val("");
     });
 })
