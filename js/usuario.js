@@ -1,5 +1,8 @@
 $(function() {
     var eventoAula;
+    $.getJSON("php/validarAdministrador.php", function(datos) {
+        if (datos == "ok")
+    });
     $("#form-listar").hide();
     $("#listar-aulas").click(function() {
             eventoAula = "listarAulas";
