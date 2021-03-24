@@ -16,7 +16,7 @@ if ($datos = $conexion->query($consulta)) {
 	while ($dato = $datos->fetch_object()) {
 		$existe = false;
 		foreach ($grilla as $s) {
-			if ($s->id_alumno == $alumno->id_alumno) {
+			if ($s->id_alumno == $dato->id_alumno) {
 				$existe = true;
 				break;
 			}

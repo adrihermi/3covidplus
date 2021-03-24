@@ -1,23 +1,53 @@
 $(function() {
+    var eventoAula;
     $("#form-listar").hide();
     $("#listar-aulas").click(function() {
-        $.getJSON('php/cargarAulas.php', function(datos) {
-            $("#aula-listar").html("<option selected></option>");
-            $(datos).each(function() {
-                $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+            eventoAula = "listarAulas";
+            $.getJSON('php/cargarAulas.php', function(datos) {
+                $("#aula-listar").html("<option selected></option>");
+                $(datos).each(function() {
+                    $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                });
             });
+            ocultarFormularios();
+            $("#form-listar").show();
+            $(".bienvenido").text("Gestionar alumnos");
+            $("#form-listar table tbody").html("");
+
+        })
+        // Evento listar cuando se da de alta a un alumno
+        .on("listar", function() {
+            eventoAula = "listarAulas";
+            // Se obtiene el id del aula seleccionado
+            var aula_seleccionada = $(this).data("id_aula");
+            $.getJSON('php/cargarAulas.php', function(datos) {
+                $("#aula-listar").html("<option selected></option>");
+                $(datos).each(function() {
+                    $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+                });
+                // Ya cargados los datos se selecciona el valor del select en #aula-listar y se activa el evento change
+                $("#aula-listar").val(aula_seleccionada).trigger("change");
+            });
+            ocultarFormularios();
+            $("#form-listar").show();
+            $(".bienvenido").text("Gestionar alumnos");
+            $("#form-listar table tbody").html("");
         });
-        ocultarFormularios();
-        $("#form-listar").show();
-        $(".bienvenido").text("Gestionar alumnos");
-        $("#form-listar table tbody").html("");
+
+    $("#aula-listar").change(function() {
+        if (eventoAula == "listarAulas") {
+            listarAulas(this.value);
+        } else if (eventoAula == "grilla-aula") {
+            grillaAula(this.value);
+        }
 
     });
-    $("#aula-listar").change(function() {
+
+    var listarAulas = function(idAula) {
         $.ajax({
                 type: "POST",
                 url: "php/cargarAlumnosPorAula.php",
-                data: { aula: this.value },
+                data: { aula: idAula },
                 dataType: "JSON"
             })
             .done(function(alumnos) {
@@ -31,6 +61,7 @@ $(function() {
                         "<td>" + this.fecha_nacimiento + "</td>" +
                         "<td>" + this.telefono + "</td>" +
                         "<td>" + this.email + "</td>" +
+                        "<td>" + (this.id_estado === "1" ? "Normal" : this.id_estado === "2" ? "En espera" : this.id_estado === "3" ? "Positivo" : "En contacto con un positivo") + "</td>" +
                         "<td>" +
                         "<a href='#' class='asignar_posicion' data-value='" + this.id_alumno + "'><img src='estilos/img/posicion.png' title='Asignar posicion del alumno' class='gestionAlumno' alt='Asignar posicion del alumno'/></a>" +
                         "<a href='#' class='modificar_alumno' data-value='" + this.id_alumno + "'><img src='estilos/img/edit.png' title='Editar alumno' class='gestionAlumno' alt='Editar alumno'/></a>" +
@@ -46,7 +77,7 @@ $(function() {
                     // $("#form-asignar-posicion").show();
                     $(".bienvenido").text("Asignar posicion");
 
-                    
+
                     $.getJSON("php/cargarAlumnoPorId.php?id=" + $(this).data("value"), function(alumno_y_aula) {
                         if (alumno_y_aula) {
                             $(".grid-container" + alumno_y_aula.capacidad_aula).show();
@@ -66,7 +97,7 @@ $(function() {
                                     cantidad_total_y = 4;
                                 }
                                 for (var y = 0; y < cantidad_total_y; y++) {
-                                    for (var x = 0; x <4; x++) {
+                                    for (var x = 0; x < 4; x++) {
                                         var posicion_alumno = grilla.filter(f => f.posicion_x == x && f.posicion_y == y)[0];
                                         var etiqueta = "<label>Posicion libre</label>";
                                         var libre = "posicion_libre";
@@ -141,7 +172,54 @@ $(function() {
             .fail(function() {
                 alert("Error en el fichero: cargarAlumnosPorAula.php")
             });
-    });
+    };
+
+    var grillaAula = function(idAula) {
+        $(".grid-container16, .grid-container20, .grid-container24,  .grid-container28,  .grid-container32").hide();
+        $.getJSON("php/cargarAulaPorId.php?id=" + idAula, function(aula) {
+            if (aula) {
+                $(".grid-container" + aula.capacidad).show();
+                // Logica para cargar la grilla
+                $.getJSON("php/cargarGrillaDelAula.php?id=" + aula.id_aula, function(grilla) {
+                    // Logica para indicar las posiciones ocupadas
+                    var cantidad_total_y;
+                    if (aula.capacidad == 32) {
+                        cantidad_total_y = 8;
+                    } else if (aula.capacidad == 28) {
+                        cantidad_total_y = 7;
+                    } else if (aula.capacidad == 24) {
+                        cantidad_total_y = 6;
+                    } else if (aula.capacidad == 20) {
+                        cantidad_total_y = 5;
+                    } else {
+                        cantidad_total_y = 4;
+                    }
+                    for (var y = 0; y < cantidad_total_y; y++) {
+                        for (var x = 0; x < 4; x++) {
+                            var posicion_alumno = grilla.filter(f => f.posicion_x == x && f.posicion_y == y)[0];
+                            var etiqueta = "<label>Posicion libre</label>";
+                            var libre = "posicion_libre";
+                            var titulo = "";
+                            if (posicion_alumno) {
+                                libre = posicion_alumno.id_estado === "1" ? "normal" :
+                                    posicion_alumno.id_estado === "2" ? "enespera" :
+                                    posicion_alumno.id_estado === "3" ? "positivo" :
+                                    "encontacto";
+                                titulo = posicion_alumno.id_estado === "1" ? "" :
+                                    posicion_alumno.id_estado === "2" ? "En espera de PCR" :
+                                    posicion_alumno.id_estado === "3" ? "Positivo" :
+                                    "En contacto con un positivo";
+                                etiqueta = "<label>" + posicion_alumno.nombre + " " + (posicion_alumno.apellido1 || "") + " " + (posicion_alumno.apellido2 || "") + "</label>";
+                            }
+                            $(".grid-container" + aula.capacidad + " .x" + x + "_y" + y).html(
+                                "<div class='usuarios_grilla'></div>" +
+                                etiqueta).addClass(libre).attr("title", titulo);
+                        }
+                    }
+                });
+            }
+        });
+    }
 
     $("#alta-alumno").click(function() {
         ocultarFormularios();
@@ -485,5 +563,20 @@ $(function() {
             .fail(function() {
                 alert("Error en el fichero: logout.php");
             })
-    })
+    });
+
+    $("#grilla-aula").click(function() {
+        eventoAula = "grilla-aula";
+        $.getJSON('php/cargarAulas.php', function(datos) {
+            $("#aula-listar").html("<option selected></option>");
+            $(datos).each(function() {
+                $("#aula-listar").append("<option value = '" + this.id_aula + "'>" + this.nombre + " (" + this.capacidad + ")" + "</option>");
+            });
+        });
+        ocultarFormularios();
+        $("#form-listar").show();
+        $(".bienvenido").text("Mostrar Aula");
+        $("#form-listar table tbody").html("");
+
+    });
 })

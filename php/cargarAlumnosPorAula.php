@@ -10,7 +10,7 @@
 					GROUP BY id_alumno, fecha
 					ORDER BY fecha DESC
 				 ) b ON al.id_alumno = b.id_alumno
-				 WHERE al.id_aula='$aula' ORDER BY al.nombre, b.fecha";
+				 WHERE al.id_aula='$aula' ORDER BY al.nombre, b.fecha DESC";
 	$saida = array();
 	if ($datos = $conexion->query($consulta)) {   		
 		while ($alumno = $datos->fetch_object()) {
