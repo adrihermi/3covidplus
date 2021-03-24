@@ -25,7 +25,20 @@ $(function() {
             $("[data-role='modificar-usuario']").click(function() {
                 var idUsuario = $(this).data("value");
                 $.ajax({ url: "php/cargarUsuarioPorId.php?id=" + idUsuario }).done(function(usuario) {
-
+                    ocultarFormularios();
+                    $("#form-editar-usuario").show();
+                    $("#id-usuario-editar").val(idUsuario);
+                    $("#nombre-usuario-editar").val(usuario.nombre);
+                    $("#apellido1-usuario-editar").val(usuario.apellido1);
+                    $("#apellido2-usuario-editar").val(usuario.apellido2);
+                    $("#dni-usuario-editar").val(usuario.dni_usuario);
+                    $("#fecha-nac-usuario-editar").val(usuario.fecha_nacimiento);
+                    $("#genero-usuario-editar").val(usuario.genero);
+                    $("#telefono-usuario-editar").val(usuario.telefono);
+                    $("#mail-usuario-editar").val(usuario.email);
+                    $("#permisos-usuario-editar").val(usuario.permisos);
+                    $("#contraseña-usuario-editar").val();
+                    $("#confirmar-contraseña-usuario-editar").val();
                 });
             });
         });
