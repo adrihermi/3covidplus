@@ -14,8 +14,10 @@
 	}
 	if ($esAdministrador) {
 		$consulta = "SELECT * FROM usuarios";	
-		while ($usuario = $datos->fetch_object()) {
-			$saida[] = $usuario;
+		if ($datos = $conexion->query($consulta)) {  
+			while ($usuario = $datos->fetch_object()) {
+				$saida[] = $usuario;
+			}
 		}
 	}
 	$conexion->close();
