@@ -15,7 +15,7 @@ create TABLE IF NOT EXISTS alumnos(
     email_tutor_legal VARCHAR(50) NOT NULL,
     observaciones VARCHAR(150),
     id_aula INT NOT NULL,
-    dni_alumno VARCHAR (9) NOT NULL,
+    dni_alumno VARCHAR (9) NOT NULL UNIQUE,
     id_alumno INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     CONSTRAINT fk_alumnos_aulas FOREIGN KEY  (id_aula) REFERENCES aulas (id_aula)
     ON UPDATE CASCADE 
@@ -81,7 +81,11 @@ create TABLE IF NOT EXISTS profesores(
     telefono VARCHAR(11) NOT NULL,
     email_profesor VARCHAR(50) NOT NULL,
     observaciones VARCHAR(150),
-    dni_profesor VARCHAR(9) NOT NULL,
+    dni_profesor VARCHAR(9) NOT NULL UNIQUE,
+    id_aula INT NOT NULL,
+    CONSTRAINT fk_alumnos_aulas FOREIGN KEY  (id_aula) REFERENCES aulas (id_aula)
+    ON UPDATE CASCADE 
+    ON DELETE RESTRICT,
     id_profesor INT AUTO_INCREMENT NOT NULL PRIMARY KEY 
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
 
