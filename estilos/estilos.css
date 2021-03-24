@@ -245,7 +245,7 @@
     }
     
     .normal .usuarios_grilla {
-        background-image: url(img/usuario2.png);
+        background-image: url(img/usuario.png);
     }
     
     .enespera .usuarios_grilla,
@@ -259,6 +259,10 @@
     
     .posicion_libre .usuarios_grilla {
         background-image: url(img/freePosition.png);
+    }
+    
+    .seleccionado .usuarios_grilla {
+        background-image: url(img/usuario2.png);
     }
     
     .posicion_libre:hover .usuarios_grilla {

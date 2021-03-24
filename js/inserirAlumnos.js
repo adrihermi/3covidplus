@@ -120,7 +120,7 @@ $(function() {
                             $("#listar-aulas").data("id_aula", clase_alumno).trigger("grilla");
                         } else {
                             // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
-                            $("#listar-aulas").data("id_aula", clase_alumno).trigger("listar");
+                            $("#listar-aulas").data("id_aula", clase_alumno).trigger("grilla-lista");
                         }
                         break;
                     case "error":
