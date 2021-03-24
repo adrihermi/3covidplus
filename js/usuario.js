@@ -45,6 +45,8 @@ $(function() {
                     ocultarFormularios();
                     // $("#form-asignar-posicion").show();
                     $(".bienvenido").text("Asignar posicion");
+
+                    
                     $.getJSON("php/cargarAlumnoPorId.php?id=" + $(this).data("value"), function(alumno_y_aula) {
                         if (alumno_y_aula) {
                             $(".grid-container" + alumno_y_aula.capacidad_aula).show();
