@@ -15,7 +15,9 @@ $(function() {
         $("#form-listar table tbody").html("");
 
     });
+
     $("#aula-listar").change(function() {
+        $(".grid-container16, .grid-container20, .grid-container24,  .grid-container28,  .grid-container32").hide();
         if (eventoAula == "listarAulas") {
             $.ajax({
                     type: "POST",
