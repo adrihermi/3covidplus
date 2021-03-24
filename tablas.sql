@@ -134,3 +134,9 @@ create TABLE IF NOT EXISTS posicion_alumnos(
     ON UPDATE CASCADE 
     ON DELETE RESTRICT
 )ENGINE = MyISAM DEFAULT CHARSET = latin1;
+
+INSERT INTO estados_alumnos (fecha, id_alumno, id_estado)
+ SELECT NOW(), al.id_alumno, '1'
+ FROM estados_alumnos AS es
+ RIGHT JOIN alumnos AS al ON es.id_alumno=al.id_alumno
+ WHERE es.id_estado IS NULL;

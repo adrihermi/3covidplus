@@ -64,7 +64,7 @@ $(function() {
                                     cantidad_total_y = 4;
                                 }
                                 for (var y = 0; y < cantidad_total_y; y++) {
-                                    for (var x = 0; x < 4; x++) {
+                                    for (var x = 0; x <4; x++) {
                                         var posicion_alumno = grilla.filter(f => f.posicion_x == x && f.posicion_y == y)[0];
                                         var etiqueta = "<label>Posicion libre</label>";
                                         var libre = "posicion_libre";
