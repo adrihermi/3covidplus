@@ -136,7 +136,7 @@ $(function() {
                                         }
                                         $(".grid-container" + alumno_y_aula.capacidad_aula + " .x" + x + "_y" + y).html(
                                             "<div class='usuarios_grilla'></div>" +
-                                            etiqueta).addClass(libre).attr("title", titulo);
+                                            etiqueta).removeClass("posicion_libre normal enespera positivo encontacto").addClass(libre).attr("title", titulo);
 
                                     }
                                 }
@@ -234,9 +234,10 @@ $(function() {
                             }
                             $(".grid-container" + aula.capacidad + " .x" + x + "_y" + y).html(
                                 "<div class='usuarios_grilla'></div>" +
-                                etiqueta).addClass(libre).attr("title", titulo);
+                                etiqueta).removeClass("posicion_libre normal enespera positivo encontacto").addClass(libre).attr("title", titulo);
                         }
                     }
+                    $("#posicion-id-aula").val(idAula);
                 });
             }
         });
@@ -245,12 +246,6 @@ $(function() {
     $("button[data-role='volver-aula']").click(function() {
         // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
         $("#listar-aulas").data("id_aula", $(this).data("id_aula")).trigger("listar");
-    });
-
-    $("#alta-alumno").click(function() {
-        ocultarFormularios();
-        $("#form-alumno").show();
-        $(".bienvenido").text("Dar de alta un alumno");
     });
 
     $("#alta-aula").click(function() {
@@ -497,7 +492,7 @@ $(function() {
         return false;
     });
 
-    $(".x0_y0,.x0_y1,.x0_y2,.x0_y3,.x1_y0,.x1_y1,.x1_y2,.x1_y3,.x2_y0,.x2_y1,.x2_y2,.x2_y3,.x3_y0,.x3_y1,.x3_y2,.x3_y3,.x4_y0,.x4_y1,.x4_y2,.x4_y3,.x5_y0,.x5_y1,.x5_y2,.x5_y3,.x6_y0,.x6_y1,.x6_y2,.x6_y3,.x7_y0,.x7_y1,.x7_y2,.x7_y3").click(function() {
+    $(".grid-container16 > div,.grid-container20 > div,.grid-container24 > div,.grid-container28 > div,.grid-container32 > div").click(function() {
         var id_alumno = $("#posicion-id-alumno").val();
         var id_aula = $("#posicion-id-aula").val();
         if (id_alumno && id_alumno > 0) {
@@ -506,7 +501,7 @@ $(function() {
                 .done(function(datos) {
                     switch (datos) {
                         case "ok":
-                            $("#listar-aulas").data("id_aula", clase_alumno).trigger("grilla");
+                            $("#listar-aulas").data("id_aula", id_aula).trigger("grilla");
                             break;
                         case "error":
                             $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
@@ -516,6 +511,11 @@ $(function() {
                 .fail(function() {
                     $("#mensaje-error").removeClass("ocultar").html("Ocurrió un error al insertar el aula.");
                 });
+        }
+        if (eventoAula == "grilla-aula") {
+            $("#clase-alumno").val(id_aula);
+            var posicion = this.classList[0].split("_");
+            $("#alta-alumno").data("id_aula", id_aula).data("posicion_x", posicion[0].replace("x", "")).data("posicion_y", posicion[1].replace("y", "")).trigger("alta");
         }
     });
 
@@ -606,6 +606,5 @@ $(function() {
         $("#form-listar").show();
         $(".bienvenido").text("Mostrar Aula");
         $("#form-listar table tbody").html("");
-
     });
 })
