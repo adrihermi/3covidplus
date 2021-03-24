@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>3Covid+</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="pagina inicial">
+    <link rel="stylesheet" href="estilos/estilos.css" />
+    <link rel="shortcut icon" href="estilos/img/logo.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/usuario.js"></script>
+    <script src="js/inserirAlumnos.js"></script>
+    <script src="js/modificarAlumnos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <header id="logo_nombre">
+            <div class="uno">
+                <img src="estilos/img/logo_fondo_transparente.png" alt="3Covid+">
+            </div>
+            <nav>
+                <div class="dos">
+                    <a href="#" id="cerrarSesion" class="navLink">Cerrar Sesión</a>
+                </div>
+            </nav>
+        </header>
+        <main class="main_usuario">
+            <section class="acciones">
+                <nav class="menu_usuario">
+                    <ul>
+                        <li><img src="estilos/img/userkey.png" alt="imagen de alta usuario" height="40px">
+                            <a href="#" id="alta-usuario">Dar de Alta un usuario</a><br></li>
+                        <li><img src="estilos/img/usuario2.png" alt="imagen de usuario" height="40px">
+                            <a href="#" id="alta-alumno">Dar de Alta un alumno</a><br></li>
+                        <li><img src="estilos/img/list.png" alt="imagen de lista" height="40px">
+                            <a href="#" id="listar-aulas">Gestionar alumnos</a><br></li>
+                        <li><img src="estilos/img/classroom.png" alt="imagen de usuario" height="40px">
+                            <a href="#" id="alta-aula">Dar de alta un aula</a><br></li>
+                        <li><img src="estilos/img/grid.png" alt="imagen de grilla" height="40px">
+                            <a href="#" id="grilla-aula">Mostrar un aula</a><br></li>
+                        <li><img src="estilos/img/teacher.png" alt="imagen de usuario" height="40px">
+                            <a href="#" id="gestion-profesores">Gestionar profesores</a><br></li>
+                    </ul>
+                </nav>
+            </section>
+            <div class="cuerpo">
+                <div id="mensaje-error" class="mensaje-error ocultar"></div>
+                <div id="mensaje-exito" class="mensaje-exito form"></div>
+                <h1 class="bienvenido mb-5">¡Bienvenido!</h1>
+                <div id="form-listar" class="form">
+                    <form class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="mb-3 offset-4 col-4">
+                                <label for="aula-listar" class="form-label ">Por favor, seleccione el aula a listar</label>
+                                <select class="form-select" id="aula-listar" required>
+                                    
+                                  </select>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table form">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Nombre completo</th>
+                                <th scope="col">Fecha de nacimiento</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Estado actual</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <form id="form-usuario" class="needs-validation form" novalidate>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="nombre-usuario" class="form-label">Nombre del usuario</label>
+                            <input type="text" class="form-control" id="nombre-usuario" aria-describedby="nombreusuario" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="apellido1-usuario" class="form-label">Primer apellido del usuario</label>
+                            <input type="text" class="form-control" id="apellido1-usuario" aria-describedby="apellido1usuario" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="apellido2-usuario" class="form-label">Segundo apellido del usuario</label>
+                            <input type="text" class="form-control" id="apellido2-usuario" aria-describedby="apellido2usuario" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="dni-usuario" class="form-label">DNI del usuario</label>
+                            <input type="text" class="form-control" id="dni-usuario" aria-describedby="dniusuario" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="fecha-nac-usuario" class="form-label">Fecha de nacimiento del usuario</label>
+                            <input type="date" class="form-control" id="fecha-nac-alumno" aria-describedby="fechaNacusuario" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="genero-usuario" class="form-label ">Género del usuario</label>
+                            <select class="form-select" id="genero-usuario" required>
+                                <option selected></option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="telefono-usuario" class="form-label">Telefono</label>
+                            <input type="number" class="form-control" id="telefono-usuario" aria-describedby="tlfalumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="mail-usuario" class="form-label">Correo del usuario</label>
+                            <input type="email" class="form-control" id="mail-usuario" aria-describedby="correousuario">
+                        </div>
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="permisos-usuario" class="form-label ">Permisos del usuario</label>
+                        <select class="form-select" id="permisos-usuario" required>
+                            <option selected></option>
+                            <option value="Administrador">Administrador</option>
+                            <option value="Usuario">Usuario</option>
+                          </select>
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="contraseña-usuario" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control" id="mail-usuario" aria-describedby="contraseñausuario">
+                        <label for="confirmar-contraseña-usuario" class="form-label">Confirmar contraseña</label>
+                        <input type="password" class="form-control" id="confirmar-contraseña-usuario" aria-describedby="confirmarcontraseñausuario">
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn" type="submit">Confirmar</button>
+                    </div>
+                </form>
+                <form id="form-editar-alumno" class="needs-validation form" novalidate>
+                    <input type="hidden" id="id-alumno-editar" />
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="nombre-alumno-editar" class="form-label">Nombre del alumno</label>
+                            <input type="text" class="form-control" id="nombre-alumno-editar" aria-describedby="nombrealumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="apellido1-alumno-editar" class="form-label">Primer apellido del alumno</label>
+                            <input type="text" class="form-control" id="apellido1-alumno-editar" aria-describedby="apellido1alumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="apellido2-alumno-editar" class="form-label">Segundo apellido del alumno</label>
+                            <input type="text" class="form-control" id="apellido2-alumno-editar" aria-describedby="apellido2alumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="dni-alumno-editar" class="form-label">DNI del alumno</label>
+                            <input type="text" class="form-control" id="dni-alumno-editar" aria-describedby="dnialumno" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="fecha-nac-alumno-editar" class="form-label">Fecha de nacimiento del alumno</label>
+                            <input type="date" class="form-control" id="fecha-nac-alumno-editar" aria-describedby="fechaNacalumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="genero-alumno-editar" class="form-label ">Género del alumno</label>
+                            <select class="form-select" id="genero-alumno-editar" required>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="clase-alumno-editar" class="form-label ">Aula</label>
+                            <select class="form-select" id="clase-alumno-editar" required></select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="telefono-alumno-editar" class="form-label">Telefono</label>
+                            <input type="number" class="form-control" id="telefono-alumno-editar" aria-describedby="tlfalumno" required>
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="mail-contacto-alumno-editar" class="form-label">Correo del alumno</label>
+                            <input type="email" class="form-control" id="mail-contacto-alumno-editar" aria-describedby="correoalumno">
+                        </div>
+                        <div class="mb-3 col">
+                            <label for="mail-tutor-alumno-editar" class="form-label">Correo de tutor legal</label>
+                            <input type="email" class="form-control" id="mail-tutor-alumno-editar" placeholder="ejemplo@gmail.com" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col">
+                            <label for="observaciones-alumno-editar" class="form-label">Observaciones</label>
+                            <textarea class="form-control" id="observaciones-alumno-editar"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-grid gap-2 col-3 mx-auto">
+                        <button class="btn" type="submit">Confirmar</button>
+                    </div>
+
+
+                    <form id="form-alumno" class="needs-validation form" novalidate>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="nombre-alumno" class="form-label">Nombre del alumno</label>
+                                <input type="text" class="form-control" id="nombre-alumno" aria-describedby="nombrealumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="apellido1-alumno" class="form-label">Primer apellido del alumno</label>
+                                <input type="text" class="form-control" id="apellido1-alumno" aria-describedby="apellido1alumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="apellido2-alumno" class="form-label">Segundo apellido del alumno</label>
+                                <input type="text" class="form-control" id="apellido2-alumno" aria-describedby="apellido2alumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="dni-alumno" class="form-label">DNI del alumno</label>
+                                <input type="text" class="form-control" id="dni-alumno" aria-describedby="dnialumno" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="fecha-nac-alumno" class="form-label">Fecha de nacimiento del alumno</label>
+                                <input type="date" class="form-control" id="fecha-nac-alumno" aria-describedby="fechaNacalumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="genero-alumno" class="form-label ">Género del alumno</label>
+                                <select class="form-select" id="genero-alumno" required>
+                                <option selected></option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="clase-alumno" class="form-label ">Aula</label>
+                                <select class="form-select" id="clase-alumno" required></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="telefono-alumno" class="form-label">Telefono</label>
+                                <input type="number" class="form-control" id="telefono-alumno" aria-describedby="tlfalumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="mail-contacto-alumno" class="form-label">Correo del alumno</label>
+                                <input type="email" class="form-control" id="mail-contacto-alumno" aria-describedby="correoalumno">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="mail-tutor-alumno" class="form-label">Correo de tutor legal</label>
+                                <input type="email" class="form-control" id="mail-tutor-alumno" placeholder="ejemplo@gmail.com" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="observaciones-alumno" class="form-label">Observaciones</label>
+                                <textarea class="form-control" id="observaciones-alumno"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-3 mx-auto">
+                            <button class="btn" type="submit">Confirmar</button>
+                        </div>
+                    </form>
+                    <form id="form-editar-alumno" class="needs-validation form" novalidate>
+                        <input type="hidden" id="id-alumno-editar" />
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="nombre-alumno-editar" class="form-label">Nombre del alumno</label>
+                                <input type="text" class="form-control" id="nombre-alumno-editar" aria-describedby="nombrealumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="apellido1-alumno-editar" class="form-label">Primer apellido del alumno</label>
+                                <input type="text" class="form-control" id="apellido1-alumno-editar" aria-describedby="apellido1alumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="apellido2-alumno-editar" class="form-label">Segundo apellido del alumno</label>
+                                <input type="text" class="form-control" id="apellido2-alumno-editar" aria-describedby="apellido2alumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="dni-alumno-editar" class="form-label">DNI del alumno</label>
+                                <input type="text" class="form-control" id="dni-alumno-editar" aria-describedby="dnialumno" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="fecha-nac-alumno-editar" class="form-label">Fecha de nacimiento del alumno</label>
+                                <input type="date" class="form-control" id="fecha-nac-alumno-editar" aria-describedby="fechaNacalumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="genero-alumno-editar" class="form-label ">Género del alumno</label>
+                                <select class="form-select" id="genero-alumno-editar" required>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="clase-alumno-editar" class="form-label ">Aula</label>
+                                <select class="form-select" id="clase-alumno-editar" required></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="telefono-alumno-editar" class="form-label">Telefono</label>
+                                <input type="number" class="form-control" id="telefono-alumno-editar" aria-describedby="tlfalumno" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="mail-contacto-alumno-editar" class="form-label">Correo del alumno</label>
+                                <input type="email" class="form-control" id="mail-contacto-alumno-editar" aria-describedby="correoalumno">
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="mail-tutor-alumno-editar" class="form-label">Correo de tutor legal</label>
+                                <input type="email" class="form-control" id="mail-tutor-alumno-editar" placeholder="ejemplo@gmail.com" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="observaciones-alumno-editar" class="form-label">Observaciones</label>
+                                <textarea class="form-control" id="observaciones-alumno-editar"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-3 mx-auto">
+                            <button class="btn" type="submit">Confirmar</button>
+                        </div>
+                    </form>
+                    <form id="form-cambiar-estado-alumno" class="needs-validation form" novalidate>
+                        <input type="hidden" id="id-alumno-cambiar-estado" />
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="estado-alumno" class="form-label">Estado</label>
+                                <select class="form-control" id="estado-alumno" required></select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="fecha-cambio-estado" class="form-label">Fecha</label>
+                                <input class="form-control" id="fecha-cambio-estado" type="date" />
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-3 mx-auto">
+                            <button class="btn" type="submit">Confirmar</button>
+                        </div>
+                    </form>
+                    <form action="" id="form-aula" class="needs-validation form" novalidate>
+                        <div class="row">
+                            <div class="mb-3 offset-4 col-4">
+                                <label for="nombre" class="form-label">Nombre del aula</label>
+                                <input type="text" class="form-control" id="nombre-aula" aria-describedby="nombreAula" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 offset-4 col-4">
+                                <label for="capacidad" class="form-label ">Capacidad del aula</label>
+                                <select class="form-select" id="capacidad" required>
+                                <option selected></option>
+                                <option value="16">16</option>
+                                <option value="20">20</option>
+                                <option value="24">24</option>
+                                <option value="28">28</option>
+                                <option value="32">32</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-grid gap-2 col-3 mx-auto">
+                                <button class="btn" type="submit">Confirmar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <form id="form-profesor" class="needs-validation form" novalidate>
+                        <button class="btn" id="alta-profesor">Dar de alta profesor</button>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre completo</th>
+                                    <th scope="col">Fecha de nacimiento</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">email</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                    <form id="form-alta-profesor" class="needs-validation form" novalidate>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="nombre-profesor" class="form-label">Nombre del profesor</label>
+                                <input type="text" class="form-control" id="nombre-profesor" aria-describedby="nombreprofesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="apellido1-profesor" class="form-label">Primer apellido del profesor</label>
+                                <input type="text" class="form-control" id="apellido1-profesor" aria-describedby="apellido1profesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="apellido2-profesor" class="form-label">Segundo apellido del profesor</label>
+                                <input type="text" class="form-control" id="apellido2-profesor" aria-describedby="apellido2profesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="dni-profesor" class="form-label">DNI del profesor</label>
+                                <input type="text" class="form-control" id="dni-profesor" aria-describedby="dniprofesor" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="fecha-nac-profesor" class="form-label">Fecha de nacimiento del profesor</label>
+                                <input type="date" class="form-control" id="fecha-nac-profesor" aria-describedby="fechaNacprofesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="genero-profesor" class="form-label ">Género del profesor</label>
+                                <select class="form-select" id="genero-profesor" required>
+                                <option selected></option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="clase-profesor" class="form-label ">Aula tutelar</label>
+                                <select class="form-select" id="clase-profesor" required></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="telefono-profesor" class="form-label">Telefono</label>
+                                <input type="number" class="form-control" id="telefono-profesor" aria-describedby="tlfprofesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="mail-profesor" class="form-label">Correo del profesor</label>
+                                <input type="email" class="form-control" id="mail-profesor" aria-describedby="correoprofesor">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="observaciones-profesor" class="form-label">Observaciones</label>
+                                <textarea class="form-control" id="observaciones-profesor"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-3 mx-auto">
+                            <button class="btn" type="submit">Confirmar</button>
+                        </div>
+                    </form>
+                    <input type="hidden" id="posicion-id-alumno" />
+                    <input type="hidden" id="posicion-id-aula" />
+                    <div class="grid-container16 form">
+                        <div class="x0_y0"></div>
+                        <div class="x1_y0"></div>
+                        <div class="x2_y0"></div>
+                        <div class="x3_y0"></div>
+                        <div class="x0_y1"></div>
+                        <div class="x1_y1"></div>
+                        <div class="x2_y1"></div>
+                        <div class="x3_y1"></div>
+                        <div class="x0_y2"></div>
+                        <div class="x1_y2"></div>
+                        <div class="x2_y2"></div>
+                        <div class="x3_y2"></div>
+                        <div class="x0_y3"></div>
+                        <div class="x1_y3"></div>
+                        <div class="x2_y3"></div>
+                        <div class="x3_y3"></div>
+                        <button class="btn" data-role="volver-aula">Volver</button>
+                    </div>
+                    <br>
+                    <div class="grid-container20 form">
+                        <div class="x0_y1"></div>
+                        <div class="x1_y1"></div>
+                        <div class="x2_y1"></div>
+                        <div class="x3_y1"></div>
+                        <div class="x0_y2"></div>
+                        <div class="x1_y2"></div>
+                        <div class="x2_y2"></div>
+                        <div class="x3_y2"></div>
+                        <div class="x0_y3"></div>
+                        <div class="x1_y3"></div>
+                        <div class="x2_y3"></div>
+                        <div class="x3_y3"></div>
+                        <div class="x0_y4"></div>
+                        <div class="x1_y4"></div>
+                        <div class="x2_y4"></div>
+                        <div class="x3_y4"></div>
+                        <div class="x0_y0"></div>
+                        <div class="x1_y0"></div>
+                        <div class="x2_y0"></div>
+                        <div class="x3_y0"></div>
+                        <button class="btn" data-role="volver-aula">Volver</button>
+                    </div>
+                    <br>
+
+                    <div class="grid-container24 form">
+                        <div class="x0_y0"></div>
+                        <div class="x1_y0"></div>
+                        <div class="x2_y0"></div>
+                        <div class="x3_y0"></div>
+                        <div class="x0_y1"></div>
+                        <div class="x1_y1"></div>
+                        <div class="x2_y1"></div>
+                        <div class="x3_y1"></div>
+                        <div class="x0_y2"></div>
+                        <div class="x1_y2"></div>
+                        <div class="x2_y2"></div>
+                        <div class="x3_y2"></div>
+                        <div class="x0_y3"></div>
+                        <div class="x0_y4"></div>
+                        <div class="x0_y5"></div>
+                        <div class="x1_y3"></div>
+                        <div class="x1_y4"></div>
+                        <div class="x1_y5"></div>
+                        <div class="x2_y3"></div>
+                        <div class="x2_y4"></div>
+                        <div class="x2_y5"></div>
+                        <div class="x3_y3"></div>
+                        <div class="x3_y4"></div>
+                        <div class="x3_y5"></div>
+                        <button class="btn" data-role="volver-aula">Volver</button>
+                    </div>
+                    <br>
+                    <div class="grid-container28 form">
+                        <div class="x0_y0"></div>
+                        <div class="x1_y0"></div>
+                        <div class="x2_y0"></div>
+                        <div class="x3_y0"></div>
+                        <div class="x0_y1"></div>
+                        <div class="x1_y1"></div>
+                        <div class="x2_y1"></div>
+                        <div class="x3_y1"></div>
+                        <div class="x0_y2"></div>
+                        <div class="x1_y2"></div>
+                        <div class="x2_y2"></div>
+                        <div class="x3_y2"></div>
+                        <div class="x0_y3"></div>
+                        <div class="x1_y3"></div>
+                        <div class="x2_y3"></div>
+                        <div class="x3_y3"></div>
+                        <div class="x0_y4"></div>
+                        <div class="x1_y4"></div>
+                        <div class="x2_y4"></div>
+                        <div class="x3_y4"></div>
+                        <div class="x0_y5"></div>
+                        <div class="x1_y5"></div>
+                        <div class="x2_y5"></div>
+                        <div class="x3_y5"></div>
+                        <div class="x0_y6"></div>
+                        <div class="x1_y6"></div>
+                        <div class="x2_y6"></div>
+                        <div class="x3_y6"></div>
+                        <button class="btn" data-role="volver-aula">Volver</button>
+                    </div>
+                    <br>
+                    <div class="grid-container32 form">
+                        <div class="x0_y0"></div>
+                        <div class="x1_y0"></div>
+                        <div class="x2_y0"></div>
+                        <div class="x3_y0"></div>
+                        <div class="x0_y1"></div>
+                        <div class="x1_y1"></div>
+                        <div class="x2_y1"></div>
+                        <div class="x3_y1"></div>
+                        <div class="x0_y2"></div>
+                        <div class="x1_y2"></div>
+                        <div class="x2_y2"></div>
+                        <div class="x3_y2"></div>
+                        <div class="x0_y3"></div>
+                        <div class="x1_y3"></div>
+                        <div class="x2_y3"></div>
+                        <div class="x3_y3"></div>
+                        <div class="x0_y4"></div>
+                        <div class="x1_y4"></div>
+                        <div class="x2_y4"></div>
+                        <div class="x3_y4"></div>
+                        <div class="x0_y5"></div>
+                        <div class="x1_y5"></div>
+                        <div class="x2_y5"></div>
+                        <div class="x3_y5"></div>
+                        <div class="x0_y6"></div>
+                        <div class="x1_y6"></div>
+                        <div class="x2_y6"></div>
+                        <div class="x3_y6"></div>
+                        <div class="x0_y7"></div>
+                        <div class="x1_y7"></div>
+                        <div class="x2_y7"></div>
+                        <div class="x3_y7"></div>
+                        <button class="btn" data-role="volver">Volver</button>
+                    </div>
+                    <form id="form-editar-profesor" class="needs-validation form" novalidate>
+                        <input type="hidden" id="id-profesor-editar" />
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="nombre-profesor-editar" class="form-label">Nombre del profesor</label>
+                                <input type="text" class="form-control" id="nombre-profesor-editar" aria-describedby="nombreprofesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="apellido1-profesor-editar" class="form-label">Primer apellido del profesor</label>
+                                <input type="text" class="form-control" id="apellido1-profesor-editar" aria-describedby="apellido1profesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="apellido2-profesor-editar" class="form-label">Segundo apellido del profesor</label>
+                                <input type="text" class="form-control" id="apellido2-profesor-editar" aria-describedby="apellido2profesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="dni-profesor-editar" class="form-label">DNI del profesor</label>
+                                <input type="text" class="form-control" id="dni-profesor-editar" aria-describedby="dniprofesor" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-2 col">
+                                <label for="fecha-nac-profesor-editar" class="form-label">Fecha de nacimiento del profesor</label>
+                                <input type="date" class="form-control" id="fecha-nac-profesor-editar" aria-describedby="fechaNacprofesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="genero-profesor-editar" class="form-label ">Género del profesor</label>
+                                <select class="form-select" id="genero-profesor-editar" required>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="Otros">Otros</option>
+                              </select>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="clase-profesor-editar" class="form-label ">Aula tutelar</label>
+                                <select class="form-select" id="clase-profesor-editar" required></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="telefono-profesor-editar" class="form-label">Telefono</label>
+                                <input type="number" class="form-control" id="telefono-profesor-editar" aria-describedby="tlfprofesor" required>
+                            </div>
+                            <div class="mb-3 col">
+                                <label for="mail-profesor-editar" class="form-label">Correo del profesor</label>
+                                <input type="email" class="form-control" id="mail-profesor-editar" aria-describedby="correoprofesor">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-3 col">
+                                <label for="observaciones-profesor-editar" class="form-label">Observaciones</label>
+                                <textarea class="form-control" id="observaciones-profesor-editar"></textarea>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2 col-3 mx-auto">
+                            <button class="btn" type="submit">Confirmar</button>
+                        </div>
+                    </form>
+            </div>
+        </main>
+        <footer>
+            <p>
+                Creado por Adrian Hermida y Ann Jolie Lourido
+            </p>
+        </footer>
+    </div>
+
+</body>
+
+</html>

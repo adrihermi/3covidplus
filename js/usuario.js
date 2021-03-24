@@ -277,6 +277,19 @@ $(function() {
         $("#listar-aulas").data("id_aula", $(this).data("id_aula")).trigger("listar");
     });
 
+    $("#alta-alumno").click(function() {
+        ocultarFormularios();
+        $("#form-alumno").show();
+        $(".bienvenido").text("Dar de alta un alumno");
+    });
+
+    $("#alta-usuario").click(function() {
+        ocultarFormularios();
+        $("#form-usuario").show();
+        $(".bienvenido").text("Dar de alta un usuario");
+    });
+
+
     $("#alta-aula").click(function() {
         ocultarFormularios();
         $("#form-aula").show();
