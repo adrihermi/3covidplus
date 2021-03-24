@@ -1,5 +1,8 @@
 $(function() {
     var eventoAula;
+    $.getJSON("php/validarAdministrador.php", function(datos) {
+        if (datos == "ok")
+    });
     $("#form-listar").hide();
     $("#listar-aulas").click(function() {
             eventoAula = "listarAulas";
@@ -273,6 +276,19 @@ $(function() {
         // Se envia el aula del alumno a la lista de aulas y se activa el evento listar
         $("#listar-aulas").data("id_aula", $(this).data("id_aula")).trigger("listar");
     });
+
+    $("#alta-alumno").click(function() {
+        ocultarFormularios();
+        $("#form-alumno").show();
+        $(".bienvenido").text("Dar de alta un alumno");
+    });
+
+    $("#alta-usuario").click(function() {
+        ocultarFormularios();
+        $("#form-usuario").show();
+        $(".bienvenido").text("Dar de alta un usuario");
+    });
+
 
     $("#alta-aula").click(function() {
         ocultarFormularios();

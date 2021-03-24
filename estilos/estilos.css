@@ -51,6 +51,11 @@
         background-color: white;
         color: #5857df;
     }
+    
+    #banner img {
+        height: 60vh;
+        margin-bottom: 5vh;
+    }
     /***************************************** FOOTER ************************************************/
     
     .container>footer {
