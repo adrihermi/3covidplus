@@ -20,6 +20,7 @@ $(function() {
                     "</tr>";
             });
             $("#form-listar").show();
+            $("#form-editar-usuario").hide();
             $(".bienvenido").text("Gestionar usuarios");
             $("#form-listar table tbody").html(htmlString);
             $("[data-role='modificar-usuario']").click(function() {
@@ -27,7 +28,7 @@ $(function() {
                 $.getJSON({ url: "php/cargarUsuarioPorId.php?id=" + idUsuario }).done(function(usuario) {
                     ocultarFormularios();
                     $("#form-editar-usuario").show();
-                    $("#form-editar-usuario button").val(idUsuario);
+                    $("#id-usuario-editar").val(idUsuario);
                     $("#nombre-usuario-editar").val(usuario.nombre);
                     $("#apellido1-usuario-editar").val(usuario.apellido1);
                     $("#apellido2-usuario-editar").val(usuario.apellido2);
@@ -122,6 +123,7 @@ $(function() {
         };
         $.post("php/inserirUsuario.php", consulta)
             .done(function(datos) {
+                console.log(consulta)
                 switch (datos) {
                     case "ok":
                        cargarUsuarios();
@@ -140,7 +142,7 @@ $(function() {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
-        var id_usuario = $("#form-editar-usuario button").val();
+        var id_usuario = $("#id-usuario-editar").val();
         var nombre = $("#nombre-usuario-editar").val();
         var apellido1 = $("#apellido1-usuario-editar").val();
         var apellido2 = $("#apellido2-usuario-editar").val();
@@ -203,15 +205,15 @@ $(function() {
             telefono: telefono,
             email: email_usuario,
             dni_usuario: dni_usuario,
-            contraseña: contraseña_usuario,
-            permisos: permisos_usuario
+            permisos: permisos_usuario,
+            contraseña: contraseña_usuario
         };
         $.post("php/modificarUsuario.php", consulta)
             .done(function(datos) {
-                console.log(consulta)
                 switch (datos) {
                     case "ok":
-                        cargarUsuarios();
+                       cargarUsuarios();
+                       break;
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el usuario.");
                         break;
