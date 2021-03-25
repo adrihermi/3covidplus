@@ -1,47 +1,43 @@
 <?php 
     require("conexion.php");
 	require ("correo.php");
-	$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES (now(), ".$_POST['id_alumno'].", ".$_POST['id_estado'].")";
-	$saida = array();
-	if ($conexion->query($consulta)) {   
-		if($_POST['id_estado'] == 3){
-			// El alumno dio positivo, se deben buscar los colindantes
-			$consulta = "SELECT pos.posicion_x, pos.posicion_y, au.capacidad, au.id_aula
-						 FROM posicion_alumnos as pos
-						 JOIN aulas as au on pos.id_aula=au.id_aula
-						 WHERE pos.id_alumno = ".$_POST['id_alumno'];
-			$posicion_alumno_contagiado = null;
-			if ($datos = $conexion->query($consulta)) {   		
-				while ($posicion = $datos->fetch_object()) {
-					$posicion_alumno_contagiado = $posicion;
-					break;
-				}
-				$datos->close();
+	if($_POST['id_estado'] == 3){
+		// El alumno dio positivo, se deben buscar los colindantes
+		$consulta = "SELECT pos.posicion_x, pos.posicion_y, au.capacidad, au.id_aula
+						FROM posicion_alumnos as pos
+						JOIN aulas as au on pos.id_aula=au.id_aula
+						WHERE pos.id_alumno = ".$_POST['id_alumno'];
+		$posicion_alumno_contagiado = null;
+		if ($datos = $conexion->query($consulta)) {   		
+			while ($posicion = $datos->fetch_object()) {
+				$posicion_alumno_contagiado = $posicion;
+				break;
 			}
+			$datos->close();
+		}
 
-			if ($posicion_alumno_contagiado != null) {
-				// Buscando los posibles colindantes
-				$colindantes = posibles_colindantes($posicion_alumno_contagiado->posicion_x, $posicion_alumno_contagiado->posicion_y, $posicion_alumno_contagiado->capacidad);
-				foreach ($colindantes as $colindante) {
-					$consulta = "SELECT pos.id_alumno, al.email_tutor_legal FROM posicion_alumnos AS pos
-								 INNER JOIN alumnos AS al ON pos.id_alumno=al.id_alumno
-								 WHERE pos.id_aula='".$posicion_alumno_contagiado->id_aula."' AND pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."'";
-					$posicion_alumno_posible_contagiado = null;
-					if ($datos = $conexion->query($consulta)) {   		
-						while ($posicion = $datos->fetch_object()) {
-							$posicion_alumno_posible_contagiado = $posicion;
-							break;
-						}
-						$datos->close();
+		if ($posicion_alumno_contagiado != null) {
+			// Buscando los posibles colindantes
+			$colindantes = posibles_colindantes($posicion_alumno_contagiado->posicion_x, $posicion_alumno_contagiado->posicion_y, $posicion_alumno_contagiado->capacidad);
+			foreach ($colindantes as $colindante) {
+				$consulta = "SELECT pos.id_alumno, al.email_tutor_legal FROM posicion_alumnos AS pos
+								INNER JOIN alumnos AS al ON pos.id_alumno=al.id_alumno
+								WHERE pos.id_aula='".$posicion_alumno_contagiado->id_aula."' AND pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."'";
+				$posicion_alumno_posible_contagiado = null;
+				if ($datos = $conexion->query($consulta)) {   		
+					while ($posicion = $datos->fetch_object()) {
+						$posicion_alumno_posible_contagiado = $posicion;
+						break;
 					}
-					if ($posicion_alumno_posible_contagiado != null) {
-						$conexion->query($consulta);
-						if ($posicion_alumno_posible_contagiado->email_tutor_legal != "") {
-							try {
-								enviar_correos($posicion_alumno_posible_contagiado->email_tutor_legal);
-							} catch (\Throwable $th) {
-								
-							}
+					$datos->close();
+				}
+				if ($posicion_alumno_posible_contagiado != null) {
+					$conexion->query($consulta);
+					if ($posicion_alumno_posible_contagiado->email_tutor_legal != "") {
+						try {
+							enviar_correos($posicion_alumno_posible_contagiado->email_tutor_legal);
+						} catch (\Throwable $th) {
+							
 						}
 					}
 				}

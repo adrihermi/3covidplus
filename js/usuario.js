@@ -232,6 +232,7 @@ $(function() {
                 $(".cambiar_estado").click(function() {
                     var id_alumno = $(this).data("value");
                     $("#id-alumno-cambiar-estado").val(id_alumno);
+                    $("#enviarCorreo").hide();
                     ocultarFormularios();
                     $("#form-cambiar-estado-alumno").data("id_aula", idAula).show();
                     $(".bienvenido").text("Modificar alumno");
@@ -532,8 +533,7 @@ $(function() {
         return false;
     });
 
-    $("#form-cambiar-estado-alumno button").on('click', function() {
-        var id_aula = $(this).parent().parent().data("id_aula");
+    $("#confirmar").on('click', function() {
         var id_alumno = $("#id-alumno-cambiar-estado").val();
         var id_estado = $("#estado-alumno").val();
         var fecha = $("#fecha-cambio-estado").val();
@@ -550,6 +550,35 @@ $(function() {
             .done(function(datos) {
                 switch (datos) {
                     case "ok":
+                        if (id_estado == "3") {
+                            $("#enviarCorreo").show();
+                        }
+                        break;
+                    case "error":
+                        $("#mensaje-error").removeClass("ocultar").html("Error al cambiar el estado del alumno.");
+                        break;
+                }
+            })
+            .fail(function() {
+                $("#mensaje-error").removeClass("ocultar").html("Error al cambiar el estado del alumno.");
+            });
+        return false;
+    });
+
+    $("#enviarCorreo").on('click', function() {
+        var id_aula = $(this).parent().parent().parent().data("id_aula");
+        var id_alumno = $("#id-alumno-cambiar-estado").val();
+        var id_estado = $("#estado-alumno").val();
+        if (!id_alumno) {
+            $("#mensaje-error").removeClass("ocultar").html("Debe seleccionar al usuario.");
+            return false;
+        }
+
+        $.post("php/enviarCorreo.php", { id_alumno: id_alumno, id_estado: id_estado })
+            .done(function(datos) {
+                switch (datos) {
+                    case "ok":
+                        $("#mensaje-exito").show().html("Correo enviado con éxito").fadeOut(5000);
                         $("#listar-aulas").data("id_aula", id_aula).trigger("grilla-lista");
                         break;
                     case "error":
@@ -560,6 +589,12 @@ $(function() {
             .fail(function() {
                 $("#mensaje-error").removeClass("ocultar").html("Error al cambiar el estado del alumno.");
             });
+        return false;
+    });
+
+    $("#volverEstado").click(function() {
+        var id_aula = $(this).parent().parent().parent().data("id_aula");
+        $("#listar-aulas").data("id_aula", id_aula).trigger("listar");
         return false;
     });
 
