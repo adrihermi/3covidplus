@@ -13,7 +13,7 @@
 			$consulta = "INSERT INTO posicion_alumnos (id_aula, id_alumno, posicion_x, posicion_y)
 						 VALUES ('".$_POST['clase']."', '$id_alumno', '".$_POST['posicion_x']."', '".$_POST['posicion_y']."')";
 			if ($conexion->query($consulta)) {
-				$saida = 'ok';
+				$saida = json_encode(["id"=> $id_alumno]);
 			}
 		}
 	}

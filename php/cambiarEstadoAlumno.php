@@ -3,7 +3,7 @@
 	require ("correo.php");
 	$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES (now(), ".$_POST['id_alumno'].", ".$_POST['id_estado'].")";
 	$saida = array();
-	if ($conexion->query($consulta)) {   		
+	if ($conexion->query($consulta)) {   
 		if($_POST['id_estado'] == 3){
 			// El alumno dio positivo, se deben buscar los colindantes
 			$consulta = "SELECT pos.posicion_x, pos.posicion_y, au.capacidad, au.id_aula
@@ -23,24 +23,28 @@
 				// Buscando los posibles colindantes
 				$colindantes = posibles_colindantes($posicion_alumno_contagiado->posicion_x, $posicion_alumno_contagiado->posicion_y, $posicion_alumno_contagiado->capacidad);
 				foreach ($colindantes as $colindante) {
-					$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado)
-								 SELECT '".$_POST["fecha"]."', al.id_alumno, '4' FROM alumnos as al
-								 INNER JOIN posicion_alumnos as pos on al.id_alumno=pos.id_alumno
+					$consulta = "SELECT pos.id_alumno, al.email_tutor_legal FROM posicion_alumnos AS pos
+								 INNER JOIN alumnos AS al ON pos.id_alumno=al.id_alumno
 								 WHERE pos.id_aula='".$posicion_alumno_contagiado->id_aula."' AND pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."'";
-					$conexion->query($consulta);
-					$consulta = "SELECT al.email_tutor_legal
-								 FROM alumnos as al 
-								 JOIN posicion_alumnos as pos on al.id_alumno = pos.id_alumno 
-								 WHERE pos.posicion_x='".$colindante["x"]."' AND pos.posicion_y='".$colindante["y"]."' AND pos.id_aula='".$posicion_alumno_contagiado->id_aula."'";
-					$correo_tutor_legal = "";
-					$datos = $conexion->query($consulta);
-					while ($dato_alumno = $datos->fetch_object()) {
-						$correo_tutor_legal = $dato_alumno->email_tutor_legal;
-						break;
+					$posicion_alumno_posible_contagiado = null;
+					if ($datos = $conexion->query($consulta)) {   		
+						while ($posicion = $datos->fetch_object()) {
+							$posicion_alumno_posible_contagiado = $posicion;
+							break;
+						}
+						$datos->close();
 					}
-					$datos->close();
-					if ($correo_tutor_legal != "") {
-						enviar_correos($correo_tutor_legal);
+					if ($posicion_alumno_posible_contagiado != null) {
+						$conexion->query($consulta);
+						$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES (now(), '".$posicion_alumno_posible_contagiado->id_alumno."', '4');";
+						$conexion->query($consulta);
+						if ($posicion_alumno_posible_contagiado->email_tutor_legal != "") {
+							try {
+								enviar_correos($posicion_alumno_posible_contagiado->email_tutor_legal);
+							} catch (\Throwable $th) {
+								
+							}
+						}
 					}
 				}
 			}

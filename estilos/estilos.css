@@ -39,7 +39,15 @@
         font-size: 2vh;
         color: white;
     }
-    
+    .cerrarSesion{
+        color: white;
+        text-decoration: none;
+    }
+    .cerrarSesion:hover{
+        color: white;
+        text-decoration: none;
+    }
+
     a:visited {
         color: white;
     }
