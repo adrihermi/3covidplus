@@ -13,7 +13,7 @@
                 group by al.id_aula";
 ?>
 <table>
-    <caption>Informe de casos.</caption>
+    <caption>Historico de casos por aula.</caption>
     <tr>
         <th>Aula</th>
         <th>Estado normal</th>

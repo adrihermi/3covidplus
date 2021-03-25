@@ -234,6 +234,7 @@ $(function() {
                     $("#id-alumno-cambiar-estado").val(id_alumno);
                     ocultarFormularios();
                     $("#form-cambiar-estado-alumno").data("id_aula", idAula).show();
+                    
                     $(".bienvenido").text("Modificar alumno");
                     $('#fecha-cambio-estado').val(new Date().toDateInputValue());
                     $.getJSON('php/cargarEstados.php', function(datos) {

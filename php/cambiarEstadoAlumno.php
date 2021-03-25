@@ -39,11 +39,11 @@
 						$consulta = "INSERT INTO estados_alumnos (fecha, id_alumno, id_estado) VALUES (now(), '".$posicion_alumno_posible_contagiado->id_alumno."', '4');";
 						$conexion->query($consulta);
 						if ($posicion_alumno_posible_contagiado->email_tutor_legal != "") {
-							try {
+							/*try {
 								enviar_correos($posicion_alumno_posible_contagiado->email_tutor_legal);
 							} catch (\Throwable $th) {
 								
-							}
+							}*/
 						}
 					}
 				}
