@@ -3,7 +3,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 require dirname(__FILE__)."/../email/autoload.php";
 function enviar_correos($correo){
 	$cuerpo = crear_correo();
-	return enviar_correo_multiples("$correo, ies.aller.ulloa@edu.xunta.es", 
+	return enviar_correo_multiples("$correo, 3covidplus@gmail.com", 
                         	$cuerpo, "Aviso de contacto con un positivo en covid-19.");
 }
 function crear_correo(){
@@ -25,7 +25,7 @@ function enviar_correo_multiples($lista_correos,  $cuerpo,  $asunto){
 		$mail->Port       = 587;                   
 		$mail->Username   = "3covidplus@gmail.com";  
 		$mail->Password   = "olacaracola";           
-		$mail->SetFrom('ies.aller.ulloa@edu.xunta.es', 'Aviso de contacto con un positivo en covid-19.');
+		$mail->SetFrom('3covidplus@gmail.com', 'Aviso de contacto con un positivo en covid-19.');
 		$mail->Subject    = $asunto;
 		$mail->MsgHTML($cuerpo);
 		$correos = explode(",", $lista_correos);

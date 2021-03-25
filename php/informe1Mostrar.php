@@ -10,7 +10,7 @@
     join estados as e on(e.id_estado=ea.id_estado)
     group by al.id_aula";
     
-    $tabla = "<div><table class = 'table'>
+    $tabla = "<h1>Historico de casos por aula</h1><div><table class = 'table'>
                 <tr>
                     <th>Aula</th>
                     <th>Estado normal</th>
