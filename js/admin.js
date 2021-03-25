@@ -27,7 +27,7 @@ $(function() {
                 $.getJSON({ url: "php/cargarUsuarioPorId.php?id=" + idUsuario }).done(function(usuario) {
                     ocultarFormularios();
                     $("#form-editar-usuario").show();
-                    $("#id-usuario-editar").val(idUsuario);
+                    $("#form-editar-usuario button").val(idUsuario);
                     $("#nombre-usuario-editar").val(usuario.nombre);
                     $("#apellido1-usuario-editar").val(usuario.apellido1);
                     $("#apellido2-usuario-editar").val(usuario.apellido2);
@@ -140,7 +140,7 @@ $(function() {
         if (!$("#mensaje-error").hasClass("ocultar")) {
             $("#mensaje-error").addClass("ocultar");
         }
-        var id_usuario = $("#id-usuario-editar").val();
+        var id_usuario = $("#form-editar-usuario button").val();
         var nombre = $("#nombre-usuario-editar").val();
         var apellido1 = $("#apellido1-usuario-editar").val();
         var apellido2 = $("#apellido2-usuario-editar").val();
@@ -152,7 +152,6 @@ $(function() {
         var permisos_usuario = $("#permisos-usuario-editar").val();
         var contraseña_usuario = $("#contraseña-usuario-editar").val();
         var confirmar_contraseña_usuario = $("#confirmar-contraseña-usuario-editar").val();
-        console.log($('#id-usuario-editar'))
         if (!nombre || nombre.trim().length === 0) {
             $("#mensaje-error").removeClass("ocultar").html("Debe ingresar el nombre del usuario");
             return false;
@@ -204,14 +203,15 @@ $(function() {
             telefono: telefono,
             email: email_usuario,
             dni_usuario: dni_usuario,
-            permisos: permisos_usuario,
-            contraseña: contraseña_usuario
+            contraseña: contraseña_usuario,
+            permisos: permisos_usuario
         };
         $.post("php/modificarUsuario.php", consulta)
             .done(function(datos) {
+                console.log(consulta)
                 switch (datos) {
                     case "ok":
-                        //cargarUsuarios();
+                        cargarUsuarios();
                     case "error":
                         $("#mensaje-error").removeClass("ocultar").html("Error al insertar el usuario.");
                         break;
